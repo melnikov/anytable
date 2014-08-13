@@ -1,0 +1,186 @@
+{% extends "layout_inner.html" %}
+
+{% block content %}
+
+     <link rel="stylesheet" type="text/css" href="/static/css/jcarousel.connected-carousels.css">
+     <link rel="stylesheet" type="text/css" href="/static/css/venueCard.css">
+
+        <script type="text/javascript" src="/static/js/jquery.jcarousel.js"></script>
+
+        <script type="text/javascript" src="/static/js/jcarousel.connected-carousels.js"></script>
+<h1>{{ venue.name }}</h1>
+    <div >
+<div class="wrapper">
+
+            <div class="connected-carousels">
+                <div class="stage">
+                    <div class="carousel carousel-stage">
+                        <ul>
+                            {% for venueimage in venueimages  %}
+                                <li><img src="/static/uploads/{{ venueimage.image }}" width="415" height="310" alt=""></li>
+                            {% empty %}
+                                <li><img src="/static/images/logo_inner.png" width="415" height="310" alt=""></li>
+                            {% endfor %}
+
+                        </ul>
+                    </div>
+                    <div id="qr_link">
+                        <a href="#" id="">QR</a>
+                    </div>
+                </div>
+                <div class="navigation">
+                    <a href="#" class="prev-navigation"></a>
+                    <div class="cl"></div>
+                    <div class="carousel carousel-navigation carousel_list">
+                        <ul>
+                            {% for venueimage in venueimages  %}
+                            <li><img src="/static/uploads/{{ venueimage.image }}" width="50" height="50" alt=""></li>
+                            {% empty %}
+                                <li><img src="/static/images/logo_inner.png" width="50" height="50" alt=""></li>
+                            {% endfor %}
+                        </ul>
+
+                    </div>
+                    <div class="cl"></div>
+                    <a href="#" class="next-navigation"></a>
+                </div>
+            </div>
+<div class="cl"></div>
+</div>
+
+<!-- end Jcarousel -->
+    <br />
+
+<div id="venueInfo">
+
+	{{ venue.address }} <a href="#" style="text-decoration: none">[map]</a>
+    <br>
+ {{ event.name }}
+Время работы: {{ venue.schedule }}<br>
+тел.: {{ venue.tel }}<br>
+(831) 413-82-32<br>
+e-mail: <a href="mailto:webmaster@example.com">{{ venue.email }}</a><br>
+web: <a href="http://{{ venue.website }}" target="_blank">{{ venue.website }}</a><br>
+<a href="#">группа Mixturabar Вконтакте</a> <br>
+<a href="#">группа Mixturabar в Facebook</a> <br>
+Загруженность:    <div id="sc_2_percent_red" style="margin-left: 10px; padding: 0px 10px 0px 10px;"> 90%</div>
+<a id="reserveTb" > &nbsp;</a>
+
+
+    <div class="cl"></div>
+</div>
+
+    <div class="cl"></div>
+
+</div>
+<div style="font-size: 12px; ">
+    <ul style="list-style: none; font-weight: bold;">
+            {% for kitchen in kitchens %}
+                 <li style=" float: left; margin-left:10px;  padding-left: 20px;  background:url('/static/images/checked_bg_checked.png') left top no-repeat;">{{ kitchen.name }}</li>
+            {% endfor %}
+    </ul>
+</div>
+<div style="height: 20px; clear: both;"></div>
+<div id="description">{{ venue.description }}</div>
+    <div style="height: 30px" class="cl"></div>
+
+    <div style="position: relative;">
+<div id="sc_2_top_shaodw"></div>
+<section id="sc_2">
+
+
+<div class="cl"></div>
+<div style=" width: 100%; margin: 0; padding: 0;">
+
+<div class="afisha">
+<h1 >АФИША</h1>
+<script type="text/javascript" src="/static/js/jquery.jcarousel.js"></script>
+<script type="text/javascript" src="/static/js/jcarousel.responsive.js"></script>
+
+<link rel="stylesheet" type="text/css" href="/static/css/jcarousel.responsive.css" />
+            <div class="jcarousel-wrapper">
+                <div class="jcarousel">
+                    <ul>
+
+            {% for event in events %}
+            <li style="width: auto!important;">
+                <div id="sc_1_item">
+                    <h1>{{ event.title }}</h1>
+                    <div id="sc_1_item_caption">
+                        <span id="sc_1_item_date">{{ event.date }}</span>
+                        <a>QR</a>
+                    </div>
+                    <img src="/static/uploads/{{ event.image }}" />
+                </div>
+            </li>
+            {% endfor %}
+
+                    </ul>
+                </div>
+                <a href="#" class="jcarousel-control-prev">&lsaquo;</a>
+                <a href="#" class="jcarousel-control-next">&rsaquo;</a>
+
+            </div>
+
+{% for event in events %}
+    <div style="float: left; display: inline-block; ">
+        <div class="afishaItem">
+        <h3>{{ event.title }}</h3>
+        <a id="a{{ event.pk }}" onclick="openEvent('#{{ event.pk }}');"> <img src="/static/uploads/{{ event.image }}" /></a>
+        {{ event.date }}
+
+
+    <div  id="{{ event.pk }}"   style="display: none; height: 1024px!important;" class="ui-widget-eventinfo">
+        <div style=" height: 1024px!important;">
+         <img src="/static/uploads/{{ event.image }}"  />
+        <br />
+        </div>
+
+    </div>
+
+<script >
+    function openEvent(targetDiv) {
+        $(targetDiv).dialog({
+		modal: true,
+		autoOpen: false,
+        closeOnEscape: true,
+        dialogClass: "no-close",
+        resizable: false,
+        open: function(event, ui){
+                jQuery('.ui-dialog-title').addClass('ui-dialog-eventtitle');
+                jQuery('.ui-dialog-titlebar').addClass('.ui-dialog-titlebar-eventinfo');
+            $('.ui-widget-header').addClass('override');
+                jQuery('.ui-widget').addClass('override');
+                jQuery('.ui-dialog').addClass('ui-dialog-eventinfo');
+                jQuery('.ui-widget-overlay').bind('click',function(){
+
+                jQuery(targetDiv).dialog('close');
+                jQuery(targetDiv).val("");
+
+               })
+              }
+			});
+      };
+			jQuery("#a{{ event.pk }}").on("click", function() {
+			     var targetDiv;
+                 jQuery('#{{ event.pk }}').dialog("open");
+                 openEvent(targetDiv);
+		    });
+
+	</script><!-- end login, register forms -->
+    </div>
+
+    </div>
+{% endfor %}
+
+        <div class="cl"></div>
+</div>
+
+</div>
+
+</section>
+
+<div id="sc_2_bottom_shaodw"></div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,249 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="header_bg" >
+<header id="header" style="position: relative;">
+
+<ul class="slider">
+  <li>
+    <img src="static/images/header_1.jpg" />
+  </li>
+  <li>
+    <img src="static/images/header_2.jpg" />
+  </li>
+</ul>
+<script src="static/js/carousel.js"></script> <!-- end carousel -->
+
+
+<nav id="nav">
+
+<section id="left_menu">
+<h1>Найти свободный столик:</h1>
+<div id="left_menu_form_layout">
+<div id="left_menu_form_content">
+<div style="position: relative; height: 80px;">
+<select  name="city" id="city">
+<option >Город</option>
+  {% for city in cities %}
+      <option value="{{ city.pk }}">{{ city.name }}</option>
+  {% endfor %}
+</select>
+<div style="position: absolute; top: 34px; width: 202px; height: 20px; padding-top: 5px; padding-left: 10px; margin: 0; background: rgba(255, 255, 255, 0.2); color: #fff;">
+<label class="checkbox"><input type="checkbox" /><span></span>Мое местоположение</label>
+
+</div>
+</div>
+<input type="text" placeholder="21/07/2014" id="datepicker" />
+<br />
+<select ><option> Куда идем?</option></select>
+<select >
+    <option selected>Кухня</option>
+    {% for kitchen in kitchens %}
+        <option >{{ kitchen.name }}</option>
+    {% endfor %}
+
+</select>
+<div style="background: rgba(255, 255, 255, 0.2); ">
+<ul style="list-style: none;">
+
+    <li><label class="checkbox"><input type="checkbox" /><span></span>Расплатиться по карте</label></li>
+    <li><label class="checkbox"><input type="checkbox" /><span></span>Бизнес-ланч</label></li>
+   <li> <label class="checkbox"><input type="checkbox" /><span></span>Парковка</label> </li>
+   <li> <label class="checkbox"><input type="checkbox" /><span></span>Wi-Fi</label></li>
+</ul>
+</div>
+<button>ИСКАТЬ</button>
+</div>
+</div>
+</section><!-- end left menu -->
+
+<section id="top_menu">
+<div style="height: 25px; padding-left: 20px;">
+<a  href="" class="city">Нижний Новгород</a>
+<img style="padding-left:120px;" height="20px" src="static/images/fb_top.png" /> <img height="20px" src="static/images/twitter_top.png" /> <img height="20px" src="static/images/inst_top.png" />
+ <a  id="targetLink" onclick="openDialog('#logIn');" style="padding-left: 20px; padding-right: 20px;">Войти</a> Забыл пароль?
+ <a  id="targetLink2" onclick="openDialog('#register');"  style="padding-left: 20px;">Регистрация</a>
+</div>
+<style>
+    .ui-widget{
+        height: 380px!important;
+    }
+</style>
+<div id="logIn" title="ВХОД" style="display: none;">
+        <input type="text" placeholder="E-MAIL" />
+        <input type="password" placeholder="ПАРОЛЬ" />
+        <div class="cl" style="height: 30px;"></div>
+        <a href="">ОЙ, Я ЗАБЫЛ ПАРОЛЬ!</a><br />
+        <input type="button"  value="ВОЙТИ"/><br />
+        Войти через социальные сети:<br />
+        <div style=" width: 100%; margin:0 auto; margin-top: 15px ;  ">
+            <img height="60px" src="static/images/fb_top.png" />
+            <img height="60px" src="static/images/twitter_top.png" />
+            <img height="60px" src="static/images/inst_top.png" />
+        </div>
+        <div style="position: absolute; bottom: 100px;  height: 30px; background: #fff;"></div>
+</div>
+
+<div id="register" title="Регистрация" style="display:  none;">
+       <div style="width: 250px; float: left;">
+        <input type="text" placeholder="ФАМИЛИЯ" />
+        <input type="text" placeholder="E-MAIL" />
+        <input type="password" placeholder="ПАРОЛЬ" />
+        <input type="password" placeholder="ПОВТОРИТЕ ПАРОЛЬ" />
+        <input type="text" placeholder="СОТОВЫЙ ТЕЛЕФОН" />
+        <input type="text" placeholder="ВАШ ГОРОД" />
+       </div>
+       <div style="width: 280px; height: 220px; float: right; position: relative; text-align: left;">
+        Войти через социальные сети:<br />
+       <div style="margin-top: 15px ;  ">
+        <img style="padding-left:35px;" height="50px" src="static/images/fb_top.png" />
+        <img height="50px" src="static/images/twitter_top.png" />
+        <img height="50px" src="static/images/inst_top.png" />
+       </div>
+        <input type="text" style="position: absolute; bottom: 0; left: 0; width: 190px; background: none;" placeholder="ПРОВЕРОЧНЫЙ КОД"/>
+       </div>
+        <div class="cl"></div>
+        <input type="button"  value="ЗАРЕГИСТРИРОВАТЬСЯ"/>
+</div>
+<script >
+    function openDialog(targetDiv) {
+        $(targetDiv).dialog({
+		modal: true,
+		autoOpen: false,
+        closeOnEscape: true,
+        dialogClass: "no-close",
+        resizable: false,
+        open: function(){
+
+                jQuery('.ui-widget-overlay').bind('click',function(){
+                jQuery(targetDiv).dialog('close');
+                jQuery(targetDiv).val("");
+
+               })
+              }
+			});
+      };
+            jQuery("#targetLink").on("click", function() {
+			     var targetDiv;
+				 jQuery('#logIn').dialog("open");
+                 openDialog(targetDiv);
+		    });
+
+			jQuery("#targetLink2").on("click", function() {
+			     var targetDiv;
+                 jQuery('#register').dialog("open");
+                 openDialog(targetDiv);
+		    });
+
+
+
+	</script><!-- end login, register forms -->
+
+<hr />
+<div style="position: absolute; bottom: 10px; margin: 0; padding-left: 20px;">
+Скачать приложение:
+<a style="background:  url('static/images/Apple.png')  left no-repeat; margin-left: 15px; padding-left: 30px ; background-size: 20px 20px;" > AppStore </a>
+<a style="background:  url('static/images/Android.png') left no-repeat; margin-left: 15px; padding-left: 30px ; background-size: 20px 25px;" >Google Play</a>
+</div>
+<input type="text" size="30px" id="search_form"/>
+</section> <!-- end top menu -->
+</nav> <!-- End navigation -->
+
+
+<a href="http://anytable.ru"><img style=" position: absolute; right: 100px; top: 60px; " src="static/images/logo.png" /></a>
+
+<section id="social">
+В социальных сетях:<br />
+<a href="http://inst.link"><img src="static/images/inst.png"/></a> <a href="http://fb.link"><img src="static/images/fb.png"/></a>
+</section>
+</header>
+</div>
+
+<section id="sc_1">
+<script type="text/javascript" src="/static/js/jquery.jcarousel.js"></script>
+<script type="text/javascript" src="/static/js/jcarousel.responsive.js"></script>
+
+<link rel="stylesheet" type="text/css" href="/static/css/jcarousel.responsive.css" />
+            <div class="jcarousel-wrapper">
+                <div class="jcarousel"  style="width: 960px!important; margin: 0 auto;" >
+                    <ul>
+
+            {% for event in events %}
+            <li style="width: 230px!important;">
+                <div id="sc_1_item">
+                    <h1>{{ event.title }}</h1>
+                    <div id="sc_1_item_caption">
+                        <span id="sc_1_item_date">{{ event.date }}</span>
+                        <a>QR</a>
+                    </div>
+                    <img src="/static/uploads/{{ event.image }}" />
+                </div>
+            </li>
+            {% endfor %}
+
+                    </ul>
+                </div>
+                <a href="#" class="jcarousel-control-prev"></a>
+                <a href="#" class="jcarousel-control-next"></a>
+
+            </div>
+
+
+</section>
+<div class="cl"></div>
+<div style="position: relative;">
+<div id="sc_2_top_shaodw"></div>
+<section id="sc_2">
+
+<nav id="sc_2_nav">
+    <div >
+        <span style="float: left; font-size: 18px; margin-right: 40px;">Я пойду в</span>
+        {% for type in types %}
+        <a href="javascript:void(0);" onclick = "getVenues({{ type.pk }});">{{ type.name }}</a>
+        {% endfor %}
+
+        <a href="" style="float: right;">Смотреть все</a>
+    </div>
+    <div class="cl" style="height: 10px;"></div>
+    <div>
+        <span style="float: left; font-size: 12px; margin-right: 30px; line-height: 2;">Сортировать:</span>
+        <select><option>по алфавиту</option></select>
+        <select><option>по загруженности</option></select>
+        <select><option>по рейтингу</option></select>
+    </div>
+</nav>
+<div class="cl"></div>
+<div style=" width: 100%; margin: 0; padding: 0;">
+
+<div id="tabs" style="width: 1024px;">
+
+    <ul style="display:block; position: absolute;top: -25px;right: 35px;">
+    <li><a href="#tabs-1">Список</a></li>
+    <li><a href="#tabs-2">Карта</a></li>
+  </ul>
+  <div class="cl"></div>
+  <div id="tabs-1" >
+
+    <div id="venues">
+
+
+
+    </div>
+
+  </div>
+
+  <div id="tabs-2">
+   <div id="sc_2_map" style=" box-shadow:  4px 4px 16px 10px rgba(0, 0, 0, 0.3);"> <img src="static/images/map_sample.jpg"/></div>
+  </div>
+
+
+</div>
+
+</div>
+
+</section>
+
+<div id="sc_2_bottom_shaodw"></div>
+</div>
+{% endblock %}

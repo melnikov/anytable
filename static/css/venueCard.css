@@ -1,0 +1,45 @@
+#venueInfo{
+    font-weight: bold;
+    width: 400px;
+    line-height: 30px;
+    float: right;
+    text-align: right;
+}
+#venueInfo a{
+    color: #ff6633;
+}
+#description{
+    font-size: 12px;
+    text-indent:30px;
+}
+#reserveTb{
+    display: block;
+    width: 287px;
+    height: 44px !important;
+    margin-top: 20px;
+    float: right;
+    background: url("/static/images/reserveTb.png") left top no-repeat;
+}
+.afisha{
+    padding: 20px 10px 20px 10px;
+}
+.afisha h1{
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+.afishaItem{
+    float: left;
+    color: #ff6633;
+    width: 205px;
+    height: 330px;
+    margin-right: 10px;
+}
+.afishaItem img{
+    width: 205px;
+    height: 278px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    -webkit-box-shadow: 0 0 12px #999;
+    -moz-box-shadow: 0 0 12px #999;
+    box-shadow: 0 0 12px #999;
+}
