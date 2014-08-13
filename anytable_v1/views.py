@@ -30,7 +30,10 @@ def test(request):
 def ajaxFront(request, type):
 
     type = type.strip("/")
-    venues = venue.objects.filter(type = type)
+    if type == "0":
+        venues = venue.objects.all()
+    else:
+        venues = venue.objects.filter(type = type)
 
     context = Context({"venues":venues, "request":request,})
     return render_to_response('ajaxFront.html', context)
@@ -39,7 +42,8 @@ def ajaxFront(request, type):
 def venueCard(request, id):
 
     svenue = venue.objects.get(pk = id)
-    sevents = event.objects.filter(venue__pk = id).order_by('-date')[:4]
+    #sevents = event.objects.filter(venue__pk = id).order_by('-date')[:4]
+    sevents = event.objects.filter(venue__pk = id).order_by('-date')
     svenueimages = venueimage.objects.filter(venue__pk = id)
     kitchens = venueKitchen.objects.filter(venue__pk = id)
     #svenueimage = venueimage.objects.filter(venue__pk = id)

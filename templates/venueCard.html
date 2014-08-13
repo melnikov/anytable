@@ -28,10 +28,12 @@
                         <a href="#" id="">QR</a>
                     </div>
                 </div>
+            {% if venueimages %}
                 <div class="navigation">
                     <a href="#" class="prev-navigation"></a>
                     <div class="cl"></div>
                     <div class="carousel carousel-navigation carousel_list">
+
                         <ul>
                             {% for venueimage in venueimages  %}
                             <li><img src="/static/uploads/{{ venueimage.image }}" width="50" height="50" alt=""></li>
@@ -40,10 +42,12 @@
                             {% endfor %}
                         </ul>
 
+
                     </div>
                     <div class="cl"></div>
                     <a href="#" class="next-navigation"></a>
-                </div>
+                  </div>
+            {% endif %}
             </div>
 <div class="cl"></div>
 </div>
@@ -74,11 +78,20 @@ web: <a href="http://{{ venue.website }}" target="_blank">{{ venue.website }}</a
 
 </div>
 <div style="font-size: 12px; ">
-    <ul style="list-style: none; font-weight: bold;">
+<div >
+    <div>
+        <h2 style="float: left; font-size: 20px; line-height: 10px;">Кухня: </h2>
+    </div>
+    <div>
+       <ul style="list-style: none; font-weight: bold; padding-left: 10px;">
             {% for kitchen in kitchens %}
                  <li style=" float: left; margin-left:10px;  padding-left: 20px;  background:url('/static/images/checked_bg_checked.png') left top no-repeat;">{{ kitchen.name }}</li>
             {% endfor %}
     </ul>
+    </div>
+</div>
+
+
 </div>
 <div style="height: 20px; clear: both;"></div>
 <div id="description">{{ venue.description }}</div>
@@ -94,40 +107,22 @@ web: <a href="http://{{ venue.website }}" target="_blank">{{ venue.website }}</a
 
 <div class="afisha">
 <h1 >АФИША</h1>
-<script type="text/javascript" src="/static/js/jquery.jcarousel.js"></script>
-<script type="text/javascript" src="/static/js/jcarousel.responsive.js"></script>
+{% if events %}
+    <script type="text/javascript" src="/static/js/jquery.jcarousel.js"></script>
+    <script type="text/javascript" src="/static/js/jcarousel.responsive.js"></script>
 
-<link rel="stylesheet" type="text/css" href="/static/css/jcarousel.responsive.css" />
+    <link rel="stylesheet" type="text/css" href="/static/css/jcarousel.responsive.css" />
             <div class="jcarousel-wrapper">
-                <div class="jcarousel">
+                <div class="jcarousel"  style="width: 960px!important; margin: 0 auto; " >
                     <ul>
 
             {% for event in events %}
-            <li style="width: auto!important;">
-                <div id="sc_1_item">
-                    <h1>{{ event.title }}</h1>
-                    <div id="sc_1_item_caption">
-                        <span id="sc_1_item_date">{{ event.date }}</span>
-                        <a>QR</a>
-                    </div>
-                    <img src="/static/uploads/{{ event.image }}" />
-                </div>
-            </li>
-            {% endfor %}
-
-                    </ul>
-                </div>
-                <a href="#" class="jcarousel-control-prev">&lsaquo;</a>
-                <a href="#" class="jcarousel-control-next">&rsaquo;</a>
-
-            </div>
-
-{% for event in events %}
+            <li style="width: 230px!important; height: 370px!important;">
     <div style="float: left; display: inline-block; ">
         <div class="afishaItem">
         <h3>{{ event.title }}</h3>
-        <a id="a{{ event.pk }}" onclick="openEvent('#{{ event.pk }}');"> <img src="/static/uploads/{{ event.image }}" /></a>
-        {{ event.date }}
+        <a id="a{{ event.pk }}" onclick="openEvent('#{{ event.pk }}');"> <img height="270px" src="/static/uploads/{{ event.image }}" /></a>
+        <div style="">{{ event.date }}</div>
 
 
     <div  id="{{ event.pk }}"   style="display: none; height: 1024px!important;" class="ui-widget-eventinfo">
@@ -138,7 +133,7 @@ web: <a href="http://{{ venue.website }}" target="_blank">{{ venue.website }}</a
 
     </div>
 
-<script >
+    <script >
     function openEvent(targetDiv) {
         $(targetDiv).dialog({
 		modal: true,
@@ -167,13 +162,24 @@ web: <a href="http://{{ venue.website }}" target="_blank">{{ venue.website }}</a
                  openEvent(targetDiv);
 		    });
 
-	</script><!-- end login, register forms -->
+	</script><!-- end afishainfo, forms -->
     </div>
 
     </div>
-{% endfor %}
+    </li>
+            {% endfor %}
 
-        <div class="cl"></div>
+                    </ul>
+                </div>
+                <a href="#" class="jcarousel-control-prev"></a>
+                <a href="#" class="jcarousel-control-next"></a>
+
+            </div>
+
+    <div class="cl"></div>
+{% else %}
+   <h1>No events yet</h1>
+{% endif %}
 </div>
 
 </div>

@@ -309,26 +309,26 @@ label.checkbox span {
     display:inline-block;
     /* border:2px solid #BBB;
     border-radius:10px;*/
-    width:16px;
-    height:16px;
+    width:12px;
+    height:12px;
    /* background:#F55;*/
     vertical-align:middle;
-    background: #fff url('/static/images/checkbox_bg.png') left top no-repeat;
+    background: #fff url('/static/images/checkbox_bg_12px.png') left top no-repeat;
     margin:3px;
     text-align:center;
 
 }
 label.checkbox :checked + span {
-     background:url('/static/images/checked_bg_checked.png') left top no-repeat;
+     background:url('/static/images/checked_bg_checked_12px.png') left top no-repeat;
 
 }
 label.checkbox span:before {
-    background: #fff url('/static/images/checkbox_bg.png') left top no-repeat;
+    background: #fff url('/static/images/checkbox_bg_12px.png') left top no-repeat;
     vertical-align:middle;
 }
 label.checkbox :checked + span:before {
 
-        background:url('/static/images/checked_bg_checked.png') left top no-repeat;
+        background:url('/static/images/checked_bg_checked_12px.png') left top no-repeat;
 }
 
 #datepicker{
@@ -406,7 +406,7 @@ label.checkbox :checked + span:before {
 #sc_1_item h1{
     position: relative;
     top: 0px;
-    z-index: 999;
+
     text-transform:  uppercase;
 }
 #sc_1_item a{
@@ -472,7 +472,7 @@ label.checkbox :checked + span:before {
     text-decoration: none;
 }
 #sc_2_nav{
-    
+
     min-height: 0px;
     padding: 20px;
 }
@@ -484,8 +484,8 @@ label.checkbox :checked + span:before {
     font-family: 'Roboto', sans-serif;
 }
 #sc_2_nav a{
+    font-size: 20px;
     float: left;
-    font-size: 16px; 
     border-bottom: 1px #ff6633 dotted;
     margin-right: 15px;
 }

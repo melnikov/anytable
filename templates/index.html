@@ -36,7 +36,12 @@
 </div>
 <input type="text" placeholder="21/07/2014" id="datepicker" />
 <br />
-<select ><option> Куда идем?</option></select>
+<select ><option selected> Куда идем?</option>
+        {% for type in types %}
+       <option >{{ type.name }}</option>
+        {% endfor %}
+
+</select>
 <select >
     <option selected>Кухня</option>
     {% for kitchen in kitchens %}
@@ -203,7 +208,7 @@
         <a href="javascript:void(0);" onclick = "getVenues({{ type.pk }});">{{ type.name }}</a>
         {% endfor %}
 
-        <a href="" style="float: right;">Смотреть все</a>
+        <a href="javascript:void(0);" onclick = "getVenues(0);" style="float: right;">Смотреть все</a>
     </div>
     <div class="cl" style="height: 10px;"></div>
     <div>
