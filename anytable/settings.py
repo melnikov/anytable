@@ -42,6 +42,7 @@ INSTALLED_APPS = (
     'accounts',
     'easy_thumbnails',
     'image_cropping',
+    "pygeocoder",
 )
 
 MIDDLEWARE_CLASSES = (
@@ -100,3 +101,4 @@ from easy_thumbnails.conf import Settings as thumbnail_settings
 THUMBNAIL_PROCESSORS = (
     'image_cropping.thumbnail_processors.crop_corners',
 ) + thumbnail_settings.THUMBNAIL_PROCESSORS
+

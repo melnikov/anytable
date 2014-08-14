@@ -4,7 +4,7 @@ from south.modelsinspector import add_introspection_rules
 from imagekit.models import ImageSpecField
 from imagekit.processors import *
 from image_cropping import ImageCropField, ImageRatioField
-
+from pygeocoder import *
 from django.contrib.auth.models import AbstractBaseUser
 
 
@@ -57,7 +57,7 @@ class city(models.Model):
 
 class venue(models.Model):
     name = models.CharField(max_length=255, verbose_name="Name")
-    address = models.CharField(max_length=255, verbose_name="Address")
+
 
     image = models.ImageField(upload_to='images', blank=True, null=True)
     thumbnail = ImageSpecField(source='image', processors=[ResizeToFill(100, 50)], format='JPEG', options={'quality': 60})
@@ -67,6 +67,8 @@ class venue(models.Model):
     #type = models.ForeignKey(venueType, null=True)
     type = models.ManyToManyField(venueType, null=False)
     city = models.ForeignKey(city, null=True)
+    address = models.CharField(max_length=255, verbose_name="Address")
+
     #photo = models.ManyToManyField(to=photo, null=True, blank=True)
     tel = models.CharField(max_length=255, blank=True, verbose_name="Telephone")
     email = models.CharField(max_length=255, blank=True, verbose_name="E-Mail")

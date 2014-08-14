@@ -38,14 +38,16 @@ def ajaxFront(request, type):
     context = Context({"venues":venues, "request":request,})
     return render_to_response('ajaxFront.html', context)
 
-
 def venueCard(request, id):
 
     svenue = venue.objects.get(pk = id)
+    latitude =  Geocoder.geocode(svenue.address)
+    latitude = latitude[0].coordinates
+    latitude = list(latitude)
     #sevents = event.objects.filter(venue__pk = id).order_by('-date')[:4]
     sevents = event.objects.filter(venue__pk = id).order_by('-date')
     svenueimages = venueimage.objects.filter(venue__pk = id)
     kitchens = venueKitchen.objects.filter(venue__pk = id)
     #svenueimage = venueimage.objects.filter(venue__pk = id)
-    context = Context({"venue":svenue, "events":sevents,"request":request, "venueimages":svenueimages, "kitchens":kitchens})
+    context = Context({"venue":svenue, "events":sevents,"request":request, "venueimages":svenueimages, "kitchens":kitchens, "latitude":latitude})
     return render_to_response('venueCard.html', context)

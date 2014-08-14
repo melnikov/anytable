@@ -57,8 +57,69 @@
 
 <div id="venueInfo">
 
-	{{ venue.address }} <a href="#" style="text-decoration: none">[map]</a>
+	{{ venue.city }} ,{{ venue.address }} <a  id="mapLink" onclick="openDialog('#map');" style="text-decoration: none">[map]</a>
     <br>
+
+ <script src="http://api-maps.yandex.ru/2.0/?load=package.full&lang=ru_RU"  type="text/javascript"></script>
+
+    <script type="text/javascript">
+        // Initializes the map as soon as the API is loaded and DOM is ready
+        ymaps.ready(init);
+
+        function init () {
+            var myMap = new ymaps.Map("venueMap", {
+                    center: {{ latitude }},
+                    zoom: 14
+                }),
+                // The first way to set placemarks
+                // Creates a placemark for Salt Lake City.
+                // Specifies the placemark description: the name of the city and its population.
+                myPlacemark = new ymaps.Placemark({{ latitude }}, {
+                    name: '{{ venue.name }}',
+                    tables: '4, tables ',
+                    //rate: 'rate: great',
+                }),
+
+                // Creates a template for displaying the hint content.
+                myHintLayout = ymaps.templateLayoutFactory.createClass(
+                    '<b>$[properties.name]</b> - $[properties.tables]'
+                );
+
+            // Puts the created template in the template storage. Now our template can be accessed using the 'mysuperlayout' key.
+            ymaps.layout.storage.add('my#superlayout', myHintLayout);
+
+            // Defines our template for the placemark hint.
+            myPlacemark.options.set('hintContentLayout', 'my#superlayout');
+                // The second way
+                myGeoObject = new ymaps.GeoObject({
+
+
+                });
+                 myMap.controls
+                // Adds the zoom control button. The position of the control on the map is passed as a parameter.
+                .add('zoomControl', {
+                    left: '35',
+                    top: '50'
+                })
+
+
+                // Adds the list of map types
+                .add('typeSelector')
+                // Adds the scale line
+
+            // Adding placemarks to the map
+            myMap.geoObjects
+                .add(myPlacemark)
+                .add(myGeoObject);
+        }
+    </script>
+
+
+<div id="map" style="width:600px; height:500px; position: relative; display: none;" title="MAP" >
+    <div id="venueMap" style="width:600px; height:300px;"></div>
+</div>
+
+
  {{ event.name }}
 Время работы: {{ venue.schedule }}<br>
 тел.: {{ venue.tel }}<br>
@@ -161,6 +222,11 @@ web: <a href="http://{{ venue.website }}" target="_blank">{{ venue.website }}</a
                  jQuery('#{{ event.pk }}').dialog("open");
                  openEvent(targetDiv);
 		    });
+			jQuery("#mapLink").on("click", function() {
+			     var targetDiv;
+                 jQuery('#map').dialog("open");
+                 openDialog(targetDiv);
+		    });
 
 	</script><!-- end afishainfo, forms -->
     </div>
@@ -188,5 +254,7 @@ web: <a href="http://{{ venue.website }}" target="_blank">{{ venue.website }}</a
 
 <div id="sc_2_bottom_shaodw"></div>
 </div>
+<div >
 
+</div>
 {% endblock %}
