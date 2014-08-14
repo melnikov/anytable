@@ -194,6 +194,35 @@ web: <a href="http://{{ venue.website }}" target="_blank">{{ venue.website }}</a
 
     </div>
 
+
+    </div>
+
+    </div>
+    </li>
+            {% endfor %}
+
+                    </ul>
+                </div>
+                <a href="#" class="jcarousel-control-prev"></a>
+                <a href="#" class="jcarousel-control-next"></a>
+
+            </div>
+
+    <div class="cl"></div>
+{% else %}
+   <h1>No events yet</h1>
+{% endif %}
+</div>
+
+</div>
+
+</section>
+
+<div id="sc_2_bottom_shaodw"></div>
+</div>
+<div >
+
+</div>
     <script >
     function openEvent(targetDiv) {
         $(targetDiv).dialog({
@@ -229,32 +258,4 @@ web: <a href="http://{{ venue.website }}" target="_blank">{{ venue.website }}</a
 		    });
 
 	</script><!-- end afishainfo, forms -->
-    </div>
-
-    </div>
-    </li>
-            {% endfor %}
-
-                    </ul>
-                </div>
-                <a href="#" class="jcarousel-control-prev"></a>
-                <a href="#" class="jcarousel-control-next"></a>
-
-            </div>
-
-    <div class="cl"></div>
-{% else %}
-   <h1>No events yet</h1>
-{% endif %}
-</div>
-
-</div>
-
-</section>
-
-<div id="sc_2_bottom_shaodw"></div>
-</div>
-<div >
-
-</div>
 {% endblock %}
