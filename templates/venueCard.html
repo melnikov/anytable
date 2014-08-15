@@ -56,8 +56,7 @@
     <br />
 
 <div id="venueInfo">
-
-	{{ venue.city }} ,{{ venue.address }} <a  id="mapLink" onclick="openDialog('#map');" style="text-decoration: none">[map]</a>
+	{{ venue.city }} ,{{ venue.address }} <a  id="mapLink" onclick="openMap('#map');" style="text-decoration: none">[map]</a>
     <br>
 
  <script src="http://api-maps.yandex.ru/2.0/?load=package.full&lang=ru_RU"  type="text/javascript"></script>
@@ -113,7 +112,41 @@
                 .add(myGeoObject);
         }
     </script>
+    <style>
+        .map_widget{
+            width: 620px!important;
+            height: 320px!important;
+        }
+    </style>
+    <script>
+    function openMap(targetDiv) {
+        $(targetDiv).dialog({
+		modal: true,
+		autoOpen: false,
+        closeOnEscape: true,
+        dialogClass: "no-close",
+        resizable: false,
+        open: function(event, ui){
+                jQuery('.ui-dialog-title').hide();
+                jQuery('.ui-dialog-titlebar').hide();
+                jQuery('.ui-widget-header').hide();
+                jQuery('.ui-widget').addClass('map_widget');
 
+                jQuery('.ui-widget-overlay').bind('click',function(){
+                jQuery(targetDiv).dialog('close');
+                jQuery(targetDiv).val("");
+
+               })
+              }
+			});
+      };
+			jQuery("#mapLink").on("click", function() {
+			     var targetDiv;
+                 jQuery('#map').dialog("open");
+                 openMap(targetDiv);
+		    });
+
+	</script><!-- end Map,  -->
 
 <div id="map" style="width:600px; height:500px; position: relative; display: none;" title="MAP" >
     <div id="venueMap" style="width:600px; height:300px;"></div>
@@ -169,7 +202,7 @@ web: <a href="http://{{ venue.website }}" target="_blank">{{ venue.website }}</a
 <div class="afisha">
 <h1 >АФИША</h1>
 {% if events %}
-    <script type="text/javascript" src="/static/js/jquery.jcarousel.js"></script>
+
     <script type="text/javascript" src="/static/js/jcarousel.responsive.js"></script>
 
     <link rel="stylesheet" type="text/css" href="/static/css/jcarousel.responsive.css" />
@@ -182,18 +215,105 @@ web: <a href="http://{{ venue.website }}" target="_blank">{{ venue.website }}</a
     <div style="float: left; display: inline-block; ">
         <div class="afishaItem">
         <h3>{{ event.title }}</h3>
-        <a id="a{{ event.pk }}" onclick="openEvent('#{{ event.pk }}');"> <img height="270px" src="/static/uploads/{{ event.image }}" /></a>
+        <a id="a{{ event.pk }}"  onclick="openEvent('#{{ event.pk }}');"> <img height="270px" src="/static/uploads/{{ event.image }}" /></a>
         <div style="">{{ event.date }}</div>
 
 
     <div  id="{{ event.pk }}"   style="display: none; height: 1024px!important;" class="ui-widget-eventinfo">
-        <div style=" height: 1024px!important;">
          <img src="/static/uploads/{{ event.image }}"  />
-        <br />
-        </div>
-
+         <div class="event_info">
+             <h1>{{ event.title }}</h1>
+             <div class="event_description"> {{ venue.description }}</div>
+             <div style="line-height: 30px;">
+                  <h2>Вход:&nbsp;</h2> 1000 руб./чел.<div style="clear: both;"></div>
+             и (или)<div style="clear: both;"></div>
+             <h2>Депозит:&nbsp;</h2> 1000 руб./чел. <div style="clear: both;"></div>
+             <h2>Свободные столики:&nbsp;</h2> есть (уточнить) <div style="clear: both;"></div>
+             <div class="iwanthere" onclick="order({{ event.pk }});"></div>
+             </div>
+<script>
+    function order(eventId){
+        alert('order now '+eventId);
+    }
+</script>
     </div>
 
+    </div>
+<style>
+.event_widget{
+    position: fixed;
+    left: 350px!important;
+    float: left!important;
+    width: 920px!important;
+    height: 420px!important;
+}
+.event_widget h1, h2{
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 30px;
+    text-indent: 0px;
+}
+.event_widget h2{
+    margin: 0px;
+    font-size: 16px;
+    float: left;
+}
+.event_widget img{
+    width: 300px;
+    height: 410px;
+    float: left;
+}
+.event_info{
+    position: relative;
+    width: 550px;
+    height: 410px;
+    float: right;
+    text-align: left;
+    color: #ff6633;
+}
+.event_description{
+    color: #000;
+    font-size: 14px;
+    text-indent: 40px;
+    text-align: justify;
+    margin-bottom: 30px;
+}
+.iwanthere{
+    width: 130px;
+    height: 51px;
+    background: url("/static/images/af_res_but.png") no-repeat;
+    float: right;
+}
+</style>
+    <script>
+    function openEvent(targetDiv) {
+        $(targetDiv).dialog({
+		modal: true,
+		autoOpen: false,
+        closeOnEscape: true,
+        dialogClass: "no-close",
+        resizable: false,
+        open: function(event, ui){
+               jQuery('.ui-dialog-title').hide('.ui-dialog-title');
+
+               jQuery('.ui-widget').addClass('event_widget');
+               jQuery('.ui-dialog').addClass('ui-dialog-eventinfo');
+               jQuery('.ui-widget-overlay').bind('click',function(){
+               jQuery(targetDiv).dialog('close');
+               jQuery(targetDiv).val("");
+
+               })
+              }
+			});
+      };
+			jQuery("#a{{ event.pk }}").on("click", function() {
+			     var targetDiv;
+                 jQuery('#{{ event.pk }}').dialog("open");
+                 openEvent(targetDiv);
+		    });
+
+
+	</script><!-- end afisha info, forms -->
 
     </div>
 
@@ -209,6 +329,7 @@ web: <a href="http://{{ venue.website }}" target="_blank">{{ venue.website }}</a
             </div>
 
     <div class="cl"></div>
+
 {% else %}
    <h1>No events yet</h1>
 {% endif %}
@@ -223,39 +344,5 @@ web: <a href="http://{{ venue.website }}" target="_blank">{{ venue.website }}</a
 <div >
 
 </div>
-    <script >
-    function openEvent(targetDiv) {
-        $(targetDiv).dialog({
-		modal: true,
-		autoOpen: false,
-        closeOnEscape: true,
-        dialogClass: "no-close",
-        resizable: false,
-        open: function(event, ui){
-                jQuery('.ui-dialog-title').addClass('ui-dialog-eventtitle');
-                jQuery('.ui-dialog-titlebar').addClass('.ui-dialog-titlebar-eventinfo');
-            $('.ui-widget-header').addClass('override');
-                jQuery('.ui-widget').addClass('override');
-                jQuery('.ui-dialog').addClass('ui-dialog-eventinfo');
-                jQuery('.ui-widget-overlay').bind('click',function(){
 
-                jQuery(targetDiv).dialog('close');
-                jQuery(targetDiv).val("");
-
-               })
-              }
-			});
-      };
-			jQuery("#a{{ event.pk }}").on("click", function() {
-			     var targetDiv;
-                 jQuery('#{{ event.pk }}').dialog("open");
-                 openEvent(targetDiv);
-		    });
-			jQuery("#mapLink").on("click", function() {
-			     var targetDiv;
-                 jQuery('#map').dialog("open");
-                 openDialog(targetDiv);
-		    });
-
-	</script><!-- end afishainfo, forms -->
 {% endblock %}
