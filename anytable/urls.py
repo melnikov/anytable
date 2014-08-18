@@ -16,6 +16,4 @@ urlpatterns = patterns('',
     url(r'^query/type/(?P<type>[a-zA-Z0-9_][0-9a-zA-Z_]*/$)', 'anytable_v1.views.ajaxFront', name='Queries For Front Page'),
     url(r'^venue/(?P<id>[0-9]+)', 'anytable_v1.views.venueCard', name='Venue Card'),
     url(r'^search/$', 'anytable_v1.views.searchResult', name='Search Results'),
-
-
 )
