@@ -239,13 +239,16 @@ web: <a href="http://{{ venue.website }}" target="_blank">{{ venue.website }}</a
     </div>
 
     </div>
+
 <style>
+.ui-widget{
+    margin: 0 auto!important;
+    padding: 0px!important;
+}
 .event_widget{
-    position: fixed;
-    left: 350px!important;
-    float: left!important;
     width: 920px!important;
     height: 420px!important;
+    margin: 0 auto!important;
 }
 .event_widget h1, h2{
     font-size: 20px;
@@ -293,8 +296,10 @@ web: <a href="http://{{ venue.website }}" target="_blank">{{ venue.website }}</a
         closeOnEscape: true,
         dialogClass: "no-close",
         resizable: false,
+
         open: function(event, ui){
                jQuery('.ui-dialog-title').hide('.ui-dialog-title');
+
 
                jQuery('.ui-widget').addClass('event_widget');
                jQuery('.ui-dialog').addClass('ui-dialog-eventinfo');
@@ -306,10 +311,12 @@ web: <a href="http://{{ venue.website }}" target="_blank">{{ venue.website }}</a
               }
 			});
       };
+
 			jQuery("#a{{ event.pk }}").on("click", function() {
 			     var targetDiv;
                  jQuery('#{{ event.pk }}').dialog("open");
                  openEvent(targetDiv);
+
 		    });
 
 

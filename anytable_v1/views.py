@@ -1,10 +1,12 @@
 # coding=utf-8
-from django.shortcuts import render
-
-# Create your views here.
-from django.shortcuts import render_to_response
-from django.template import Context
+from django.shortcuts import *
+from django.template import *
 from anytable_v1.models import *
+from django.contrib.auth import *
+from django.views.decorators.csrf import csrf_exempt, csrf_protect
+
+from django.core.context_processors import csrf
+# Create your views here.
 
 def index(request):
     events = event.objects.all()
@@ -47,7 +49,22 @@ def venueCard(request, id):
     #sevents = event.objects.filter(venue__pk = id).order_by('-date')[:4]
     sevents = event.objects.filter(venue__pk = id).order_by('-date')
     svenueimages = venueimage.objects.filter(venue__pk = id)
+
     kitchens = venueKitchen.objects.filter(venue__pk = id)
     #svenueimage = venueimage.objects.filter(venue__pk = id)
     context = Context({"venue":svenue, "events":sevents,"request":request, "venueimages":svenueimages, "kitchens":kitchens, "latitude":latitude})
     return render_to_response('venueCard.html', context)
+
+@csrf_exempt
+def searchResult(request):
+    if request.method == "POST":
+        type = request.POST['type']
+        ana = type
+        return render_to_response('searchResult.html', context_instance = RequestContext(request, {'a':ana,}))
+    #context_instance = RequestContext(request, {"v":v})
+    else:
+        ana = 'idk'
+        return render_to_response('searchResult.html', context_instance = RequestContext(request, {'a':ana,}))
+
+
+

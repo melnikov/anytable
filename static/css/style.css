@@ -329,7 +329,7 @@ label.checkbox :checked + span:before {
 #left_menu select:focus{
      outline-color: #7C97A5;
 }
-#left_menu button{
+#left_menu input[type="submit"]{
 
     width: 212px;
     height: 40px;

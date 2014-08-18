@@ -3,7 +3,7 @@
   <component name="BookmarkManager">
     <bookmark url="file://$PROJECT_DIR$/anytable_v1/models.py" line="28" />
     <bookmark url="file://$PROJECT_DIR$/templates/layout.html" line="24" />
-    <bookmark url="file://$PROJECT_DIR$/templates/index.html" line="52" />
+    <bookmark url="file://$PROJECT_DIR$/templates/index.html" line="53" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6d601714-a0ac-4f28-a836-158e2caf6fdf" name="Default" comment="" />
@@ -31,16 +31,79 @@
       <file leaf-file-name="settings.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/anytable/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="32" column="25" selection-start="844" selection-end="849" vertical-scroll-proportion="-7.28" vertical-offset="362" max-vertical-offset="1870">
+            <state line="32" column="13" selection-start="836" selection-end="837" vertical-scroll-proportion="20.12" vertical-offset="1047" max-vertical-offset="1887">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="views.py" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="index.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="25" column="54" selection-start="568" selection-end="584" vertical-scroll-proportion="-8.333333" vertical-offset="0" max-vertical-offset="4437">
+              <folding>
+                <element signature="e#759#925#0" expanded="true" />
+                <element signature="e#1446#1492#0" expanded="true" />
+                <element signature="e#1498#1523#0" expanded="true" />
+                <element signature="e#2037#2078#0" expanded="true" />
+                <element signature="e#2130#2157#0" expanded="true" />
+                <element signature="e#2372#2420#0" expanded="true" />
+                <element signature="e#2503#2530#0" expanded="true" />
+                <element signature="e#2655#2677#0" expanded="true" />
+                <element signature="e#2809#2830#0" expanded="true" />
+                <element signature="e#2995#3052#0" expanded="true" />
+                <element signature="e#3284#3359#0" expanded="true" />
+                <element signature="e#3451#3485#0" expanded="true" />
+                <element signature="e#3850#3938#0" expanded="true" />
+                <element signature="e#3995#4023#0" expanded="true" />
+                <element signature="e#4038#4064#0" expanded="true" />
+                <element signature="e#4283#4362#0" expanded="true" />
+                <element signature="e#6571#6618#0" expanded="true" />
+                <element signature="e#6701#6732#0" expanded="true" />
+                <element signature="e#7915#7988#0" expanded="true" />
+                <element signature="e#8284#8306#0" expanded="true" />
+                <element signature="e#8317#8382#0" expanded="true" />
+                <element signature="e#8611#8670#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="urls.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/anytable/urls.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="17" column="19" selection-start="765" selection-end="765" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="459">
+              <folding>
+                <element signature="e#0#51#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ajaxFront.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/ajaxFront.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="13" column="30" selection-start="531" selection-end="531" vertical-scroll-proportion="-8.5" vertical-offset="0" max-vertical-offset="527">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="views.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/anytable_v1/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="45" column="28" selection-start="1329" selection-end="1337" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="986">
+            <state line="61" column="18" selection-start="2085" selection-end="2085" vertical-scroll-proportion="0.7208029" vertical-offset="642" max-vertical-offset="1292">
+              <folding>
+                <element signature="e#15#45#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="searchResult.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/searchResult.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="2" column="8" selection-start="49" selection-end="49" vertical-scroll-proportion="-1.3076923" vertical-offset="0" max-vertical-offset="153">
               <folding />
             </state>
           </provider>
@@ -49,7 +112,7 @@
       <file leaf-file-name="venueCard.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/venueCard.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="235" column="25" selection-start="8656" selection-end="8656" vertical-scroll-proportion="-11.769231" vertical-offset="3689" max-vertical-offset="6018">
+            <state line="313" column="0" selection-start="10217" selection-end="10217" vertical-scroll-proportion="-204.65384" vertical-offset="0" max-vertical-offset="6137">
               <folding>
                 <element signature="n#style#0;n#a#0;n#div#1;n#div#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
@@ -77,10 +140,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="style.css" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="style.css" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/static/css/style.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="333" column="14" selection-start="7152" selection-end="7152" vertical-scroll-proportion="0.36313868" vertical-offset="5462" max-vertical-offset="11305">
+            <state line="331" column="29" selection-start="7147" selection-end="7147" vertical-scroll-proportion="-7.28" vertical-offset="5445" max-vertical-offset="11305">
               <folding />
             </state>
           </provider>
@@ -89,7 +152,7 @@
       <file leaf-file-name="layout_inner.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/layout_inner.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="145" column="27" selection-start="5085" selection-end="5095" vertical-scroll-proportion="-2.1710527" vertical-offset="2300" max-vertical-offset="3536">
+            <state line="145" column="27" selection-start="5085" selection-end="5095" vertical-scroll-proportion="-18.276316" vertical-offset="1076" max-vertical-offset="3536">
               <folding>
                 <element signature="n#style#0;n#div#0;n#section#0;n#nav#0;n#header#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#img#0;n#div#0;n#section#0;n#nav#0;n#header#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -101,72 +164,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="urls.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/anytable/urls.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="10" column="0" selection-start="250" selection-end="250" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="408">
-              <folding>
-                <element signature="e#0#51#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="models.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/anytable_v1/models.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="6" column="15" selection-start="243" selection-end="253" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2159">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="layout.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/layout.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="23" column="33" selection-start="519" selection-end="519" vertical-scroll-proportion="-3.4117646" vertical-offset="217" max-vertical-offset="1530">
+            <state line="23" column="33" selection-start="519" selection-end="519" vertical-scroll-proportion="-1.9019607" vertical-offset="294" max-vertical-offset="1530">
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ajaxFront.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/ajaxFront.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="13" column="30" selection-start="531" selection-end="531" vertical-scroll-proportion="-8.5" vertical-offset="0" max-vertical-offset="527">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/index.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="60" column="8" selection-start="1839" selection-end="1839" vertical-scroll-proportion="-4.647059" vertical-offset="783" max-vertical-offset="4403">
-              <folding>
-                <element signature="e#704#870#0" expanded="true" />
-                <element signature="e#1356#1402#0" expanded="true" />
-                <element signature="e#1408#1433#0" expanded="true" />
-                <element signature="e#1926#1967#0" expanded="true" />
-                <element signature="e#2019#2046#0" expanded="true" />
-                <element signature="e#2261#2309#0" expanded="true" />
-                <element signature="e#2392#2419#0" expanded="true" />
-                <element signature="e#2544#2566#0" expanded="true" />
-                <element signature="e#2698#2719#0" expanded="true" />
-                <element signature="e#2884#2941#0" expanded="true" />
-                <element signature="e#3173#3248#0" expanded="true" />
-                <element signature="e#3340#3374#0" expanded="true" />
-                <element signature="e#3739#3827#0" expanded="true" />
-                <element signature="e#3884#3912#0" expanded="true" />
-                <element signature="e#3927#3953#0" expanded="true" />
-                <element signature="e#4172#4251#0" expanded="true" />
-                <element signature="e#6460#6507#0" expanded="true" />
-                <element signature="e#6590#6621#0" expanded="true" />
-                <element signature="e#7804#7877#0" expanded="true" />
-                <element signature="e#8173#8195#0" expanded="true" />
-                <element signature="e#8206#8271#0" expanded="true" />
-                <element signature="e#8500#8559#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -181,7 +183,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/static/js/jquery.jcarousel.js" />
         <option value="$PROJECT_DIR$/static/js/jcarousel.connected-carousels.js" />
         <option value="$PROJECT_DIR$/templates/ajaxFront.html" />
         <option value="$PROJECT_DIR$/anytable_v1/admin.py" />
@@ -189,14 +190,15 @@
         <option value="$PROJECT_DIR$/templates/footer.html" />
         <option value="$PROJECT_DIR$/static/css/venueCard.css" />
         <option value="$PROJECT_DIR$/templates/layout.html" />
-        <option value="$PROJECT_DIR$/anytable/settings.py" />
-        <option value="$PROJECT_DIR$/anytable_v1/models.py" />
-        <option value="$PROJECT_DIR$/anytable_v1/views.py" />
         <option value="$PROJECT_DIR$/templates/layout_inner.html" />
-        <option value="$PROJECT_DIR$/anytable/urls.py" />
         <option value="$PROJECT_DIR$/templates/venueCard.html" />
-        <option value="$PROJECT_DIR$/templates/index.html" />
+        <option value="$PROJECT_DIR$/anytable_v1/models.py" />
         <option value="$PROJECT_DIR$/static/css/style.css" />
+        <option value="$PROJECT_DIR$/anytable/urls.py" />
+        <option value="$PROJECT_DIR$/anytable/settings.py" />
+        <option value="$PROJECT_DIR$/templates/index.html" />
+        <option value="$PROJECT_DIR$/templates/searchResult.html" />
+        <option value="$PROJECT_DIR$/anytable_v1/views.py" />
       </list>
     </option>
   </component>
@@ -437,7 +439,7 @@
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24940476" sideWeight="0.67227834" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39955106" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32996634" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32772166" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.14702581" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -469,13 +471,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/static/js/jcarousel.connected-carousels.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="16" selection-start="242" selection-end="251" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1615">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/static/js/jquery.jcarousel.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="259" column="30" selection-start="7485" selection-end="7485" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="24038">
@@ -527,20 +522,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/ajaxFront.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="30" selection-start="531" selection-end="531" vertical-scroll-proportion="-8.5" vertical-offset="0" max-vertical-offset="527">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/layout.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="33" selection-start="519" selection-end="519" vertical-scroll-proportion="-3.4117646" vertical-offset="217" max-vertical-offset="1530">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/static/css/venueCard.css">
       <provider selected="true" editor-type-id="text-editor">
         <state line="43" column="4" selection-start="805" selection-end="805" vertical-scroll-proportion="-17.16" vertical-offset="302" max-vertical-offset="850">
@@ -550,30 +531,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/anytable_v1/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="15" selection-start="243" selection-end="253" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2159">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/anytable/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="0" selection-start="250" selection-end="250" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="408">
+        <state line="0" column="14" selection-start="14" selection-end="14" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2159">
           <folding>
-            <element signature="e#0#51#0" expanded="true" />
+            <element signature="e#15#43#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/anytable/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="32" column="25" selection-start="844" selection-end="849" vertical-scroll-proportion="-7.28" vertical-offset="362" max-vertical-offset="1870">
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/layout_inner.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="145" column="27" selection-start="5085" selection-end="5095" vertical-scroll-proportion="-2.1710527" vertical-offset="2300" max-vertical-offset="3536">
+        <state line="145" column="27" selection-start="5085" selection-end="5095" vertical-scroll-proportion="-18.276316" vertical-offset="1076" max-vertical-offset="3536">
           <folding>
             <element signature="n#style#0;n#div#0;n#section#0;n#nav#0;n#header#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#img#0;n#div#0;n#section#0;n#nav#0;n#header#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -584,16 +551,39 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/anytable_v1/views.py">
+    <entry file="file://$PROJECT_DIR$/static/css/style.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="45" column="28" selection-start="1329" selection-end="1337" vertical-scroll-proportion="0.0" vertical-offset="396" max-vertical-offset="986">
+        <state line="331" column="29" selection-start="7147" selection-end="7147" vertical-scroll-proportion="-7.28" vertical-offset="5445" max-vertical-offset="11305">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/layout.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="23" column="33" selection-start="519" selection-end="519" vertical-scroll-proportion="-1.9019607" vertical-offset="294" max-vertical-offset="1530">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/anytable/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="17" column="19" selection-start="765" selection-end="765" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="459">
+          <folding>
+            <element signature="e#0#51#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/ajaxFront.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="30" selection-start="531" selection-end="531" vertical-scroll-proportion="-8.5" vertical-offset="0" max-vertical-offset="527">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/venueCard.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="235" column="25" selection-start="8656" selection-end="8656" vertical-scroll-proportion="-11.769231" vertical-offset="3689" max-vertical-offset="6018">
+        <state line="313" column="0" selection-start="10217" selection-end="10217" vertical-scroll-proportion="-204.65384" vertical-offset="0" max-vertical-offset="6137">
           <folding>
             <element signature="n#style#0;n#a#0;n#div#1;n#div#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
@@ -622,38 +612,54 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="60" column="8" selection-start="1839" selection-end="1839" vertical-scroll-proportion="-4.647059" vertical-offset="783" max-vertical-offset="4403">
+        <state line="25" column="54" selection-start="568" selection-end="584" vertical-scroll-proportion="-8.333333" vertical-offset="0" max-vertical-offset="4437">
           <folding>
-            <element signature="e#704#870#0" expanded="true" />
-            <element signature="e#1356#1402#0" expanded="true" />
-            <element signature="e#1408#1433#0" expanded="true" />
-            <element signature="e#1926#1967#0" expanded="true" />
-            <element signature="e#2019#2046#0" expanded="true" />
-            <element signature="e#2261#2309#0" expanded="true" />
-            <element signature="e#2392#2419#0" expanded="true" />
-            <element signature="e#2544#2566#0" expanded="true" />
-            <element signature="e#2698#2719#0" expanded="true" />
-            <element signature="e#2884#2941#0" expanded="true" />
-            <element signature="e#3173#3248#0" expanded="true" />
-            <element signature="e#3340#3374#0" expanded="true" />
-            <element signature="e#3739#3827#0" expanded="true" />
-            <element signature="e#3884#3912#0" expanded="true" />
-            <element signature="e#3927#3953#0" expanded="true" />
-            <element signature="e#4172#4251#0" expanded="true" />
-            <element signature="e#6460#6507#0" expanded="true" />
-            <element signature="e#6590#6621#0" expanded="true" />
-            <element signature="e#7804#7877#0" expanded="true" />
-            <element signature="e#8173#8195#0" expanded="true" />
-            <element signature="e#8206#8271#0" expanded="true" />
-            <element signature="e#8500#8559#0" expanded="true" />
+            <element signature="e#759#925#0" expanded="true" />
+            <element signature="e#1446#1492#0" expanded="true" />
+            <element signature="e#1498#1523#0" expanded="true" />
+            <element signature="e#2037#2078#0" expanded="true" />
+            <element signature="e#2130#2157#0" expanded="true" />
+            <element signature="e#2372#2420#0" expanded="true" />
+            <element signature="e#2503#2530#0" expanded="true" />
+            <element signature="e#2655#2677#0" expanded="true" />
+            <element signature="e#2809#2830#0" expanded="true" />
+            <element signature="e#2995#3052#0" expanded="true" />
+            <element signature="e#3284#3359#0" expanded="true" />
+            <element signature="e#3451#3485#0" expanded="true" />
+            <element signature="e#3850#3938#0" expanded="true" />
+            <element signature="e#3995#4023#0" expanded="true" />
+            <element signature="e#4038#4064#0" expanded="true" />
+            <element signature="e#4283#4362#0" expanded="true" />
+            <element signature="e#6571#6618#0" expanded="true" />
+            <element signature="e#6701#6732#0" expanded="true" />
+            <element signature="e#7915#7988#0" expanded="true" />
+            <element signature="e#8284#8306#0" expanded="true" />
+            <element signature="e#8317#8382#0" expanded="true" />
+            <element signature="e#8611#8670#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/static/css/style.css">
+    <entry file="file://$PROJECT_DIR$/anytable/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="333" column="14" selection-start="7152" selection-end="7152" vertical-scroll-proportion="0.36313868" vertical-offset="5462" max-vertical-offset="11305">
+        <state line="32" column="13" selection-start="836" selection-end="837" vertical-scroll-proportion="20.12" vertical-offset="1047" max-vertical-offset="1887">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/searchResult.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="8" selection-start="49" selection-end="49" vertical-scroll-proportion="-1.3076923" vertical-offset="0" max-vertical-offset="153">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/anytable_v1/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="61" column="18" selection-start="2085" selection-end="2085" vertical-scroll-proportion="0.7208029" vertical-offset="642" max-vertical-offset="1292">
+          <folding>
+            <element signature="e#15#45#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
