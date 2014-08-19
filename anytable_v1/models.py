@@ -71,7 +71,8 @@ class venue(models.Model):
     type = models.ManyToManyField(venueType, null=False)
     city = models.ForeignKey(city, null=True)
     address = models.CharField(max_length=255, verbose_name="Address")
-
+    facebook_url = models.CharField(max_length=1024, verbose_name="Facebook URL", blank=True, null=True)
+    vk_url = models.CharField(max_length=1024, verbose_name="VK URL", blank=True, null=True)
     #photo = models.ManyToManyField(to=photo, null=True, blank=True)
     tel = models.CharField(max_length=255, blank=True, verbose_name="Telephone")
     email = models.CharField(max_length=255, blank=True, verbose_name="E-Mail")

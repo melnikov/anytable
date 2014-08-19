@@ -159,8 +159,12 @@
 (831) 413-82-32<br>
 e-mail: <a href="mailto:webmaster@example.com">{{ venue.email }}</a><br>
 web: <a href="http://{{ venue.website }}" target="_blank">{{ venue.website }}</a><br>
-<a href="#">группа Mixturabar Вконтакте</a> <br>
-<a href="#">группа Mixturabar в Facebook</a> <br>
+{% if venue.vk_url %}
+    <a href="{{ venue.vk_url }}">группа {{ venue.name }} Вконтакте</a> <br>
+{% endif %}
+{% if venue.facebook_url %}
+    <a href="{{ venue.facebook_url }}">группа {{ venue.name }} в Facebook</a> <br>
+{% endif %}
 Загруженность:    <div id="sc_2_percent_red" style="margin-left: 10px; padding: 0px 10px 0px 10px;"> 90%</div>
 <a id="reserveTb" > &nbsp;</a>
 
