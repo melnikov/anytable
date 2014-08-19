@@ -134,8 +134,9 @@
                 jQuery('.ui-widget').addClass('map_widget');
 
                 jQuery('.ui-widget-overlay').bind('click',function(){
-                jQuery(targetDiv).dialog('close');
-                jQuery(targetDiv).val("");
+
+                    jQuery(targetDiv).dialog('close');
+                    jQuery(targetDiv).val("");
 
                })
               }
@@ -357,7 +358,7 @@ web: <a href="http://{{ venue.website }}" target="_blank">{{ venue.website }}</a
                 //jQuery('.ui-widget')
 
                jQuery('.ui-widget-overlay').bind('click',function(){
-                //jQuery(targetDiv).dialog('close');
+                jQuery(targetDiv).dialog('close');
                 //jQuery(targetDiv).val("");
 
                });
