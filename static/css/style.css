@@ -174,7 +174,8 @@ h1{
 .ui-dialog a{
     color: #9a9d9b;
 }
-.no-close .ui-dialog-titlebar-close {
+.no-close .ui-dialog-titlebar-close,
+.ui-dialog-titlebar-close{
   display: none;
 }
 .ui-widget-overlay {

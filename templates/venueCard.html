@@ -8,7 +8,8 @@
         <script type="text/javascript" src="/static/js/jquery.jcarousel.js"></script>
 
         <script type="text/javascript" src="/static/js/jcarousel.connected-carousels.js"></script>
-<h1>{{ venue.name }}</h1>
+<div style="">
+    <h1>{{ venue.name }}</h1>
     <div >
 <div class="wrapper">
 
@@ -199,8 +200,8 @@ web: <a href="http://{{ venue.website }}" target="_blank">{{ venue.website }}</a
 <div class="cl"></div>
 <div style=" width: 100%; margin: 0; padding: 0;">
 
-<div class="afisha">
-<h1 >АФИША</h1>
+<div class="afisha" style="">
+<h1>АФИША</h1>
 {% if events %}
 
     <script type="text/javascript" src="/static/js/jcarousel.responsive.js"></script>
@@ -219,7 +220,7 @@ web: <a href="http://{{ venue.website }}" target="_blank">{{ venue.website }}</a
         <div style="">{{ event.date }}</div>
 
 
-    <div  id="{{ event.pk }}"   style="display: none; height: 1024px!important;" class="ui-widget-eventinfo">
+    <div  id="{{ event.pk }}"   style="display: none;" class="ui3 ui-widget-eventinfo">
          <img src="/static/uploads/{{ event.image }}"  />
          <div class="event_info">
              <h1>{{ event.title }}</h1>
@@ -230,38 +231,40 @@ web: <a href="http://{{ venue.website }}" target="_blank">{{ venue.website }}</a
              <h2>Депозит:&nbsp;</h2> 1000 руб./чел. <div style="clear: both;"></div>
              <h2>Свободные столики:&nbsp;</h2> есть (уточнить) <div style="clear: both;"></div>
              <div class="iwanthere" onclick="order({{ event.pk }});"></div>
-             </div>
+         </div>
+
 <script>
     function order(eventId){
         alert('order now '+eventId);
     }
 </script>
-    </div>
+        </div>
+
 
     </div>
+
 
 <style>
 .ui-widget{
-    margin: 0 auto!important;
-    padding: 0px!important;
+
 }
-.event_widget{
-    width: 920px!important;
-    height: 420px!important;
-    margin: 0 auto!important;
+.ui-widget.event_widget{
+    width: 920px !important;
+    height: 420px !important;
+
 }
-.event_widget h1, h2{
+.ui3 h1, h2{
     font-size: 20px;
     font-weight: bold;
     margin-bottom: 30px;
     text-indent: 0px;
 }
-.event_widget h2{
+.ui3 h2{
     margin: 0px;
     font-size: 16px;
     float: left;
 }
-.event_widget img{
+.ui3 img{
     width: 300px;
     height: 410px;
     float: left;
@@ -289,34 +292,12 @@ web: <a href="http://{{ venue.website }}" target="_blank">{{ venue.website }}</a
 }
 </style>
     <script>
-    function openEvent(targetDiv) {
-        $(targetDiv).dialog({
-		modal: true,
-		autoOpen: false,
-        closeOnEscape: true,
-        dialogClass: "no-close",
-        resizable: false,
 
-        open: function(event, ui){
-               jQuery('.ui-dialog-title').hide('.ui-dialog-title');
-
-
-               jQuery('.ui-widget').addClass('event_widget');
-               jQuery('.ui-dialog').addClass('ui-dialog-eventinfo');
-               jQuery('.ui-widget-overlay').bind('click',function(){
-               jQuery(targetDiv).dialog('close');
-               jQuery(targetDiv).val("");
-
-               })
-              }
-			});
-      };
 
 			jQuery("#a{{ event.pk }}").on("click", function() {
-			     var targetDiv;
-                 jQuery('#{{ event.pk }}').dialog("open");
-                 openEvent(targetDiv);
-
+                var targetDiv = '#{{ event.pk }}';
+                jQuery('#{{ event.pk }}').dialog("open");
+                //openEvent(targetDiv);
 		    });
 
 
@@ -351,5 +332,44 @@ web: <a href="http://{{ venue.website }}" target="_blank">{{ venue.website }}</a
 <div >
 
 </div>
+<div style="clear:both;"></div>
+</div>
+    <script>
+
+
+        function openEvent(targetDiv) {
+
+
+        $(targetDiv).dialog({
+		modal: true,
+		autoOpen: false,
+        closeOnEscape: true,
+        dialogClass: "no-close",
+        dialogClass: "event_widget",
+        resizable: false,
+        before: function(event,ui){
+
+        },
+        open: function(event, ui){
+               jQuery('.ui-dialog-title').hide();
+                //jQuery('.ui-widget').addClass('event_widget');
+                jQuery('.ui-dialog').addClass('ui-dialog-eventinfo');
+                //jQuery('.ui-widget')
+
+               jQuery('.ui-widget-overlay').bind('click',function(){
+                //jQuery(targetDiv).dialog('close');
+                //jQuery(targetDiv).val("");
+
+               });
+
+              }
+			});
+
+      }
+
+
+
+    </script>
+
 
 {% endblock %}
