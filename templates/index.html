@@ -25,7 +25,7 @@
 <div style="position: relative; height: 80px;">
 <form action="/search/" method="POST">{% csrf_token %}
 <select  name="city" id="city">
-<option >Город</option>
+<option value="0">Город</option>
   {% for city in cities %}
       <option value="{{ city.pk }}">{{ city.name }}</option>
   {% endfor %}
@@ -39,7 +39,7 @@
 <br />
 <select name="type"><option selected> Куда идем?</option>
         {% for type in types %}
-       <option value="{{ type.name }}" >{{ type.name }}</option>
+       <option value="{{ type.pk }}" >{{ type.name }}</option>
         {% endfor %}
 
 </select>

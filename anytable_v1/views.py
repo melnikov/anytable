@@ -58,13 +58,18 @@ def venueCard(request, id):
 @csrf_exempt
 def searchResult(request):
     if request.method == "POST":
+        #if request.POST['city'] > '0':
+        #    var = 'activated'
+        city = request.POST['city']
+
         type = request.POST['type']
-        ana = type
-        return render_to_response('searchResult.html', context_instance = RequestContext(request, {'a':ana,}))
+        #q_city = venue.objects.filter(city__pk = city)
+        q_type = venue.objects.filter(type__pk = type, city__pk = city)
+        return render_to_response('searchResult.html', context_instance = RequestContext(request, {'venues':q_type, 'city':city, }))
     #context_instance = RequestContext(request, {"v":v})
-    else:
-        ana = 'idk'
-        return render_to_response('searchResult.html', context_instance = RequestContext(request, {'a':ana,}))
+    #else:
+        #ana = 'idk'
+        #return render_to_response('searchResult.html', context_instance = RequestContext(request, {'a':ana,}))
 
 
 

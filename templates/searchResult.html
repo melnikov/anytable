@@ -1,4 +1,6 @@
 {% block content %}
 <h1>Search Page</h1>
-    {{ a }}
+{% for venue in venues %}
+    {{ city }}: {{ venue.name }}: {{ var }} <br />
+{% endfor %}
 {% endblock %}
