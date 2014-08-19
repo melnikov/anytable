@@ -43,6 +43,11 @@ class venueKitchen(models.Model):
     def __unicode__(self):
         return u"%s" % self.name
 
+class venueOptions(models.Model):
+    name = models.CharField(max_length=255)
+    def __unicode__(self):
+        return u"%s" % self.name
+
 class region(models.Model):
     name = models.CharField(max_length=255, verbose_name="Region Name",default="")
     def __unicode__(self):
@@ -57,12 +62,10 @@ class city(models.Model):
 
 class venue(models.Model):
     name = models.CharField(max_length=255, verbose_name="Name")
-
-
     image = models.ImageField(upload_to='images', blank=True, null=True)
     thumbnail = ImageSpecField(source='image', processors=[ResizeToFill(100, 50)], format='JPEG', options={'quality': 60})
     cropping = ImageRatioField('image', '430x360', free_crop=True)
-
+    option = models.ManyToManyField(venueOptions, null=True)
     subscriber = models.ForeignKey(subscriber,null=True)
     #type = models.ForeignKey(venueType, null=True)
     type = models.ManyToManyField(venueType, null=False)
@@ -81,7 +84,8 @@ class venue(models.Model):
         return ([v.name for v in self.type.all()])
     def kitchen_list(self):
         return ([k.name for k in self.kitchen.all()])
-
+    def option_list(self):
+        return ([o.name for o in self.option.all()])
     def vkfield(self):
         return u"<h3>%s</h3>" % self.name
 
@@ -91,7 +95,6 @@ class venue(models.Model):
        return u"%s " % self.name
 
 class venueimage(models.Model):
-
     image = models.ImageField(upload_to='images', blank=True, null=True)
     thumbnail = ImageSpecField(source='image', processors=[ResizeToFit(300, 150)], format='JPEG', options={'quality': 60})
     description = models.CharField(max_length=255)

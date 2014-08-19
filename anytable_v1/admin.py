@@ -27,12 +27,16 @@ class venueImage(admin.TabularInline):
     extra = 1
     thumbnail = AdminThumbnail(image_field = 'thumbnail')
     readonly_fields = ['thumbnail']
+
 class venueKitchenAdmin(admin.ModelAdmin):
     list_display = ("name",)
 
+class venueOptionAdmin(admin.ModelAdmin):
+    list_display = ("name",)
+
 class venueAdmin(ImageCroppingMixin, admin.ModelAdmin):
-   filter_horizontal = ("type", "kitchen", )
-   list_display = (  "name", "address", "kitchen_list", "image", "types_list", "admin_thumbnail",)
+   filter_horizontal = ("type", "kitchen", "option")
+   list_display = (  "name", "address", "kitchen_list", "image", "option_list", "types_list", "admin_thumbnail",)
    inlines = [ venueImage, ]
    pass
    admin_thumbnail = AdminThumbnail(image_field='thumbnail')
@@ -47,6 +51,7 @@ class costumorAdmin(admin.ModelAdmin):
     list_display = ("name", "email", "telephone", "city", )
 
 #admin.site.register(photo, photoAdmin)
+admin.site.register(venueOptions, venueOptionAdmin)
 admin.site.register(venueKitchen,venueKitchenAdmin)
 admin.site.register(testUsers,testUsersAdmin)
 admin.site.register(subscriber, subscriberAdmin)
