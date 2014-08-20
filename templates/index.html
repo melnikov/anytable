@@ -25,7 +25,7 @@
 <div style="position: relative; height: 80px;">
 <form action="/search/" method="POST">{% csrf_token %}
 <select  name="city" id="city">
-<option value="0">Город</option>
+<option value="" selected>Город</option>
   {% for city in cities %}
       <option value="{{ city.pk }}">{{ city.name }}</option>
   {% endfor %}
@@ -37,26 +37,27 @@
 </div>
 <input type="text" placeholder="21/07/2014" id="datepicker" />
 <br />
-<select name="type"><option selected> Куда идем?</option>
+<select name="type">
+             <option selected value=""> Куда идем?</option>
         {% for type in types %}
-       <option value="{{ type.pk }}" >{{ type.name }}</option>
+             <option value="{{ type.pk }}" >{{ type.name }}</option>
         {% endfor %}
 
 </select>
-<select >
-    <option selected>Кухня</option>
+<select name="kitchen">
+    <option selected value="">Кухня</option>
     {% for kitchen in kitchens %}
-        <option >{{ kitchen.name }}</option>
+        <option value="{{ kitchen.pk }}">{{ kitchen.name }}</option>
     {% endfor %}
 
 </select>
 <div style="background: rgba(255, 255, 255, 0.2); ">
 <ul style="list-style: none;">
-
-    <li><label class="checkbox"><input type="checkbox" /><span></span>Расплатиться по карте</label></li>
-    <li><label class="checkbox"><input type="checkbox" /><span></span>Бизнес-ланч</label></li>
-   <li> <label class="checkbox"><input type="checkbox" /><span></span>Парковка</label> </li>
-   <li> <label class="checkbox"><input type="checkbox" /><span></span>Wi-Fi</label></li>
+    {% for option in options %}
+        <li><label class="checkbox">
+            <input type="checkbox"   name="options" value="{{ option.pk }}" /><span></span>{{ option.name }}
+        </label></li>
+    {% endfor %}
 </ul>
 </div>
 <input type="submit" value="">

@@ -5,6 +5,7 @@ from anytable_v1.models import *
 from django.contrib.auth import *
 from django.views.decorators.csrf import csrf_exempt, csrf_protect
 
+
 from django.core.context_processors import csrf
 # Create your views here.
 
@@ -14,8 +15,9 @@ def index(request):
     types = venueType.objects.all()
     venues = venue.objects.all()
     kitchens = venueKitchen.objects.all()
+    options = venueOptions.objects.all()
 
-    context = Context({"events":events, "cities":cities, "types": types, "venues":venues, "kitchens":kitchens,})
+    context = Context({"events":events, "cities":cities, "types": types, "venues":venues, "kitchens":kitchens, "options": options,})
 
     return render_to_response('index.html', context)
 
@@ -58,14 +60,26 @@ def venueCard(request, id):
 @csrf_exempt
 def searchResult(request):
     if request.method == "POST":
+
         #if request.POST['city'] > '0':
         #    var = 'activated'
         city = request.POST['city']
-
         type = request.POST['type']
+        kitchen = request.POST['kitchen']
+        options = request.POST.getlist('options')
+        #options = list(options)
+        q1 = venue.objects.all()
+        if city :
+            q1 = venue.objects.filter(city__pk = city)
         #q_city = venue.objects.filter(city__pk = city)
-        q_type = venue.objects.filter(type__pk = type, city__pk = city)
-        return render_to_response('searchResult.html', context_instance = RequestContext(request, {'venues':q_type, 'city':city, }))
+        if type:
+            q1 = q1.filter(type__pk = type)
+        if kitchen:
+            q1 = q1.filter(kitchen__pk = kitchen)
+        if options :
+            q1 = q1.filter(option__pk__in = options).distinct()
+
+        return render_to_response('searchResult.html', context_instance = RequestContext(request, {'venues':q1, 'city':city, }))
     #context_instance = RequestContext(request, {"v":v})
     #else:
         #ana = 'idk'
