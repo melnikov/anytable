@@ -56,6 +56,7 @@ class region(models.Model):
 class city(models.Model):
     name = models.CharField(max_length=255)
     region = models.ForeignKey(region)
+
     def __unicode__(self):
         return u"%s" % self.name
 
@@ -70,7 +71,7 @@ class venue(models.Model):
     #type = models.ForeignKey(venueType, null=True)
     type = models.ManyToManyField(venueType, null=False)
     city = models.ForeignKey(city, null=True)
-    address = models.CharField(max_length=255, verbose_name="Address")
+    address = models.TextField(blank=True, verbose_name="Address")
     facebook_url = models.CharField(max_length=1024, verbose_name="Facebook URL", blank=True, null=True)
     vk_url = models.CharField(max_length=1024, verbose_name="VK URL", blank=True, null=True)
     #photo = models.ManyToManyField(to=photo, null=True, blank=True)
@@ -106,6 +107,9 @@ class event(models.Model):
     image = models.ImageField(upload_to='images', blank=True,null=True)
     thumbnail = ImageSpecField(source='image', processors=[ResizeToFit(325, 186)], format='JPEG', options={'quality': 60})
     date = models.DateTimeField()
+    event_date = models.DateField(null=True)
+    event_time = models.TimeField(null=True)
+    description = models.TextField(blank=True, verbose_name="Description")
     #photo = models.ManyToManyField(to=photo, blank=True)
     QR = models.CharField(max_length=1024, default='')
     venue = models.ForeignKey(venue)

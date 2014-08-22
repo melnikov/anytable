@@ -11,7 +11,7 @@ class testUsersAdmin(admin.ModelAdmin):
 
 
 class eventAdmin(admin.ModelAdmin):
-    list_display = ( 'title', 'date', 'venue', 'thumbnail',)
+    list_display = ( 'title', 'event_date', 'venue', 'thumbnail',)
     pass
     thumbnail = AdminThumbnail(image_field='thumbnail',)
     readonly_fields = ['thumbnail']
