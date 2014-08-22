@@ -1,3 +1,4 @@
+# coding=utf-8
 from django.contrib import admin
 from imagekit.admin import AdminThumbnail
 from image_cropping import ImageCroppingMixin
