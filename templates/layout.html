@@ -10,7 +10,7 @@
 
     <script>
   $(function() {
-    $( "#datepicker" ).datepicker();
+      var date = $('#datepicker').datepicker({ dateFormat: 'dd-mm-yy' }).val();
   });
    $(function() {
     $( "#tabs" ).tabs();

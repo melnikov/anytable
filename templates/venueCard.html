@@ -222,14 +222,14 @@ web: <a href="http://{{ venue.website }}" target="_blank">{{ venue.website }}</a
         <div class="afishaItem">
         <h3>{{ event.title }}</h3>
         <a id="a{{ event.pk }}"  onclick="openEvent('#{{ event.pk }}');"> <img height="270px" src="/static/uploads/{{ event.image }}" /></a>
-        <div style="">{{ event.date }}</div>
+        <div style="">{{ event.date|date:'d-m-Y'}}</div>
 
 
     <div  id="{{ event.pk }}"   style="display: none;" class="ui3 ui-widget-eventinfo">
          <img src="/static/uploads/{{ event.image }}"  />
          <div class="event_info">
              <h1>{{ event.title }}</h1>
-             <div class="event_description"> {{ venue.description }}</div>
+             <div class="event_description"> {{ event.description }}</div>
              <div style="line-height: 30px;">
                   <h2>Вход:&nbsp;</h2> 1000 руб./чел.<div style="clear: both;"></div>
              и (или)<div style="clear: both;"></div>

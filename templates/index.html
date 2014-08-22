@@ -35,8 +35,10 @@
 
 </div>
 </div>
-<input type="text" placeholder="21/07/2014" id="datepicker" />
+
+<input type="text" placeholder="{{  date_today|date:"d-m-Y"  }}" id="datepicker" name="date" />
 <br />
+{{ g }}
 <select name="type">
              <option selected value=""> Куда идем?</option>
         {% for type in types %}
@@ -159,7 +161,7 @@
 </nav> <!-- End navigation -->
 
 
-<a href="http://anytable.ru"><img style=" position: absolute; right: 100px; top: 60px; " src="static/images/logo.png" /></a>
+<a href="/"><img style=" position: absolute; right: 100px; top: 60px; " src="static/images/logo.png" /></a>
 
 <section id="social">
 В социальных сетях:<br />
@@ -182,7 +184,7 @@
                 <div id="sc_1_item">
                     <h1>{{ event.title }}</h1>
                     <div id="sc_1_item_caption">
-                        <span id="sc_1_item_date">{{ event.date }}</span>
+                        <span id="sc_1_item_date">{{ event.event_date|date:'d-m-Y' }}</span>
                         <a>QR</a>
                     </div>
                     <img src="/static/uploads/{{ event.image }}" />
