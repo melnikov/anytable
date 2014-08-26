@@ -42,9 +42,10 @@ a#link{
     padding-left: 20px;
     background: url("/static/images/icon-address.png")  top left no-repeat;
 }
-
 </style>
-
+<div >
+{{ search_q }}
+</div>
 {% if events and venues %}
    <h4>whats going on on <strong>{{ date|date:'d-m-Y' }}</strong> ?</h4>
     <h1>Афиша</h1>

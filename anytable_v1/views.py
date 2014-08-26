@@ -85,28 +85,43 @@ def searchResult(request):
         options = request.POST.getlist('options')
 
         q1 = Venue.objects.all()
+        search_q = ''
         if city :
-            mycity = City.objects.get(pk = city)
+            city_q = City.objects.get(pk = city)
+            search_q = ('City: %s' % city_q.name)
             q1 = Venue.objects.filter(city__pk = city)
         if type:
+            type_q = VenueType.objects.get(pk = type)
+            search_q = search_q + (' | Type: %s' %type_q.name)
             q1 = q1.filter(type__pk = type)
         if kitchen:
+            kitchen_q = VenueKitchen.objects.get(pk = kitchen)
+            search_q = search_q + (' | Kitchen: %s' %kitchen_q.name)
             q1 = q1.filter(kitchen__pk = kitchen )
         if options :
+            if len(options) > 1:
+                options_q = VenueOptions.objects.filter(pk__in = options)
+                #options_q = str(options_q)
+                search_q = search_q + (' | Options: ')
+                for option_q in options_q:
+                    search_q = search_q + (' %s, ' % option_q.name)
+            else:
+                options_q = VenueOptions.objects.get(pk__in = options)
+                search_q = search_q + (' | Options: %s' % options_q.name)
             q1 = q1.filter(option__pk__in = options ).distinct()
 
         q2 = Event.objects.filter(venue = q1 , event_date = date)
         #none_message = ''
         if q2.count() > 0 and q1.count() > 0:
             message = 'suggestion of venues matched the search, with no registered events, but here are Places matched ur search!'
-            return render_to_response('searchResult.html', context_instance = RequestContext(request, { 'venues':q1, 'events':q2,'city':city, 'message':message, 'date':date}))
+            return render_to_response('searchResult.html', context_instance = RequestContext(request, {'search_q': search_q, 'venues':q1, 'events':q2,'city':city, 'message':message, 'date':date}))
         elif q2.count() == 0 and q1.count() > 0:
             date_s = datetime.datetime.strptime(str(date), '%Y-%m-%d').strftime('%d-%m-%Y')
             message = ('No events found on %s, but here are Places matched ur search!' % date_s )
-            return render_to_response('searchResult.html', context_instance = RequestContext(request, {'mycity':mycity, 'venues':q1, 'city':city, 'message':message, 'date':date}))
+            return render_to_response('searchResult.html', context_instance = RequestContext(request, {'search_q': search_q, 'venues':q1, 'city':city, 'message':message, 'date':date}))
         else:
             message = 'neither venues nor events matched ur search'
-            return render_to_response('searchResult.html', context_instance = RequestContext(request, { 'events':q2, 'city':city, 'message':message}))
+            return render_to_response('searchResult.html', context_instance = RequestContext(request, { 'search_q': search_q, 'events':q2, 'city':city, 'message':message}))
 
 
 
