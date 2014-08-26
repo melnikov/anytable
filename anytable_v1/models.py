@@ -122,8 +122,13 @@ class User(AbstractBaseUser):
     city = models.ForeignKey(City)
     joined = models.DateTimeField(auto_now_add=True, null=True)
     is_active = models.BooleanField(default=True)
-    is_admin = models.BooleanField(default=False)
+    is_admin = models.NullBooleanField(default=False)
     USERNAME_FIELD = 'email'
 
     def __unicode__(self):
         return self.email
+class VenueAdmin(models.Model):
+    email =models.EmailField(max_length=254, blank= False, null= False, verbose_name="E-Mail")
+    password = models.CharField(max_length=255, blank= False, null= False, verbose_name="Password")
+    venue = models.ForeignKey(Venue, null= False, blank= False, verbose_name="Venue")
+    active = models.NullBooleanField(blank=True, null= True)
