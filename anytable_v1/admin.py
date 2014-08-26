@@ -24,7 +24,7 @@ class cityAdmin(admin.ModelAdmin):
     list_display = ('name', 'region', )
 
 class venueImage(admin.TabularInline):
-    model = venueimage
+    model = Venueimage
     extra = 1
     thumbnail = AdminThumbnail(image_field = 'thumbnail')
     readonly_fields = ['thumbnail']
@@ -52,15 +52,15 @@ class costumorAdmin(admin.ModelAdmin):
     list_display = ("name", "email", "telephone", "city", )
 
 #admin.site.register(photo, photoAdmin)
-admin.site.register(venueOptions, venueOptionAdmin)
-admin.site.register(venueKitchen,venueKitchenAdmin)
-admin.site.register(testUsers,testUsersAdmin)
-admin.site.register(subscriber, subscriberAdmin)
-admin.site.register(venueType, typeAdmin)
-admin.site.register(user, costumorAdmin)
-admin.site.register(venue, venueAdmin)
-admin.site.register(event, eventAdmin)
-admin.site.register(region, regionAdmin)
-admin.site.register(city, cityAdmin)
+admin.site.register(VenueOptions, venueOptionAdmin)
+admin.site.register(VenueKitchen,venueKitchenAdmin)
+admin.site.register(TestUsers,testUsersAdmin)
+admin.site.register(Subscriber, subscriberAdmin)
+admin.site.register(VenueType, typeAdmin)
+admin.site.register(User, costumorAdmin)
+admin.site.register(Venue, venueAdmin)
+admin.site.register(Event, eventAdmin)
+admin.site.register(Region, regionAdmin)
+admin.site.register(City, cityAdmin)
 
 

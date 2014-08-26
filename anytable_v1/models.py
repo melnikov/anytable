@@ -14,63 +14,63 @@ add_introspection_rules([], ["^sorl\.thumbnail\.fields\.ImageWithThumbnailField"
 
 # Create your models here.
 
-class testUsers(models.Model):
+class TestUsers(models.Model):
     firstName = models.CharField(max_length=255,verbose_name="Имя")
     lastName = models.CharField(max_length=255,verbose_name="Фамилия")
     def __unicode__(self):
         return "gaga"
 
-class testCities(models.Model):
+class TestCities(models.Model):
     name = models.CharField(max_length=255)
     population = models.IntegerField(default=0)
 
-class subscriber(models.Model):
+class Subscriber(models.Model):
     name = models.CharField(max_length=255, default="")
     logIn = models.CharField(max_length=255, default="")
     password = models.CharField(max_length=255, default="")
     def __unicode__(self):
         return u"%s" % self.name
 
-class venueType(models.Model):
+class VenueType(models.Model):
     name = models.CharField(max_length=255)
     def __unicode__(self):
         return u"%s" % self.name
 
     def __unicode__(self):
         return u"%s" % self.name
-class venueKitchen(models.Model):
+class VenueKitchen(models.Model):
     name = models.CharField(max_length=255, blank=True)
     def __unicode__(self):
         return u"%s" % self.name
 
-class venueOptions(models.Model):
+class VenueOptions(models.Model):
     name = models.CharField(max_length=255)
     def __unicode__(self):
         return u"%s" % self.name
 
-class region(models.Model):
+class Region(models.Model):
     name = models.CharField(max_length=255, verbose_name="Region Name",default="")
     def __unicode__(self):
         return u"%s" % self.name
 
-class city(models.Model):
+class City(models.Model):
     name = models.CharField(max_length=255)
-    region = models.ForeignKey(region)
+    region = models.ForeignKey(Region)
 
     def __unicode__(self):
         return u"%s" % self.name
 
 
-class venue(models.Model):
+class Venue(models.Model):
     name = models.CharField(max_length=255, verbose_name="Name")
     image = models.ImageField(upload_to='images', blank=True, null=True)
     thumbnail = ImageSpecField(source='image', processors=[ResizeToFill(100, 50)], format='JPEG', options={'quality': 60})
     cropping = ImageRatioField('image', '430x360', free_crop=True)
-    option = models.ManyToManyField(venueOptions, null=True)
-    subscriber = models.ForeignKey(subscriber,null=True)
+    option = models.ManyToManyField(VenueOptions, null=True)
+    subscriber = models.ForeignKey(Subscriber,null=True)
     #type = models.ForeignKey(venueType, null=True)
-    type = models.ManyToManyField(venueType, null=False)
-    city = models.ForeignKey(city, null=True)
+    type = models.ManyToManyField(VenueType, null=False)
+    city = models.ForeignKey(City, null=True)
     address = models.TextField(blank=True, verbose_name="Address")
     facebook_url = models.CharField(max_length=1024, verbose_name="Facebook URL", blank=True, null=True)
     vk_url = models.CharField(max_length=1024, verbose_name="VK URL", blank=True, null=True)
@@ -80,7 +80,7 @@ class venue(models.Model):
     website = models.CharField(max_length=255, blank=True, verbose_name="Website")
     schedule = models.CharField(max_length=255, blank=True, verbose_name="Work Schedule")
     description = models.TextField(blank=True, verbose_name="Description")
-    kitchen = models.ManyToManyField(venueKitchen,blank=True, verbose_name="Kitchen")
+    kitchen = models.ManyToManyField(VenueKitchen,blank=True, verbose_name="Kitchen")
 
     def types_list(self):
         return ([v.name for v in self.type.all()])
@@ -96,13 +96,13 @@ class venue(models.Model):
     def __unicode__(self):
        return u"%s " % self.name
 
-class venueimage(models.Model):
+class Venueimage(models.Model):
     image = models.ImageField(upload_to='images', blank=True, null=True)
     thumbnail = ImageSpecField(source='image', processors=[ResizeToFit(300, 150)], format='JPEG', options={'quality': 60})
     description = models.CharField(max_length=255)
-    venue = models.ForeignKey(venue, null=True)
+    venue = models.ForeignKey(Venue, null=True)
 
-class event(models.Model):
+class Event(models.Model):
     title = models.CharField(max_length=255)
     image = models.ImageField(upload_to='images', blank=True,null=True)
     thumbnail = ImageSpecField(source='image', processors=[ResizeToFit(325, 186)], format='JPEG', options={'quality': 60})
@@ -112,14 +112,14 @@ class event(models.Model):
     description = models.TextField(blank=True, verbose_name="Description")
     #photo = models.ManyToManyField(to=photo, blank=True)
     QR = models.CharField(max_length=1024, default='')
-    venue = models.ForeignKey(venue)
+    venue = models.ForeignKey(Venue)
 
-class user(AbstractBaseUser):
+class User(AbstractBaseUser):
     name = models.CharField(max_length=255)
     email = models.EmailField('email address', unique=True, db_index=True)
     #password = models.CharField(max_length=255)
     telephone = models.CharField(max_length=255, unique=True)
-    city = models.ForeignKey(city)
+    city = models.ForeignKey(City)
     joined = models.DateTimeField(auto_now_add=True, null=True)
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
