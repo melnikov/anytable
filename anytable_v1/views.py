@@ -77,8 +77,8 @@ def searchResult(request):
         if date:
             date = datetime.datetime.strptime(date, "%d-%m-%Y")
         else:
-             date = datetime.date.today()
 
+            date = datetime.datetime.strptime(str(datetime.date.today()), "%Y-%m-%d")
 
         type = request.POST['type']
         kitchen = request.POST['kitchen']
@@ -116,7 +116,8 @@ def searchResult(request):
             message = 'suggestion of venues matched the search, with no registered events, but here are Places matched ur search!'
             return render_to_response('searchResult.html', context_instance = RequestContext(request, {'search_q': search_q, 'venues':q1, 'events':q2,'city':city, 'message':message, 'date':date}))
         elif q2.count() == 0 and q1.count() > 0:
-            date_s = datetime.datetime.strptime(str(date), '%Y-%m-%d').strftime('%d-%m-%Y')
+            date_s = datetime.datetime.strptime(str(date), '%Y-%m-%d %H:%M:%S').strftime('%d-%m-%Y ')
+
             message = ('No events found on %s, but here are Places matched ur search!' % date_s )
             return render_to_response('searchResult.html', context_instance = RequestContext(request, {'search_q': search_q, 'venues':q1, 'city':city, 'message':message, 'date':date}))
         else:
