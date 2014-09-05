@@ -109,7 +109,7 @@ def searchResult(request):
                 options_q = VenueOptions.objects.get(pk__in = options)
                 search_q = search_q + (' | Options: %s' % options_q.name)
             q1 = q1.filter(option__pk__in = options ).distinct()
-
+        
         q2 = Event.objects.filter(venue = q1 , event_date = date)
         #none_message = ''
         if q2.count() > 0 and q1.count() > 0:

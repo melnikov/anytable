@@ -65,7 +65,7 @@ class Venue(models.Model):
     name = models.CharField(max_length=255, verbose_name="Name")
     image = models.ImageField(upload_to='images', blank=True, null=True)
     thumbnail = ImageSpecField(source='image', processors=[ResizeToFill(100, 50)], format='JPEG', options={'quality': 60})
-    cropping = ImageRatioField('image', '430x360', free_crop=True)
+    cropping = ImageRatioField('image', '220x170', free_crop=False)
     option = models.ManyToManyField(VenueOptions, null=True)
     subscriber = models.ForeignKey(Subscriber,null=True)
     #type = models.ForeignKey(venueType, null=True)
@@ -127,8 +127,16 @@ class User(AbstractBaseUser):
 
     def __unicode__(self):
         return self.email
-class VenueAdmin(models.Model):
+
+class VenueAdministrator(models.Model):
     email =models.EmailField(max_length=254, blank= False, null= False, verbose_name="E-Mail")
     password = models.CharField(max_length=255, blank= False, null= False, verbose_name="Password")
+    #password = hash(password)
     venue = models.ForeignKey(Venue, null= False, blank= False, verbose_name="Venue")
     active = models.NullBooleanField(blank=True, null= True)
+
+class justTest(models.Model):
+    record = models.CharField(max_length=255, blank=True)
+    file = models.FileField(upload_to='images',blank=True , null=True)
+    def __unicode__(self):
+        return self.record
