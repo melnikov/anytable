@@ -13,7 +13,6 @@ from imagekit.admin import AdminThumbnail
 def TheVenueAdministration(request, id):
          if  request.user.is_superuser:
             user = VenueAdministrator.objects.get( pk = id )
-
             venuetypes = VenueType.objects.filter(venue = user.venue)
             types = VenueType.objects.all()
             venuekitchens = VenueKitchen.objects.filter(venue = user.venue)
@@ -68,12 +67,9 @@ def venueaddimg(request):
                 venue = Venue.objects.get(pk = venuepk)
                 r = Venueimage.objects.create(image= docfile, description='just new img', venue= venue)
                 r.save()
-                r = Document(title= 'request is post and %s' % venuepk, docfile = docfile)
-                r.save()
-
-
+                #r = Document(title= 'request is post and %s' % venuepk, docfile = docfile)
+                #r.save()
     else:
-
         r = Document(title = 'request is not post')
         r.svae()
         form = DocumentForm() # A empty, unbound form
@@ -92,6 +88,28 @@ def venueaddimg(request):
      #return render_to_response('admin/anytable_v1/venueadministrator', context_instance = RequestContext(request, {'message':message}))
     # use his for ajax return : return HttpResponse('done', mimetype="text/plain")
 
+@csrf_exempt
+def venueupdatelogo(request):
+    # Handle file upload
+    if request.method == 'POST':
+            file = request.FILES
+            if file:
+                save_file(request.FILES['logoupload'])
+                venuepk = request.POST['venuepk']
+                docfile = ('images/%s' % request.FILES['logoupload'])
+                venue = Venue.objects.get(pk = venuepk)
+                venue.image = docfile
+                #venue.thumbnail = venue.image
+                venue.save()
+    else:
+        r = Document(title = 'request is not post')
+        r.svae()
+        form = DocumentForm() # A empty, unbound form
+
+    # Load documents for the list page
+    documents = Document.objects.all()
+
+    return HttpResponse('done', mimetype="text/plain")
 
 
 

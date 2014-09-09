@@ -50,6 +50,7 @@ class typeAdmin(admin.ModelAdmin):
 
 class costumorAdmin(admin.ModelAdmin):
     list_display = ("name", "email", "telephone", "city", )
+
 class VenueAdministratorPanel(admin.ModelAdmin):
     #exclude = ["password", ]
     list_display = ("email", "password", )

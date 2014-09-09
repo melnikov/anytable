@@ -26,6 +26,22 @@
 
     <script>
 
+function editLogo(){
+ var form = document.getElementById('editLogoForm');
+  var formData = new FormData(form);
+  var xhr = new XMLHttpRequest();
+  xhr.open("POST", "/venueupdatelogo/", true);
+
+  xhr.send(formData);
+  //var frm = document.getElementById('formcontent');
+  xhr.onreadystatechange = function() {
+
+      window.location = '/admin/anytable_v1/venueadministrator/{{ user.pk }}'
+
+  };
+
+  return true;
+}
 
 function addImg() {
   var form = document.getElementById('addImgForm');
@@ -55,9 +71,10 @@ function delImg(id){
         });
     }
 
-    function actIv(){
-    $('#fileupload').click();
+    function actIv(id){
+    $(id).click();
     }
+
     </script>
   <div>
 
@@ -68,11 +85,15 @@ function delImg(id){
 
     <div style="width: 612px;float: left;">
       <div>
-        <div style="position: relative; width: 260px;height: 176px;background: yellow;margin-right: 10px;float: left;margin-bottom: 10px;">
-            {% load cropping %}
+<form id="editLogoForm" name="editLogoForm" enctype="multipart/form-data"  method="post" action=""> {% csrf_token %}
+    <div style="position: relative; width: 260px;height: 176px;background: yellow;margin-right: 10px;float: left;margin-bottom: 10px;">
 
-                <img  src="{% cropped_thumbnail user.venue "cropping" scale=0.5 %}" width="260px;" height="176px;">
-                <img src="/static/images/edit.png" style="position: absolute; z-index: 1; top: 5px; right: 5px; " onclick="editLogo();">
+        <img  src="/static/uploads/{{ user.venue.image }}" width="260px;" height="176px;">
+        <img src="/static/images/edit.png" style="position: absolute; z-index: 1; top: 5px; right: 5px; " onclick="actIv('#logoupload');">
+        <input type="file" style="display: none;" id="logoupload"  name="logoupload" onchange="editLogo();"/>
+        <input type="hidden"  name="venuepk" value="{{ user.venue.pk  }}">
+
+</form>
 
         </div>
 {% for image in images %}
@@ -86,7 +107,7 @@ function delImg(id){
 <div id="formcontent">
 
 <form id="addImgForm" name="addImgForm" enctype="multipart/form-data"  method="post" action=""> {% csrf_token %}
-        <a   id="upload_link" onclick="actIv();"  style="display: block;width:125px;height:84px;background: #dfdfdf;float: left;margin-right: 10px;margin-bottom: 10px;font-size: 32px;color: #fff;text-align: center;line-height: 84px;text-decoration: none;" >
+        <a   id="upload_link" onclick="actIv('#fileupload');"  style="display: block;width:125px;height:84px;background: #dfdfdf;float: left;margin-right: 10px;margin-bottom: 10px;font-size: 32px;color: #fff;text-align: center;line-height: 84px;text-decoration: none;" >
         +
         </a>
     <input type="file" style="display: none;" id="fileupload"  name="fileupload" onchange="addImg();"/>
@@ -214,9 +235,6 @@ event description
 
       <div class="cl"></div>
     </div>
-
-
-
   </div>
   <div class="cl" style="height: 20px;"></div>
 {% endblock %}

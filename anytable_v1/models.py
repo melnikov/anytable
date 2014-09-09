@@ -65,8 +65,12 @@ class City(models.Model):
 class Venue(models.Model):
     name = models.CharField(max_length=255, verbose_name="Name")
     image = models.ImageField(upload_to='images', blank=True, null=True)
-    thumbnail = ImageSpecField(source='image', processors=[ResizeToFill(100, 50)], format='JPEG', options={'quality': 60})
     cropping = ImageRatioField('image', '220x170', free_crop=False)
+    ##
+    #logo_fe = ImageCropField(blank=True, null=True, upload_to='images')
+    #cropping_fe = ImageRatioField('logo_fe', '220x170')
+    ##
+    thumbnail = ImageSpecField(source='image', processors=[ResizeToFill(100, 50)], format='JPEG', options={'quality': 60})
     option = models.ManyToManyField(VenueOptions, null=True)
     subscriber = models.ForeignKey(Subscriber,null=True)
     #type = models.ForeignKey(venueType, null=True)

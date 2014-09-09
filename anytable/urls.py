@@ -17,6 +17,7 @@ urlpatterns = patterns('',
     #url(r'^query/admin/addvenueimg/(?P<id>[0-9]+)', 'anytable_v1.admin_views.AddVenueImg', name='Add Venue Image'),
     #url(r'^query/admin/addvenueimg/', 'anytable_v1.admin_views.AddVenueImg', name='Add Venue Image'),
      url(r'^venueaddimg/$', 'anytable_v1.admin_views.venueaddimg', name='Venue Add Img'),
+     url(r'^venueupdatelogo/$', 'anytable_v1.admin_views.venueupdatelogo', name='Venue Update Logo'),
     #Non-Admin
     url(r'^$','anytable_v1.views.index',name='index'),
     url(r'^test/', 'anytable_v1.views.test', name='test'),
