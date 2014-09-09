@@ -6,6 +6,7 @@ from imagekit.processors import *
 from image_cropping import ImageCropField, ImageRatioField
 from pygeocoder import *
 from django.contrib.auth.models import AbstractBaseUser
+from django.forms import ModelForm
 
 
 
@@ -135,8 +136,7 @@ class VenueAdministrator(models.Model):
     venue = models.ForeignKey(Venue, null= False, blank= False, verbose_name="Venue")
     active = models.NullBooleanField(blank=True, null= True)
 
-class justTest(models.Model):
-    record = models.CharField(max_length=255, blank=True)
-    file = models.FileField(upload_to='images',blank=True , null=True)
-    def __unicode__(self):
-        return self.record
+class Document(models.Model):
+    title = models.CharField(max_length=25, blank=True, null=True)
+    docfile = models.ImageField(upload_to='images', blank=True, null=True)
+    thumbnail = ImageSpecField(source='docfile', processors=[ResizeToFit(325, 186)], format='JPEG', options={'quality': 60})

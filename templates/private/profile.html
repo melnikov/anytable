@@ -1,0 +1,222 @@
+{% extends "layout_inner.html" %}
+
+{% block content %}
+
+  <style>
+  .asd {
+    color: #333;
+    float: left;
+    margin-right: 20px;
+  }
+  .asd input {
+    border: 1px solid red !important;
+    margin-right: 10px;
+
+  }
+  .asd2 {
+    margin-bottom: 10px;
+  }
+  .asd2 input {
+    margin-right: 10px;
+  }
+#upload{
+    display:none
+}
+  </style>
+
+    <script>
+
+
+function addImg() {
+  var form = document.getElementById('addImgForm');
+  var formData = new FormData(form);
+  var xhr = new XMLHttpRequest();
+  xhr.open("POST", "/venueaddimg/", true);
+
+  xhr.send(formData);
+  var frm = document.getElementById('formcontent');
+  xhr.onreadystatechange = function() {
+ window.location = '/admin/anytable_v1/venueadministrator/{{ user.pk }}'
+  };
+
+  return true;
+}
+
+function delImg(id){
+        url = '/query/admin/deleteimg/'+id;
+        $.ajax({
+            type: "GET",
+            url: url,
+            data: '',
+            dataType:'html',
+            success: function(){
+               window.location = '/admin/anytable_v1/venueadministrator/{{ user.pk }}'
+            }
+        });
+    }
+
+    function actIv(){
+    $('#fileupload').click();
+    }
+    </script>
+  <div>
+
+
+<script src="/static/js/jquery.fileupload.js"></script>
+
+
+
+    <div style="width: 612px;float: left;">
+      <div>
+        <div style="position: relative; width: 260px;height: 176px;background: yellow;margin-right: 10px;float: left;margin-bottom: 10px;">
+            {% load cropping %}
+
+                <img  src="{% cropped_thumbnail user.venue "cropping" scale=0.5 %}" width="260px;" height="176px;">
+                <img src="/static/images/edit.png" style="position: absolute; z-index: 1; top: 5px; right: 5px; " onclick="editLogo();">
+
+        </div>
+{% for image in images %}
+         <div style="position: relative; width: 125px; height: 84px; float: left;margin-right: 10px;margin-bottom: 10px;">
+            <img src="/static/uploads/{{ image.image }}" style="width:125px;height:84px; ">
+            <img src="/static/images/delete.png" style="position: absolute; z-index: 1; top: 5px; right: 5px;" onclick="delImg({{ image.pk }});">
+         </div>
+{% endfor %}
+
+
+<div id="formcontent">
+
+<form id="addImgForm" name="addImgForm" enctype="multipart/form-data"  method="post" action=""> {% csrf_token %}
+        <a   id="upload_link" onclick="actIv();"  style="display: block;width:125px;height:84px;background: #dfdfdf;float: left;margin-right: 10px;margin-bottom: 10px;font-size: 32px;color: #fff;text-align: center;line-height: 84px;text-decoration: none;" >
+        +
+        </a>
+    <input type="file" style="display: none;" id="fileupload"  name="fileupload" onchange="addImg();"/>
+
+    <input type="hidden"  name="venuepk" value="{{ user.venue.pk  }}">
+
+</form>
+
+</div>
+        <div class="cl"></div>
+      </div>
+    <div>
+          {% for type in types %}
+            {% if type in venuetypes %}
+              <div class="asd"><input type="checkbox" checked />{{ type.name }}</div>
+            {% else %}
+              <div class="asd"><input type="checkbox" />{{ type.name }}</div>
+            {% endif %}
+          {% endfor %}
+
+
+        <div class="cl"></div>
+      </div>
+    <div style="height: 10px;"></div>
+      <div>
+          {% for option in options %}
+            {% if option in venueoptions %}
+              <div class="asd"><input type="checkbox" checked />{{ option.name }}</div>
+            {% else %}
+              <div class="asd"><input type="checkbox" />{{ option.name }}</div>
+            {% endif %}
+          {% endfor %}
+
+
+        <div class="cl"></div>
+      </div>
+
+      <div style="height:  10px;"></div>
+
+      <div>
+        <div style="float:  left;">Кухня:</div>
+        <div style="float:  left;margin-left: 20px;">
+          <div class="asd2"><input type="checkbox" />Европейская</div>
+          <div class="asd2"><input type="checkbox" />Японская</div>
+          <div class="asd2"><input type="checkbox" />Итальянская</div>
+
+        </div>
+        <div style="float:  left;margin-left: 20px;">
+          <div class="asd2"><input type="checkbox" />Китайская</div>
+          <div class="asd2"><input type="checkbox" />Мексиканская</div>
+          <div class="asd2"><input type="checkbox" />Таджикская</div>
+
+        </div>
+
+        <div class="cl"></div>
+      </div>
+
+
+    </div>
+  <style>
+      .right_col div{
+          font-size: 14px;
+          font-weight: bold;
+          margin-bottom: 10px!important;
+
+      }
+  </style>
+      <div style="width: 412px;float: right;text-align: right;" class="right_col">
+
+      <div style="color: #ff6633;font-size:24px;">{{ user.venue.name }}</div>
+      <div>{{ user.venue.address }}</div>
+      <div>Время работы: {{ user.venue.schedule }}</div>
+      <div>Тел. : {{ user.venue.tel }}</div>
+
+      <div>e-mail:<input type="textfield" value="{{ user.venue.email }}" style="border: 0px;border-bottom: 1px solid #ff6633;font-size: 18px;margin-left:10px;color: #ff6633;" /></div>
+      <div >web:<input type="textfield" value="{{ user.venue.website }}" style="border: 0px;border-bottom: 1px solid #ff6633;font-size: 18px;margin-left:10px;color: #ff6633;" /></div>
+
+      <div>Facebook:<input type="textfield" value="{{ user.venue.facebook_url }}" style="border: 0px;border-bottom: 1px solid #999999;font-size: 18px;margin-left:10px;color: #999;" /></div>
+      <div >Twitter:<input type="textfield"  style="border: 0px;border-bottom: 1px solid #999999;font-size: 18px;margin-left:10px;color: #999;" /></div>
+      <div>Instagram:<input type="textfield"  style="border: 0px;border-bottom: 1px solid #999999;font-size: 18px;margin-left:10px;color: #999;" /></div>
+      <div >ВКонтакте:<input type="textfield" value="{{ user.venue.vk_url }}" style="border: 0px;border-bottom: 1px solid #999999;font-size: 18px;margin-left:10px;color: #999;" /></div>
+
+      </div>
+
+    <div class="cl"></div>
+  <div style="font-size: 14px; font-weight: bold;">
+             {{ user.venue.description }}
+
+  </div>
+  </div>
+
+  <div class="cl" style="height: 20px;"></div>
+
+
+  <div>
+    <div style="height: 42px;background: #ff6633;color: #fff;font-size: 24px;line-height: 42px;padding-left: 10px;">
+    Афиша
+      <a href="#" style="display: block;width: 24px;height: 24px;background: url('/static/images/z1.png') left top no-repeat;float: right;margin-right: 20px;margin-top: 8px;"></a>
+      <div class="cl"></div>
+    </div>
+    <div style="height: 42px;line-height: 42px;">
+      <a href="#" style="margin-left: 10px;text-decoration: none;color: #666;font-style: italic;border-bottom: 1px solid #666;">Добавить</a>
+
+    </div>
+    <div>
+      <div style="width: 170px;height: 240px;background: yellow;float: left;"></div>
+
+      <div style="width: 430px;margin-left: 20px;float: left;">
+        <input type="textfield" value="CHEESE PEOPLE" style="width: 430px;border: 0px;border-bottom: 1px solid #ff6633;color: #ff6633;font-size: 18px;font-style: italic;" />
+        <div style="height: 10px;"></div>
+        <textarea style="font-size: 12px;padding: 10px;border: 1px solid #ff6633;width: 410px;height: 180px;">
+event description
+
+        </textarea>
+      </div>
+
+      <div style="float:  left;margin-left: 20px;width: 380px;">
+        <div style="float:  left;width:40px;text-align: center;">C</div>
+        <input type="textfield" style="border: 0px;border-bottom: 1px solid #ff6633;width: 150px;font-size: 18px;float: left;color: #ff6633;" />
+        <div style="float:  left;width:40px;text-align: center;">ПО</div>
+        <input type="textfield" style="border: 0px;border-bottom: 1px solid #ff6633;width: 150px;font-size: 18px;float: left;color: #ff6633;" />
+
+        <div class="cl"></div>
+      </div>
+
+      <div class="cl"></div>
+    </div>
+
+
+
+  </div>
+  <div class="cl" style="height: 20px;"></div>
+{% endblock %}
