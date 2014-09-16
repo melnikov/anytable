@@ -37,6 +37,7 @@
     height: 240px;
 
 }
+
   </style>
 
     <script>
@@ -320,6 +321,10 @@ function actIv(id){
     $(id).click();
 }
 
+
+function hideShow(div){
+    $(div).slideToggle("slow");
+}
     </script>
   <div>
 
@@ -460,13 +465,14 @@ function actIv(id){
   <div class="cl" style="height: 20px;"></div>
 
 
-  <div>
+<div>
     <div style="height: 42px;background: #999999;color: #fff;font-size: 24px;line-height: 42px;padding-left: 10px;">
     Афиша
-      <a href="#" style="display: block;width: 24px;height: 24px;background: url('/static/images/z1.png') left top no-repeat;float: right;margin-right: 20px;margin-top: 8px;"></a>
+      <a  style="display: block;width: 24px;height: 24px;background: url('/static/images/z1.png') left top no-repeat;float: right;margin-right: 20px;margin-top: 8px;" onclick="hideShow('#eventsMainDiv');"></a>
       <div class="cl"></div>
     </div>
-    <div style="height: 42px;line-height: 42px;">
+<div id="eventsMainDiv">
+ <div style="height: 42px;line-height: 42px;">
       <a id="addEventLink" style="margin-left: 10px;text-decoration: none;color: #666;font-style: italic;border-bottom: 1px solid #666;">Добавить</a>
 
     </div>
@@ -535,8 +541,9 @@ function actIv(id){
       <div class="cl"></div>
 </form>
 </div>
-{% endfor %}
 
+{% endfor %}
+</div>
   </div>
   <div class="cl" style="height: 20px;"></div>
 {% endblock %}
