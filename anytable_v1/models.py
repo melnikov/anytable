@@ -7,7 +7,7 @@ from image_cropping import ImageCropField, ImageRatioField
 from pygeocoder import *
 from django.contrib.auth.models import AbstractBaseUser
 from django.forms import ModelForm
-
+from django import forms
 
 
 
@@ -79,6 +79,8 @@ class Venue(models.Model):
     address = models.TextField(blank=True, verbose_name="Address")
     facebook_url = models.CharField(max_length=1024, verbose_name="Facebook URL", blank=True, null=True)
     vk_url = models.CharField(max_length=1024, verbose_name="VK URL", blank=True, null=True)
+    twitter = models.CharField(max_length=1024, verbose_name="Twitter", blank=True, null=True)
+    instagram = models.CharField(max_length=1024, verbose_name="Instagram", blank=True, null=True)
     #photo = models.ManyToManyField(to=photo, null=True, blank=True)
     tel = models.CharField(max_length=255, blank=True, verbose_name="Telephone")
     email = models.CharField(max_length=255, blank=True, verbose_name="E-Mail")
@@ -108,15 +110,15 @@ class Venueimage(models.Model):
     venue = models.ForeignKey(Venue, null=True)
 
 class Event(models.Model):
-    title = models.CharField(max_length=255)
+    title = models.CharField(max_length=255 , blank=True, null=True)
     image = models.ImageField(upload_to='images', blank=True,null=True)
     thumbnail = ImageSpecField(source='image', processors=[ResizeToFit(325, 186)], format='JPEG', options={'quality': 60})
-    date = models.DateTimeField()
-    event_date = models.DateField(null=True)
-    event_time = models.TimeField(null=True)
+    date = models.DateTimeField(blank=True,null=True)
+    event_date = models.DateField(blank=True,null=True)
+    event_time = models.TimeField(blank=True,null=True)
     description = models.TextField(blank=True, verbose_name="Description")
     #photo = models.ManyToManyField(to=photo, blank=True)
-    QR = models.CharField(max_length=1024, default='')
+    QR = models.CharField(max_length=1024, default='', blank=True,null=True)
     venue = models.ForeignKey(Venue)
 
 class User(AbstractBaseUser):
@@ -142,5 +144,14 @@ class VenueAdministrator(models.Model):
 
 class Document(models.Model):
     title = models.CharField(max_length=25, blank=True, null=True)
+
     docfile = models.ImageField(upload_to='images', blank=True, null=True)
     thumbnail = ImageSpecField(source='docfile', processors=[ResizeToFit(325, 186)], format='JPEG', options={'quality': 60})
+
+class Folder(models.Model):
+    name = models.CharField(max_length=255, null=False)
+    parent = models.ForeignKey('self',blank=True, null=True)
+   # password = forms.PasswordInput('password', max_length=32, null=True)
+    def __unicode__(self):
+        return self.name
+

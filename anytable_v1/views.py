@@ -53,7 +53,7 @@ def venueCard(request, id):
         latitude = latitude[0].coordinates
         latitude = list(latitude)
         #sevents = event.objects.filter(venue__pk = id).order_by('-date')[:4]
-        sevents = Event.objects.filter(venue__pk = id).order_by('-date')
+        sevents = Event.objects.filter(venue__pk = id).order_by('-event_date')
         svenueimages = Venueimage.objects.filter(venue__pk = id)
         kitchens = VenueKitchen.objects.filter(venue__pk = id)
         #svenueimage = venueimage.objects.filter(venue__pk = id)

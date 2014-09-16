@@ -59,6 +59,8 @@ class DocumentsAdmin(ImageCroppingMixin, admin.ModelAdmin):
     list_display = (  "thumbnail", "title",)
     admin_thumbnail = AdminThumbnail(image_field='thumbnail')
 
+class FolderAdmin(admin.ModelAdmin):
+    list_display = ("name", "parent")
 #admin.site.register(photo, photoAdmin)
 admin.site.register(VenueOptions, venueOptionAdmin)
 admin.site.register(VenueKitchen,venueKitchenAdmin)
@@ -72,6 +74,6 @@ admin.site.register(Region, regionAdmin)
 admin.site.register(City, cityAdmin)
 admin.site.register(VenueAdministrator, VenueAdministratorPanel)
 admin.site.register(Document, DocumentsAdmin)
-
+admin.site.register(Folder, FolderAdmin)
 
 

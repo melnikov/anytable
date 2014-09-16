@@ -1,7 +1,6 @@
 {% extends "layout_inner.html" %}
 
 {% block content %}
-
   <style>
   .asd {
     color: #333;
@@ -22,9 +21,182 @@
 #upload{
     display:none
 }
+#hint{
+    float: right;
+    height: 20px;
+    font-size: 12px;
+    font-style: italic;
+    font-weight: bold;
+    color: #000;
+    padding-left: 25px;
+    background: url("/static/images/15_20px_preloader.gif") left no-repeat;
+}
+.addEventDiv{
+    position: relative;
+    display: block!important;
+    height: 240px;
+
+}
   </style>
 
     <script>
+    //(document).ready(function(){            });
+    function updateItem(item){
+        var item = item;
+         $(item).on('focus', function(){
+            $('<span>saved</span>').remove();
+        });
+           $(item).focusout(function(){
+               var val = $(this).val();
+               if(!$('<p>saved</p>').length);{
+               $('<p>saved</p>').insertAfter(this).delay(2000).fadeOut();
+
+               }
+ // return false; //to prevent the browser actually following the links!
+});
+    }
+
+    $(document).ready(function(){
+
+        $('#email').on('focusout', function(){
+            var myemail = $('#email').val();
+           // var mysomething = $('#email').val();
+            var venue_pk = $('#venue_pk_int').val();
+
+            url = '/query/admin/updatevenueemail/';
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: "email="+myemail+"&venue="+venue_pk,
+            dataType:'html',
+            success: function(data){
+
+              $('<div id="hint"></div>').insertAfter('#email').delay(400).fadeOut();
+
+            }
+        });
+
+
+        });
+
+        $('#website').on('focusout', function(){
+            var website = $('#website').val();
+           // var mysomething = $('#email').val();
+            var venue_pk = $('#venue_pk_int').val();
+
+            url = '/query/admin/updatevenuesite/';
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: "website="+website+"&venue="+venue_pk,
+            dataType:'html',
+            success: function(data){
+
+              $('<div id="hint"></div>').insertAfter('#website').delay(400).fadeOut();
+
+            }
+        });
+
+
+        });
+
+        $('#facebook').on('focusout', function(){
+            var facebook = $('#facebook').val();
+           // var mysomething = $('#email').val();
+            var venue_pk = $('#venue_pk_int').val();
+            url = '/query/admin/updatevenuefb/';
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: "facebook="+facebook+"&venue="+venue_pk,
+            dataType:'html',
+            success: function(data){
+
+              $('<div id="hint"></div>').insertAfter('#facebook').delay(400).fadeOut();
+
+            }
+        });
+
+
+        });
+
+        $('#twitter').on('focusout', function(){
+            var twitter = $('#twitter').val();
+           // var mysomething = $('#email').val();
+            var venue_pk = $('#venue_pk_int').val();
+            url = '/query/admin/updatevenuetwitter/';
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: "twitter="+twitter+"&venue="+venue_pk,
+            dataType:'html',
+            success: function(data){
+
+              $('<div id="hint"></div>').insertAfter('#twitter').delay(400).fadeOut();
+
+            }
+        });
+        });
+
+        $('#instagram').on('focusout', function(){
+            var instagram = $('#instagram').val();
+            var venue_pk = $('#venue_pk_int').val();
+            url = '/query/admin/updatevenueinstagram/';
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: "instagram="+instagram+"&venue="+venue_pk,
+            dataType:'html',
+            success: function(data){
+
+              $('<div id="hint"></div>').insertAfter('#instagram').delay(400).fadeOut();
+
+            }
+        });
+        });
+
+        $('#vk').on('focusout', function(){
+            var vk = $('#vk').val();
+            var venue_pk = $('#venue_pk_int').val();
+            url = '/query/admin/updatevenuevk/';
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: "vk="+vk+"&venue="+venue_pk,
+            dataType:'html',
+            success: function(data){
+
+              $('<div id="hint"></div>').insertAfter('#vk').delay(400).fadeOut();
+
+            }
+        });
+        });
+
+
+        $('#description').on('focusout', function(){
+            var description = $('#description').val().trim();
+            var venue_pk = $('#venue_pk_int').val();
+            url = '/query/admin/updatevenuedescription/';
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: "description="+description+"&venue="+venue_pk,
+            dataType:'html',
+            success: function(data){
+
+             $('<div id="hint"></div>').insertAfter('#description').delay(400).fadeOut();
+
+
+            }
+        });
+        });
+
+        $('#addEventLink').on('click', function(){
+               $('#addEventDiv').fadeIn('slow').addClass('addEventDiv');
+        });
+
+    });
+
 
 function editLogo(){
  var form = document.getElementById('editLogoForm');
@@ -34,10 +206,11 @@ function editLogo(){
 
   xhr.send(formData);
   //var frm = document.getElementById('formcontent');
-  xhr.onreadystatechange = function() {
-
-      window.location = '/admin/anytable_v1/venueadministrator/{{ user.pk }}'
-
+  xhr.onreadystatechange = function(data) {
+      img = this.response
+        $('#logoImg').fadeOut('fast', function(){
+            $(this).attr('src', '/static/uploads/'+img).fadeIn('fast');
+        });
   };
 
   return true;
@@ -65,30 +238,103 @@ function delImg(id){
             url: url,
             data: '',
             dataType:'html',
-            success: function(){
-               window.location = '/admin/anytable_v1/venueadministrator/{{ user.pk }}'
+            success: function(data){
+                $('#venueimg_'+id).fadeOut('fast', function(){
+                    $(this).remove();
+                });
+
+
             }
         });
     }
 
-    function actIv(id){
+function addEvent(){
+  var form = document.getElementById('addEvImgForm');
+  var formData = new FormData(form);
+  var xhr = new XMLHttpRequest();
+  xhr.open("POST", "/addevent/", true);
+  xhr.send(formData);
+  xhr.onreadystatechange = function(data) {
+    //   alert(this.response);
+     var id = this.response;
+
+    window.location.hash   = '#event_28';
+      window.location.reload(true)
+
+  };
+
+  return true;
+}
+
+function deleteEvent(eventid){
+    var eventid = eventid;
+    url = '/query/admin/deleteevent/';
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: "eventid="+eventid,
+        dataType: 'html',
+        success: function(){
+
+            $('#event_'+eventid).fadeOut('1000', function(){
+                $(this).remove();
+            });
+            //$('#event_'+eventid).remove();
+           // window.location = '/admin/anytable_v1/venueadministrator/{{ user.pk }}'
+        }
+    });
+}
+
+function updateEvent(eventid){
+    var eventTitle = $('#eventTitle_'+eventid).val().trim();
+    var eventDescription = $('#eventDescription_'+eventid).val().trim();
+    //alert(eventid+' '+eventTitle+' '+eventDescription);
+    var url = '/query/admin/updateevent/';
+    $.ajax({
+        type: 'POST',
+        url: url,
+        data: 'eventid='+eventid+'&eventtitle='+eventTitle+'&eventdescription='+eventDescription,
+        dataType: 'html',
+        success: function(data){
+           $('<div id="hint"></div>').insertAfter('#eventTitle_'+eventid).delay(400).fadeOut();
+        }
+    });
+}
+
+function updateEventImg(eventid){
+    var form = document.getElementById('eventUpdateForm_'+eventid);
+    var formData = new FormData(form);
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "/query/admin/updateeventimg/", true);
+    xhr.send(formData);
+    xhr.onreadystatechange = function(data) {
+        img = this.response;
+
+        $('#eventimg_'+eventid).fadeOut('fast', function(){
+            $(this).attr('src', '/static/uploads/'+img).fadeIn('fast');
+        });
+
+}}
+
+function actIv(id){
     $(id).click();
-    }
+}
 
     </script>
   <div>
 
-
 <script src="/static/js/jquery.fileupload.js"></script>
 
-
-
-    <div style="width: 612px;float: left;">
+<input type="hidden" id="venue_pk_int" value="{{ user.venue.pk }}">
+    <div style="width: 612px;float: left;" >
       <div>
 <form id="editLogoForm" name="editLogoForm" enctype="multipart/form-data"  method="post" action=""> {% csrf_token %}
-    <div style="position: relative; width: 260px;height: 176px;background: yellow;margin-right: 10px;float: left;margin-bottom: 10px;">
-
-        <img  src="/static/uploads/{{ user.venue.image }}" width="260px;" height="176px;">
+    <div style="position: relative; width: 260px;height: 176px; margin-right: 10px;float: left;margin-bottom: 10px;">
+        {% if user.venue.image %}
+        <img id="logoImg" src="/static/uploads/{{ user.venue.image }}" width="260px;" height="176px;">
+        {% else %}
+        <img  src="/static/images/logo.png" width="260px;" height="176px;">
+        {% endif %}
         <img src="/static/images/edit.png" style="position: absolute; z-index: 1; top: 5px; right: 5px; " onclick="actIv('#logoupload');">
         <input type="file" style="display: none;" id="logoupload"  name="logoupload" onchange="editLogo();"/>
         <input type="hidden"  name="venuepk" value="{{ user.venue.pk  }}">
@@ -97,7 +343,7 @@ function delImg(id){
 
         </div>
 {% for image in images %}
-         <div style="position: relative; width: 125px; height: 84px; float: left;margin-right: 10px;margin-bottom: 10px;">
+         <div id="venueimg_{{ image.pk }}" style="position: relative; width: 125px; height: 84px; float: left;margin-right: 10px;margin-bottom: 10px;">
             <img src="/static/uploads/{{ image.image }}" style="width:125px;height:84px; ">
             <img src="/static/images/delete.png" style="position: absolute; z-index: 1; top: 5px; right: 5px;" onclick="delImg({{ image.pk }});">
          </div>
@@ -149,19 +395,28 @@ function delImg(id){
 
       <div>
         <div style="float:  left;">Кухня:</div>
-        <div style="float:  left;margin-left: 20px;">
-          <div class="asd2"><input type="checkbox" />Европейская</div>
-          <div class="asd2"><input type="checkbox" />Японская</div>
-          <div class="asd2"><input type="checkbox" />Итальянская</div>
+       <div style="float:  left;margin-left: 20px;">
+         {% for kitchen in kitchens %}
+
+              {% if kitchen in venuekitchens %}
+              <div class="asd2"><input type="checkbox" checked />{{ kitchen.name }} </div>
+              {% else %}
+              <div class="asd2"><input type="checkbox" /> {{ kitchen.name }}</div>
+
+              {% endif %}
+
+{% endfor %}
 
         </div>
+
+<!--
         <div style="float:  left;margin-left: 20px;">
           <div class="asd2"><input type="checkbox" />Китайская</div>
           <div class="asd2"><input type="checkbox" />Мексиканская</div>
           <div class="asd2"><input type="checkbox" />Таджикская</div>
 
         </div>
-
+-->
         <div class="cl"></div>
       </div>
 
@@ -182,19 +437,22 @@ function delImg(id){
       <div>Время работы: {{ user.venue.schedule }}</div>
       <div>Тел. : {{ user.venue.tel }}</div>
 
-      <div>e-mail:<input type="textfield" value="{{ user.venue.email }}" style="border: 0px;border-bottom: 1px solid #ff6633;font-size: 18px;margin-left:10px;color: #ff6633;" /></div>
-      <div >web:<input type="textfield" value="{{ user.venue.website }}" style="border: 0px;border-bottom: 1px solid #ff6633;font-size: 18px;margin-left:10px;color: #ff6633;" /></div>
+      <div>e-mail:<input id="email" type="textfield" value="{{ user.venue.email }}" style="border: 0px;border-bottom: 1px solid #ff6633;font-size: 18px;margin-left:10px;color: #ff6633;" /></div>
+      <div >web:<input type="textfield" id="website" value="{{ user.venue.website }}" style="border: 0px;border-bottom: 1px solid #ff6633;font-size: 18px;margin-left:10px;color: #ff6633;" /></div>
 
-      <div>Facebook:<input type="textfield" value="{{ user.venue.facebook_url }}" style="border: 0px;border-bottom: 1px solid #999999;font-size: 18px;margin-left:10px;color: #999;" /></div>
-      <div >Twitter:<input type="textfield"  style="border: 0px;border-bottom: 1px solid #999999;font-size: 18px;margin-left:10px;color: #999;" /></div>
-      <div>Instagram:<input type="textfield"  style="border: 0px;border-bottom: 1px solid #999999;font-size: 18px;margin-left:10px;color: #999;" /></div>
-      <div >ВКонтакте:<input type="textfield" value="{{ user.venue.vk_url }}" style="border: 0px;border-bottom: 1px solid #999999;font-size: 18px;margin-left:10px;color: #999;" /></div>
+      <div>Facebook:<input type="textfield" id="facebook" value="{{ user.venue.facebook_url }}" style="border: 0px;border-bottom: 1px solid #999999;font-size: 18px;margin-left:10px;color: #999;" /></div>
+      <div >Twitter:<input type="textfield"  id="twitter" value="{{ user.venue.twitter }}" style="border: 0px;border-bottom: 1px solid #999999;font-size: 18px;margin-left:10px;color: #999;" /></div>
+      <div>Instagram:<input type="textfield" id="instagram" value="{{ user.venue.instagram }}" style="border: 0px;border-bottom: 1px solid #999999;font-size: 18px;margin-left:10px;color: #999;" /></div>
+      <div >ВКонтакте:<input type="textfield" id="vk" value="{{ user.venue.vk_url }}" style="border: 0px;border-bottom: 1px solid #999999;font-size: 18px;margin-left:10px;color: #999;" /></div>
 
       </div>
 
     <div class="cl"></div>
   <div style="font-size: 14px; font-weight: bold;">
-             {{ user.venue.description }}
+          <textarea id="description" style="font-size: 12px;padding: 10px;border: 1px solid #ff6633;width: 90%; height: 150px;">
+ {{ user.venue.description }}
+        </textarea>
+
 
   </div>
   </div>
@@ -203,38 +461,82 @@ function delImg(id){
 
 
   <div>
-    <div style="height: 42px;background: #ff6633;color: #fff;font-size: 24px;line-height: 42px;padding-left: 10px;">
+    <div style="height: 42px;background: #999999;color: #fff;font-size: 24px;line-height: 42px;padding-left: 10px;">
     Афиша
       <a href="#" style="display: block;width: 24px;height: 24px;background: url('/static/images/z1.png') left top no-repeat;float: right;margin-right: 20px;margin-top: 8px;"></a>
       <div class="cl"></div>
     </div>
     <div style="height: 42px;line-height: 42px;">
-      <a href="#" style="margin-left: 10px;text-decoration: none;color: #666;font-style: italic;border-bottom: 1px solid #666;">Добавить</a>
+      <a id="addEventLink" style="margin-left: 10px;text-decoration: none;color: #666;font-style: italic;border-bottom: 1px solid #666;">Добавить</a>
 
     </div>
-    <div>
-      <div style="width: 170px;height: 240px;background: yellow;float: left;"></div>
+<div id="addEventDiv" style="display: none; margin-bottom: 40px;">
+ <div style="position: relative; width: 170px;height: 240px;background: yellow;float: left;" >
+
+     <form id="addEvImgForm" name="addEvImgForm" method="post" enctype="multipart/form-data" action="">{% csrf_token %}
+        <input type="hidden" name="venuepk" id="venuepk" value="{{ user.venue.pk }}">
+
+         <input type="file" style="display: none;" id="eventimg" name="eventimg" onchange="addEvent();">
+
+     <a   id="upload_link" onclick="actIv('#eventimg');"  style="position: absolute; top: 70px; left:25px; display: block;width:125px;height:84px; float: left;margin-right: 10px;margin-bottom: 10px;font-size: 82px;color: #fff;text-align: center;line-height: 84px;text-decoration: none;" > +</a>
+      </form>
+
+ </div>
 
       <div style="width: 430px;margin-left: 20px;float: left;">
-        <input type="textfield" value="CHEESE PEOPLE" style="width: 430px;border: 0px;border-bottom: 1px solid #ff6633;color: #ff6633;font-size: 18px;font-style: italic;" />
+        <input type="textfield" disabled placeholder="Event Title.." style="width: 430px;border: 0px;border-bottom: 1px solid #ff6633;color: #ff6633;font-size: 18px;font-style: italic;" />
         <div style="height: 10px;"></div>
-        <textarea style="font-size: 12px;padding: 10px;border: 1px solid #ff6633;width: 410px;height: 180px;">
-event description
-
-        </textarea>
+        <textarea disabled style="font-size: 12px;padding: 10px;border: 1px solid #ff6633;width: 410px;height: 180px;" placeholder="Event Description"></textarea>
       </div>
 
-      <div style="float:  left;margin-left: 20px;width: 380px;">
+      <div style="position: relative; float:  left;margin-left: 20px;width: 380px;  height: 240px;">
+        <div style="float:  left;width:40px;text-align: center;">C</div>
+        <input disabled type="textfield" style="border: 0px;border-bottom: 1px solid #ff6633;width: 150px;font-size: 18px;float: left;color: #ff6633;" />
+        <div style="float:  left;width:40px;text-align: center;">ПО</div>
+        <input disabled type="textfield" style="border: 0px;border-bottom: 1px solid #ff6633;width: 150px;font-size: 18px;float: left;color: #ff6633;" />
+
+        <div class="cl"></div>
+          <ul style="position: absolute; left:20px; bottom: 0px; list-style: none; ">
+              <li style="float: left;"><img src="/static/images/delete_180x45.png" ></li>
+              <li style="float: left;"><img src="/static/images/save_180x45.png"></li>
+          </ul>
+        </div>
+
+      <div class="cl"></div></div>
+{% for event in events %}
+<div id="event_{{ event.pk }}" style=" margin: 0px 0px 40px 0px;" ><a name="event_{{ event.pk }}"></a>
+<form id="eventUpdateForm_{{ event.pk }}" name="eventUpdateForm_{{ event.pk }}" enctype="multipart/form-data"  method="post" action=""> {% csrf_token %}
+    <input type="hidden" name="eventid" value="{{ event.pk }}">
+    <input type="file" id="updateeventimg_{{ event.pk }}" name="updateeventimg" style="display:none;"  onchange="updateEventImg({{ event.pk }})">
+      <div style="position:relative; width: 170px;">
+        <img  src="/static/images/edit.png" style="position: absolute; z-index: 1; top: 5px; right: 5px; " onclick="actIv('#updateeventimg_'+{{ event.pk }});">
+        <img id="eventimg_{{ event.pk }}" style="width: 170px;height: 240px;background: yellow;float: left;" src="/static/uploads/{{ event.image }}">
+      </div>
+
+      <div style="width: 430px;margin-left: 20px;float: left;">
+        <input type="textfield" id="eventTitle_{{ event.pk }}" name="eventTitle_{{ event.pk }}" value="{{ event.title }}"  style="width: 430px;border: 0px;border-bottom: 1px solid #ff6633;color: #ff6633;font-size: 18px;font-style: italic;" />
+        <div style="height: 10px;"></div>
+        <textarea id="eventDescription_{{ event.pk }}" name="eventDescription_{{ event.pk }}" style="font-size: 12px;padding: 10px;border: 1px solid #ff6633;width: 410px;height: 180px;">{{ event.description }}</textarea>
+      </div>
+
+      <div style="position: relative; float:  left;margin-left: 20px;width: 380px;  height: 240px;">
         <div style="float:  left;width:40px;text-align: center;">C</div>
         <input type="textfield" style="border: 0px;border-bottom: 1px solid #ff6633;width: 150px;font-size: 18px;float: left;color: #ff6633;" />
         <div style="float:  left;width:40px;text-align: center;">ПО</div>
         <input type="textfield" style="border: 0px;border-bottom: 1px solid #ff6633;width: 150px;font-size: 18px;float: left;color: #ff6633;" />
 
         <div class="cl"></div>
-      </div>
+          <ul style="position: absolute; left:20px; bottom: 0px; list-style: none; ">
+              <li style="float: left;"><img src="/static/images/delete_180x45.png" onclick="deleteEvent({{ event.pk }});"></li>
+              <li style="float: left;"><img src="/static/images/save_180x45.png" onclick="updateEvent({{ event.pk }});"></li>
+          </ul>
+        </div>
 
       <div class="cl"></div>
-    </div>
+</form>
+</div>
+{% endfor %}
+
   </div>
   <div class="cl" style="height: 20px;"></div>
 {% endblock %}
