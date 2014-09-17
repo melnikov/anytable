@@ -9,17 +9,23 @@ from anytable.settings import *
 from imagekit.admin import AdminThumbnail
 import datetime
 
-
+##############################################
+################## Venues ####################
+##############################################
 
 def TheVenueAdministration(request, id):
          if  request.user.is_superuser:
             user = VenueAdministrator.objects.get( pk = id )
+
             venuetypes = VenueType.objects.filter(venue = user.venue)
             types = VenueType.objects.all()
+
             venuekitchens = VenueKitchen.objects.filter(venue = user.venue)
             kitchens = VenueKitchen.objects.all()
+
             venueoptions = VenueOptions.objects.filter(venue = user.venue)
             options = VenueOptions.objects.all()
+
             images = Venueimage.objects.filter(venue = user.venue)
             events = Event.objects.filter(venue = user.venue).order_by('-id')
             context = Context({"user":user, "venuetypes":venuetypes, "types":types, "venuekitchens":venuekitchens, "kitchens":kitchens, "venueoptions":venueoptions, "options":options, "images":images, "events":events})
@@ -199,6 +205,61 @@ def updatevenuedescription(request):
         return HttpResponse(message, mimetype="text/plain")
 
 @csrf_exempt
+def update_venue_options(request):
+    if request.method == 'POST':
+        venueid = request.POST['venueid']
+        venue = Venue.objects.get(pk = venueid)
+        option_id = request.POST['option_id']
+        the_venue_options = VenueOptions.objects.filter(venue = venue)
+        the_new_option = VenueOptions.objects.get(pk = option_id)
+        if the_new_option not in the_venue_options:
+            v = venue.option.add(the_new_option)
+        else:
+            v = venue.option.remove(the_new_option)
+
+        return HttpResponse(the_new_option.id, mimetype='text/plain')
+    else:
+        return HttpResponse('request is not post', mimetype='text/plain')
+
+
+@csrf_exempt
+def update_venue_kitchen(request):
+    if request.method == 'POST':
+        venueid = request.POST['venueid']
+        venue = Venue.objects.get(pk = venueid)
+        the_venue_kitchens = VenueKitchen.objects.filter(venue = venue)
+        kitchen_id = request.POST['kitchen_id']
+        the_new_kitchen = VenueKitchen.objects.get(pk = kitchen_id)
+        if the_new_kitchen not in the_venue_kitchens:
+            v = venue.kitchen.add(the_new_kitchen)
+        else:
+            v = venue.kitchen.remove(the_new_kitchen)
+
+        return HttpResponse(the_new_kitchen.id, mimetype='text/plain')
+    else:
+        return HttpResponse('request is not post', mimetype='text/plain')
+
+@csrf_exempt
+def update_venue_type(request):
+    if request.method == 'POST':
+        venueid = request.POST['venueid']
+        venue = Venue.objects.get(pk = venueid)
+        the_venue_types = VenueType.objects.filter(venue = venue)
+        type_id = request.POST['type_id']
+        the_new_type = VenueType.objects.get(pk = type_id)
+        if the_new_type not in the_venue_types:
+            v = venue.type.add(the_new_type)
+        else:
+            v = venue.type.remove(the_new_type)
+
+        return HttpResponse(the_new_type.id, mimetype='text/plain')
+    else:
+        return HttpResponse('request is not post', mimetype='text/plain')
+
+##############################################
+################## Events ####################
+##############################################
+@csrf_exempt
 def addevent(request):
 
     if request.method == 'POST':
@@ -248,3 +309,4 @@ def updateeventimg(request):
         #message = request.FILES['updateeventimg'].name
         message = docfile
         return HttpResponse(message, mimetype='text/plain')
+

@@ -26,12 +26,16 @@ urlpatterns = patterns('',
      url(r'^query/admin/updatevenueinstagram/', 'anytable_v1.admin_views.updatevenueinstagram', name='Update Venue Instagram'),
      url(r'^query/admin/updatevenuevk/', 'anytable_v1.admin_views.updatevenuevk', name='Update Venue VK'),
      url(r'^query/admin/updatevenuedescription/', 'anytable_v1.admin_views.updatevenuedescription', name='Update Description'),
+     url(r'^query/admin/update_venue_options/', 'anytable_v1.admin_views.update_venue_options', name='Update Venue Options'),
+     url(r'^query/admin/update_venue_kitchen/', 'anytable_v1.admin_views.update_venue_kitchen', name='Update Venue Kitchen'),
+     url(r'^query/admin/update_venue_type/', 'anytable_v1.admin_views.update_venue_type', name='Update Venue Type'),
 
 ## Events Control, Venue Administration..
      url(r'^addevent/$', 'anytable_v1.admin_views.addevent', name='Add Event'),
      url(r'^query/admin/deleteevent/', 'anytable_v1.admin_views.deleteevent', name='Delete Event'),
      url(r'^query/admin/updateevent/', 'anytable_v1.admin_views.updateevent', name='Update Event'),
      url(r'^query/admin/updateeventimg/', 'anytable_v1.admin_views.updateeventimg', name= 'Update Event Img'),
+     url(r'^query/admin/testforfun/', 'anytable_v1.admin_views.testforfun', name= 'Test For Fun'),
 
 ##Non-Admin
      url(r'^$','anytable_v1.views.index',name='index'),

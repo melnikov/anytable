@@ -38,9 +38,37 @@
 
 }
 
+label.checkbox input[type="checkbox"] {display:none;}
+label.checkbox span {
+    display:inline-block;
+    border:1px solid #fd7c51;
+    border-radius:0px;
+    width:12px;
+    height:12px;
+   /* background:#F55;*/
+    vertical-align:middle;
+    background: #fff url('/static/images/checkbox_bg_12px.png') left top no-repeat;
+    margin:3px;
+    text-align:center;
+
+
+}
+label.checkbox :checked + span {
+     background:url('/static/images/checked_bg_checked_12px.png') left top no-repeat;
+
+}
+label.checkbox span:before {
+    background: #fff url('/static/images/checkbox_bg_12px.png') left top no-repeat;
+    vertical-align:middle;
+}
+label.checkbox :checked + span:before {
+
+        background:url('/static/images/checked_bg_checked_12px.png') left top no-repeat;
+}
+
   </style>
 
-    <script>
+<script>
     //(document).ready(function(){            });
     function updateItem(item){
         var item = item;
@@ -58,6 +86,59 @@
     }
 
     $(document).ready(function(){
+
+        $('input[name="venue_option"]').on('change', function(){
+            var venueid = $('#venue_pk_int').val();
+            var option_id = $(this).val();
+            url = '/query/admin/update_venue_options/';
+            $.ajax({
+                type: 'POST',
+                url: url,
+                data: 'venueid='+venueid+'&option_id='+option_id,
+                dataType: 'html',
+                success: function(response){
+
+                     $('<div id="hint"></div>').insertBefore('#div_venue_options').delay(400).fadeOut();
+                }
+            });
+
+        });
+
+
+        $('input[name="venue_type"]').on('change', function(){
+            var venueid = $('#venue_pk_int').val();
+            var type_id = $(this).val();
+            url = '/query/admin/update_venue_type/';
+            $.ajax({
+                type: 'POST',
+                url: url,
+                data: 'venueid='+venueid+'&type_id='+type_id,
+                dataType: 'html',
+                success: function(response){
+
+                     $('<div id="hint"></div>').insertBefore('#div_venue_types').delay(400).fadeOut();
+                }
+            });
+
+        });
+
+
+$('input[name="venue_kitchen"]').on('change', function(){
+            var venueid = $('#venue_pk_int').val();
+            var kitchen_id = $(this).val();
+            url = '/query/admin/update_venue_kitchen/';
+            $.ajax({
+                type: 'POST',
+                url: url,
+                data: 'venueid='+venueid+'&kitchen_id='+kitchen_id,
+                dataType: 'html',
+                success: function(response){
+
+                     $('<div id="hint"></div>').insertBefore('#div_venue_kitchens').delay(400).fadeOut();
+                }
+            });
+
+        });
 
         $('#email').on('focusout', function(){
             var myemail = $('#email').val();
@@ -370,43 +451,48 @@ function hideShow(div){
 </div>
         <div class="cl"></div>
       </div>
-    <div>
+  <div style="float:  left; font-size: 14px; font-weight: bold;">Options:</div><br />
+    <div id="div_venue_types" style="float:  left;margin-left: 20px;">
+
           {% for type in types %}
             {% if type in venuetypes %}
-              <div class="asd"><input type="checkbox" checked />{{ type.name }}</div>
+             <div class="asd"><label class="checkbox"><input type="checkbox" name="venue_type" value="{{ type.pk }}" checked /><span></span>{{ type.name }}</label></div>
             {% else %}
-              <div class="asd"><input type="checkbox" />{{ type.name }}</div>
+              <div class="asd"><label class="checkbox"><input type="checkbox" name="venue_type" value="{{ type.pk }}"  /><span></span>{{ type.name }}</label></div>
             {% endif %}
           {% endfor %}
 
 
         <div class="cl"></div>
       </div>
+  <div class="cl"></div>
     <div style="height: 10px;"></div>
-      <div>
+   <div style="float:  left; font-size: 14px; font-weight: bold;">Options:</div><br />
+      <div id="div_venue_options"  style="float:  left;margin-left: 20px;">
           {% for option in options %}
             {% if option in venueoptions %}
-              <div class="asd"><input type="checkbox" checked />{{ option.name }}</div>
+              <div class="asd"><label class="checkbox"><input type="checkbox" name="venue_option" value="{{ option.pk }}" checked /><span></span>{{ option.name }}</label></div>
             {% else %}
-              <div class="asd"><input type="checkbox" />{{ option.name }}</div>
+              <div class="asd"><label class="checkbox"><input type="checkbox" name="venue_option" value="{{ option.pk }}"  /><span></span>{{ option.name }}</label></div>
             {% endif %}
           {% endfor %}
 
 
         <div class="cl"></div>
       </div>
-
+<div class="cl"></div>
       <div style="height:  10px;"></div>
 
       <div>
-        <div style="float:  left;">Кухня:</div>
-       <div style="float:  left;margin-left: 20px;">
+        <div style="float:  left; font-size: 14px; font-weight: bold;">Кухня:</div>
+       <div id="div_venue_kitchens" style="float:  left;margin-left: 20px;">
+
          {% for kitchen in kitchens %}
 
               {% if kitchen in venuekitchens %}
-              <div class="asd2"><input type="checkbox" checked />{{ kitchen.name }} </div>
+              <div class="asd"><label class="checkbox"><input type="checkbox"  name="venue_kitchen" value="{{ kitchen.pk }}"  checked /><span></span>{{ kitchen.name }}</label></div>
               {% else %}
-              <div class="asd2"><input type="checkbox" /> {{ kitchen.name }}</div>
+              <div class="asd"><label class="checkbox"><input type="checkbox"  name="venue_kitchen" value="{{ kitchen.pk }}"  checked /><span></span>{{ kitchen.name }}</label></div>
 
               {% endif %}
 
