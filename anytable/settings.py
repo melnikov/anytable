@@ -42,7 +42,7 @@ INSTALLED_APPS = (
     'accounts',
     'easy_thumbnails',
     'image_cropping',
-    "pygeocoder",
+    'pygeocoder',
 )
 
 MIDDLEWARE_CLASSES = (

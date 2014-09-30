@@ -1,7 +1,65 @@
 {% extends "layout_inner.html" %}
 
 {% block content %}
+
   <style>
+/*
+ * Timepicker stylesheet
+ * Highly inspired from datepicker
+ * FG - Nov 2010 - Web3R
+ *
+ * version 0.0.3 : Fixed some settings, more dynamic
+ * version 0.0.4 : Removed width:100% on tables
+ * version 0.1.1 : set width 0 on tables to fix an ie6 bug
+ */
+
+.ui-timepicker-inline { display: inline; }
+
+#ui-timepicker-div { padding: 0.2em; height: 200px!important; }
+.ui-timepicker-table { display: inline-table; width: 0; }
+.ui-timepicker-table table { margin:0.15em 0 0 0; border-collapse: collapse; }
+
+.ui-timepicker-hours, .ui-timepicker-minutes { padding: 0.2em;   font-size: 12px!important;}
+
+.ui-timepicker-table .ui-timepicker-title { line-height: 1.8em; text-align: center; font-size: 12px!important;}
+.ui-timepicker-table td { padding: 0.1em; width: 2.2em;  }
+.ui-timepicker-table th.periods { padding: 0.1em; width: 2.2em; }
+
+/* span for disabled cells */
+.ui-timepicker-table td span {
+	display:block;
+    padding:0.2em 0.3em 0.2em 0.5em;
+    width: 1.2em;
+
+    text-align:right;
+    text-decoration:none;
+}
+/* anchors for clickable cells */
+.ui-timepicker-table td a {
+    color: #FF6633!important;
+    display:block;
+    padding:0.2em 0.3em 0.2em 0.5em;
+    width: 1.2em;
+    cursor: pointer;
+    text-align:right;
+    text-decoration:none;
+}
+
+
+/* buttons and button pane styling */
+.ui-timepicker .ui-timepicker-buttonpane {
+    background-image: none; margin: .7em 0 0 0; padding:0 .2em; border-left: 0; border-right: 0; border-bottom: 0;
+}
+.ui-timepicker .ui-timepicker-buttonpane button { margin: .5em .2em .4em; cursor: pointer; padding: .2em .6em .3em .6em; width:auto; overflow:visible; }
+/* The close button */
+.ui-timepicker .ui-timepicker-close { float: right }
+
+/* the now button */
+.ui-timepicker .ui-timepicker-now { float: left; }
+
+/* the deselect button */
+.ui-timepicker .ui-timepicker-deselect { float: left; }
+
   .asd {
     color: #333;
     float: left;
@@ -66,6 +124,9 @@ label.checkbox :checked + span:before {
         background:url('/static/images/checked_bg_checked_12px.png') left top no-repeat;
 }
 
+.error{
+    color: #fe7344!important;
+}
   </style>
 
 <script>
@@ -277,6 +338,8 @@ $('input[name="venue_kitchen"]').on('change', function(){
                $('#addEventDiv').fadeIn('slow').addClass('addEventDiv');
         });
 
+
+
     });
 
 
@@ -339,8 +402,6 @@ function addEvent(){
   xhr.onreadystatechange = function(data) {
     //   alert(this.response);
      var id = this.response;
-
-    window.location.hash   = '#event_28';
       window.location.reload(true)
 
   };
@@ -350,7 +411,7 @@ function addEvent(){
 
 function deleteEvent(eventid){
     var eventid = eventid;
-    url = '/query/admin/deleteevent/';
+    url = '/query/admin/delete_event/';
     $.ajax({
         type: "POST",
         url: url,
@@ -361,21 +422,34 @@ function deleteEvent(eventid){
             $('#event_'+eventid).fadeOut('1000', function(){
                 $(this).remove();
             });
-            //$('#event_'+eventid).remove();
-           // window.location = '/admin/anytable_v1/venueadministrator/{{ user.pk }}'
         }
     });
 }
 
 function updateEvent(eventid){
+    $('#ER_event_date_'+eventid).html('');
+    $('#ER_event_time_'+eventid).html('');
+
     var eventTitle = $('#eventTitle_'+eventid).val().trim();
     var eventDescription = $('#eventDescription_'+eventid).val().trim();
+    var eventDate = $('#event_date_'+eventid).val();
+     var eventTime = $('#event_time_'+eventid).val();
+    if(eventDate <= 0){
+      $('#ER_event_date_'+eventid).html('*');
+        return false;
+    }
+    if(eventTime <= 0){
+      $('#ER_event_time_'+eventid).html('*');
+        return false;
+    }
+
+
     //alert(eventid+' '+eventTitle+' '+eventDescription);
-    var url = '/query/admin/updateevent/';
+    var url = '/query/admin/update_event/';
     $.ajax({
         type: 'POST',
         url: url,
-        data: 'eventid='+eventid+'&eventtitle='+eventTitle+'&eventdescription='+eventDescription,
+        data: 'eventid='+eventid+'&eventtitle='+eventTitle+'&eventdescription='+eventDescription+'&event_date='+eventDate+'&event_time='+eventTime,
         dataType: 'html',
         success: function(data){
            $('<div id="hint"></div>').insertAfter('#eventTitle_'+eventid).delay(400).fadeOut();
@@ -387,7 +461,7 @@ function updateEventImg(eventid){
     var form = document.getElementById('eventUpdateForm_'+eventid);
     var formData = new FormData(form);
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", "/query/admin/updateeventimg/", true);
+    xhr.open("POST", "/query/admin/update_event_img/", true);
     xhr.send(formData);
     xhr.onreadystatechange = function(data) {
         img = this.response;
@@ -525,8 +599,8 @@ function hideShow(div){
 
       <div style="color: #ff6633;font-size:24px;">{{ user.venue.name }}</div>
       <div>{{ user.venue.address }}</div>
-      <div>Время работы: {{ user.venue.schedule }}</div>
-      <div>Тел. : {{ user.venue.tel }}</div>
+      <div>Время работы: <input id="email" type="textfield" value="{{ user.venue.schedule }}" style="border: 0px;border-bottom: 1px solid #000;font-size: 18px;margin-left:10px;color: #000;" /></div>
+      <div>Тел. : <input id="email" type="textfield" value="{{ user.venue.tel }}" style="border: 0px;border-bottom: 1px solid #000;font-size: 18px;margin-left:10px;color: #000;" /></div>
 
       <div>e-mail:<input id="email" type="textfield" value="{{ user.venue.email }}" style="border: 0px;border-bottom: 1px solid #ff6633;font-size: 18px;margin-left:10px;color: #ff6633;" /></div>
       <div >web:<input type="textfield" id="website" value="{{ user.venue.website }}" style="border: 0px;border-bottom: 1px solid #ff6633;font-size: 18px;margin-left:10px;color: #ff6633;" /></div>
@@ -539,7 +613,7 @@ function hideShow(div){
       </div>
 
     <div class="cl"></div>
-  <div style="font-size: 14px; font-weight: bold;">
+  <div style="font-size: 14px; font-weight: bold; margin-top: 20px;">
           <textarea id="description" style="font-size: 12px;padding: 10px;border: 1px solid #ff6633;width: 90%; height: 150px;">
  {{ user.venue.description }}
         </textarea>
@@ -610,12 +684,23 @@ function hideShow(div){
         <div style="height: 10px;"></div>
         <textarea id="eventDescription_{{ event.pk }}" name="eventDescription_{{ event.pk }}" style="font-size: 12px;padding: 10px;border: 1px solid #ff6633;width: 410px;height: 180px;">{{ event.description }}</textarea>
       </div>
+<script>
+    $(function() {
+      var date = $('#event_date_'+{{ event.pk }}).datepicker({ dateFormat: 'dd-mm-yy' }).val();
+    $('#event_time_'+{{ event.pk }}).timepicker($.timepicker.regional['ru']);
 
+  });
+</script>
       <div style="position: relative; float:  left;margin-left: 20px;width: 380px;  height: 240px;">
-        <div style="float:  left;width:40px;text-align: center;">C</div>
-        <input type="textfield" style="border: 0px;border-bottom: 1px solid #ff6633;width: 150px;font-size: 18px;float: left;color: #ff6633;" />
-        <div style="float:  left;width:40px;text-align: center;">ПО</div>
-        <input type="textfield" style="border: 0px;border-bottom: 1px solid #ff6633;width: 150px;font-size: 18px;float: left;color: #ff6633;" />
+        <div style="float:  left;width:50px;text-align: center;" >Дата</div>
+
+        <input type="textfield"  placeholder="{{  date_today|date:"d-m-Y"  }}" value="{{ event.event_date|date:"d-m-Y" }}" style="border: 0px;border-bottom: 1px solid #ff6633;width: 150px;font-size: 18px;float: left;color: #ff6633;" name="event_date" id="event_date_{{ event.pk }}" />
+          <strong id="ER_event_date_{{ event.pk }}" class="error"></strong>
+          <div style="clear: both; height: 20px;"></div>
+          <div style="float: left; width:50px; text-align: center;">Время</div>
+
+        <input type="textfield" placeholder="20:30" value="{{ event.event_time|time:"H:i" }}" style="border: 0px; border-bottom: 1px solid #ff6633;width: 150px;  font-size: 18px; float: ; color: #ff6633;" name="event_time" id="event_time_{{ event.pk }}" />
+          <strong id="ER_event_time_{{ event.pk }}" class="error"></strong>
 
         <div class="cl"></div>
           <ul style="position: absolute; left:20px; bottom: 0px; list-style: none; ">

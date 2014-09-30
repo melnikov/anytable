@@ -8,10 +8,27 @@ from anytable_v1.models import *
 from anytable.settings import *
 from imagekit.admin import AdminThumbnail
 import datetime
-
+import _md5
+import hashlib
 ##############################################
 ################## Venues ####################
 ##############################################
+
+@csrf_exempt
+def venueadministratorauth(request):
+    if request.method == 'POST':
+        email = request.POST['email']
+        password = request.POST['password']
+        password = computeMD5hash(password)
+
+        venue_admin = VenueAdministrator.objects.get(email = email, password = password)
+        if venue_admin:
+            message = venue_admin.id
+            return HttpResponse(message, mimetype='text/plain')
+        else:
+            message = 'none'
+            return HttpResponse(message, mimetype='text/plain')
+
 
 def TheVenueAdministration(request, id):
          if  request.user.is_superuser:
@@ -28,7 +45,10 @@ def TheVenueAdministration(request, id):
 
             images = Venueimage.objects.filter(venue = user.venue)
             events = Event.objects.filter(venue = user.venue).order_by('-id')
-            context = Context({"user":user, "venuetypes":venuetypes, "types":types, "venuekitchens":venuekitchens, "kitchens":kitchens, "venueoptions":venueoptions, "options":options, "images":images, "events":events})
+            date = datetime.datetime.strptime(str(datetime.date.today()), "%Y-%m-%d")
+            date_today = datetime.date.today()
+
+            context = Context({"user":user, "venuetypes":venuetypes, "types":types, "venuekitchens":venuekitchens, "kitchens":kitchens, "venueoptions":venueoptions, "options":options, "images":images, "events":events, "date_today": date_today,})
             return render_to_response('private/profile.html',context)
          else:
              return render_to_response('badRequest.html',)
@@ -266,17 +286,18 @@ def addevent(request):
         venuepk = request.POST['venuepk']
         the_venue = Venue.objects.get(pk = venuepk)
         the_date = datetime.datetime.strptime(str(datetime.date.today()), "%Y-%m-%d")
+
         file = request.FILES
         save_file(request.FILES['eventimg'])
         docfile = ('images/%s' % request.FILES['eventimg'])
-        ev = Event.objects.create(title='title', image= docfile, date = the_date, venue = the_venue)
+        ev = Event.objects.create(title='title',venue = the_venue, date = the_date, image = docfile)
         ev.save()
         id= ev.id
         return HttpResponse(id, mimetype="text/plain")
 
 
 @csrf_exempt
-def deleteevent(request):
+def delete_event(request):
     if request.method == 'POST':
         eventid = request.POST['eventid']
         event = Event.objects.get(pk = eventid)
@@ -284,19 +305,32 @@ def deleteevent(request):
         return HttpResponse('done', mimetype="text/plain")
 
 @csrf_exempt
-def updateevent(request):
+def update_event(request):
     if request.method == 'POST':
-        eventid = request.POST['eventid']
-        eventtitle = request.POST['eventtitle']
-        eventdescription = request.POST['eventdescription']
-        ev = Event.objects.get(pk = eventid)
-        ev.title = eventtitle
-        ev.description = eventdescription
+        event_id = request.POST['eventid']
+        ev = Event.objects.get(pk = event_id)
+
+        event_title = request.POST['eventtitle']
+        if event_title:
+             ev.title = event_title
+        event_description = request.POST['eventdescription']
+        if event_description:
+            ev.description = event_description
+        event_date = request.POST['event_date']
+        event_date = datetime.datetime.strptime(event_date, "%d-%m-%Y")
+        if event_date:
+            ev.event_date = event_date
+
+        event_time = request.POST['event_time']
+        event_time = datetime.datetime.strptime(event_time, "%H:%M")
+        if event_time:
+             ev.event_time = event_time
+
         ev.save()
         return HttpResponse('yep saved!', mimetype='text/plain')
 
 @csrf_exempt
-def updateeventimg(request):
+def update_event_img(request):
     if request.method == 'POST':
         eventid = request.POST['eventid']
         file = request.FILES

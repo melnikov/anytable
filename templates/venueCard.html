@@ -222,7 +222,7 @@ web: <a href="http://{{ venue.website }}" target="_blank">{{ venue.website }}</a
         <div class="afishaItem">
         <h3>{{ event.title }}</h3>
         <a id="a{{ event.pk }}"  onclick="openEvent('#{{ event.pk }}');"> <img height="270px" src="/static/uploads/{{ event.image }}" /></a>
-        <div style="">{{ event.date|date:'d-m-Y'}}</div>
+        <div style="">{{ event.event_date|date:'d-m-Y'}}</div>
 
 
     <div  id="{{ event.pk }}"   style="display: none;" class="ui3 ui-widget-eventinfo">

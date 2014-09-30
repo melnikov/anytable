@@ -5,7 +5,7 @@ from anytable_v1.models import *
 from django.contrib.auth import *
 from django.core.context_processors import csrf
 from django.views.decorators.csrf import csrf_exempt, csrf_protect
-import geocoder
+#import geocoder
 import datetime
 # Create your views here.
 
@@ -136,3 +136,8 @@ def searchResult(request):
 
 
 
+def profileOwn(request):
+
+
+    context = Context({"request":request,})
+    return render_to_response('profileOwn.html', context)

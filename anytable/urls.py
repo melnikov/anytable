@@ -10,6 +10,8 @@ urlpatterns = patterns('',
     # url(r'^blog/', include('blog.urls')),
 
     #Admin Stuff
+
+    url(r'^query/admin/venueadministratorauth/', 'anytable_v1.admin_views.venueadministratorauth', name='Venue Admin Auth'),
     url(r'^admin/anytable_v1/venueadministrator/(?P<id>[0-9]+)/$' , 'anytable_v1.admin_views.TheVenueAdministration', name='TheVenueAdministration'),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^query/admin/deleteimg/(?P<id>[0-9]+)', 'anytable_v1.admin_views.DeleteVenueImg', name='delete venue image'),
@@ -32,10 +34,10 @@ urlpatterns = patterns('',
 
 ## Events Control, Venue Administration..
      url(r'^addevent/$', 'anytable_v1.admin_views.addevent', name='Add Event'),
-     url(r'^query/admin/deleteevent/', 'anytable_v1.admin_views.deleteevent', name='Delete Event'),
-     url(r'^query/admin/updateevent/', 'anytable_v1.admin_views.updateevent', name='Update Event'),
-     url(r'^query/admin/updateeventimg/', 'anytable_v1.admin_views.updateeventimg', name= 'Update Event Img'),
-     url(r'^query/admin/testforfun/', 'anytable_v1.admin_views.testforfun', name= 'Test For Fun'),
+     url(r'^query/admin/delete_event/', 'anytable_v1.admin_views.delete_event', name='Delete Event'),
+     url(r'^query/admin/update_event/', 'anytable_v1.admin_views.update_event', name='Update Event'),
+     url(r'^query/admin/update_event_img/', 'anytable_v1.admin_views.update_event_img', name= 'Update Event Img'),
+
 
 ##Non-Admin
      url(r'^$','anytable_v1.views.index',name='index'),
@@ -44,4 +46,8 @@ urlpatterns = patterns('',
      url(r'^query/type/(?P<type>[a-zA-Z0-9_][0-9a-zA-Z_]*/$)', 'anytable_v1.views.ajaxFront', name='Queries For Front Page'),
      url(r'^venue/(?P<id>[0-9]+)', 'anytable_v1.views.venueCard', name='Venue Card'),
      url(r'^search/$', 'anytable_v1.views.searchResult', name='Search Results'),
-)
+
+
+##Site Users Staff
+     url(r'^profile_own/$', 'anytable_v1.views.profileOwn', name='My Profile'),
+     )

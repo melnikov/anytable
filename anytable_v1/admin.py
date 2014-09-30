@@ -10,9 +10,13 @@ from anytable_v1.models import *
 class testUsersAdmin(admin.ModelAdmin):
     list_display = ('firstName','lastName',)
 
+class EventThePrice(admin.TabularInline):
+    model = EventPrice
+    extra = 1
 
 class eventAdmin(admin.ModelAdmin):
     list_display = ( 'title', 'event_date', 'venue', 'thumbnail',)
+    inlines = [ EventThePrice, ]
     pass
     thumbnail = AdminThumbnail(image_field='thumbnail',)
     readonly_fields = ['thumbnail']
@@ -51,6 +55,9 @@ class typeAdmin(admin.ModelAdmin):
 class costumorAdmin(admin.ModelAdmin):
     list_display = ("name", "email", "telephone", "city", )
 
+class PriceTypeAdmin(admin.ModelAdmin):
+    list_display = ('name',)
+
 class VenueAdministratorPanel(admin.ModelAdmin):
     #exclude = ["password", ]
     list_display = ("email", "password", )
@@ -61,6 +68,7 @@ class DocumentsAdmin(ImageCroppingMixin, admin.ModelAdmin):
 
 class FolderAdmin(admin.ModelAdmin):
     list_display = ("name", "parent")
+
 #admin.site.register(photo, photoAdmin)
 admin.site.register(VenueOptions, venueOptionAdmin)
 admin.site.register(VenueKitchen,venueKitchenAdmin)
@@ -75,5 +83,6 @@ admin.site.register(City, cityAdmin)
 admin.site.register(VenueAdministrator, VenueAdministratorPanel)
 admin.site.register(Document, DocumentsAdmin)
 admin.site.register(Folder, FolderAdmin)
+admin.site.register(PriceType, PriceTypeAdmin)
 
 

@@ -6,12 +6,11 @@
 	<meta name="author" content="gencyolcu" />
     <script src="//code.jquery.com/jquery-1.10.2.js"></script>
     <script src="//code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+    <script type="text/javascript" src="/static/js/timepicker.js"></script>
 
 <script type="text/javascript" src="/static/js/jquery.jcarousel.js"></script>
 
-
-
-    <script>
+<script>
   $(function() {
     $( "#datepicker" ).datepicker();
   });
@@ -110,6 +109,74 @@
         <div class="cl"></div>
         <input type="button"  value="ЗАРЕГИСТРИРОВАТЬСЯ"/>
 </div>
+<div id="venueAdminDialog" title="ВХОД" style="display: none;">
+        <input type="text" placeholder="E-MAIL" name="email" id="email"/>
+        <input type="password" placeholder="ПАРОЛЬ" name="password" id="password"/>
+        <div class="cl" style="height: 30px;"></div>
+        <!--<a href="">ОЙ, Я ЗАБЫЛ ПАРОЛЬ!</a><br />-->
+        <input type="button"  value="ВОЙТИ"/><br />
+       <!--
+        Войти через социальные сети:<br />
+        <div style=" width: 100%; margin:0 auto; margin-top: 15px ;  ">
+            <img height="60px" src="/static/images/fb_top.png" />
+            <img height="60px" src="/static/images/twitter_top.png" />
+            <img height="60px" src="/static/images/inst_top.png" />
+        </div>
+        -->
+        <div style="position: absolute; bottom: 100px;  height: 30px; background: #fff;"></div>
+</div>
+
+<hr />
+<div style="position: absolute; bottom: 10px; margin: 0; padding-left: 20px;">
+Скачать приложение:
+<a style="background:  url('/static/images/Apple.png')  left no-repeat; margin-left: 15px; padding-left: 30px ; background-size: 20px 20px;" > AppStore </a>
+<a style="background:  url('/static/images/Android.png') left no-repeat; margin-left: 15px; padding-left: 30px ; background-size: 20px 25px;" >Google Play</a>
+</div>
+<input type="text" size="30px" id="search_form"/>
+</section> <!-- end top menu -->
+</nav> <!-- End navigation -->
+
+
+
+
+</header>
+</div>
+   {% block content %}
+   {% endblock %}
+
+<footer >
+<div id="footer">
+    <ul style="padding-left: 20px;">
+        <li><a href="">О сервисе</a></li>
+        <li><a href=""> Информация об оплате</a></li>
+        <li><a href="">Обратная связь</a></li>
+        <li><a href="">Решение проблем</a></li>
+    </ul>
+    <ul style="line-height: 50%;">
+        <li class="enter"><a href="" >Вход</a></li>
+        <li><a href="">для пользователей</a></li>
+        <li><div style="height: 15px;"></div></li>
+        <li class="enter"><a id="venueAdminLink" onclick="openDialog('#venueAdminDialog');" >Вход</a></li>
+        <li><a href="">для рестораторов</a></li>
+    </ul>
+
+
+    <ul style="margin-left: 55px;">
+        <li>Скачать приложение:</li>
+        <li><a href=""><img src="/static/images/AppStore.png" /></a></li>
+        <li><a href=""><img src="/static/images/Google-Play.png" /></a></li>
+    </ul>
+    <ul>
+        <li>В социальных сетях:</li>
+        <li><img  style="padding-left:20px;" height="40px" src="/static/images/fb_top.png" /><img style="padding-left:10px;" height="40px" src="/static/images/inst_top.png" /></li>
+    </ul>
+</div>
+
+<span id="cr">© ООО "ЭниТейбл". Перепечатка возможна только с указанием ссылки на проект.</span>
+
+</footer>
+<div style="height: 100px;"></div>
+</div>
 <script >
     function openDialog(targetDiv) {
         $(targetDiv).dialog({
@@ -144,59 +211,13 @@
                  jQuery('#reserveTable').dialog("open");
                  openDialog(targetDiv);
 		    });
-
+            jQuery("#venueAdminLink").on("click", function() {
+			     var targetDiv;
+				 jQuery('#venueAdminDialog').dialog("open");
+                openDialog(targetDiv);
+		    });
 
 
 	</script><!-- end login, register forms -->
-
-<hr />
-<div style="position: absolute; bottom: 10px; margin: 0; padding-left: 20px;">
-Скачать приложение:
-<a style="background:  url('/static/images/Apple.png')  left no-repeat; margin-left: 15px; padding-left: 30px ; background-size: 20px 20px;" > AppStore </a>
-<a style="background:  url('/static/images/Android.png') left no-repeat; margin-left: 15px; padding-left: 30px ; background-size: 20px 25px;" >Google Play</a>
-</div>
-<input type="text" size="30px" id="search_form"/>
-</section> <!-- end top menu -->
-</nav> <!-- End navigation -->
-
-
-
-
-</header>
-</div>
-   {% block content %}
-   {% endblock %}
-
-<footer >
-<div id="footer">
-    <ul style="padding-left: 20px;">
-        <li><a href="">О сервисе</a></li>
-        <li><a href=""> Информация об оплате</a></li>
-        <li><a href="">Обратная связь</a></li>
-        <li><a href="">Решение проблем</a></li>
-    </ul>
-    <ul style="line-height: 50%;">
-        <li class="enter"><a href="" >Вход</a></li>
-        <li><a href="">для пользователей</a></li>
-        <li><div style="height: 15px;"></div></li>
-        <li class="enter"><a  href="" >Вход</a></li>
-        <li><a href="">для рестораторов</a></li>
-    </ul>
-    <ul style="margin-left: 55px;">
-        <li>Скачать приложение:</li>
-        <li><a href=""><img src="/static/images/AppStore.png" /></a></li>
-        <li><a href=""><img src="/static/images/Google-Play.png" /></a></li>
-    </ul>
-    <ul>
-        <li>В социальных сетях:</li>
-        <li><img  style="padding-left:20px;" height="40px" src="/static/images/fb_top.png" /><img style="padding-left:10px;" height="40px" src="/static/images/inst_top.png" /></li>
-    </ul>
-</div>
-
-<span id="cr">© ООО "ЭниТейбл". Перепечатка возможна только с указанием ссылки на проект.</span>
-
-</footer>
-<div style="height: 100px;"></div>
-</div>
 </body>
 </html>

@@ -8,6 +8,8 @@ from pygeocoder import *
 from django.contrib.auth.models import AbstractBaseUser
 from django.forms import ModelForm
 from django import forms
+import hashlib
+import _md5
 
 
 
@@ -37,8 +39,6 @@ class VenueType(models.Model):
     def __unicode__(self):
         return u"%s" % self.name
 
-    def __unicode__(self):
-        return u"%s" % self.name
 class VenueKitchen(models.Model):
     name = models.CharField(max_length=255, blank=True)
     def __unicode__(self):
@@ -60,7 +60,6 @@ class City(models.Model):
 
     def __unicode__(self):
         return u"%s" % self.name
-
 
 class Venue(models.Model):
     name = models.CharField(max_length=255, verbose_name="Name")
@@ -110,16 +109,25 @@ class Venueimage(models.Model):
     venue = models.ForeignKey(Venue, null=True)
 
 class Event(models.Model):
-    title = models.CharField(max_length=255 , blank=True, null=True)
+    title = models.CharField(max_length=255 , default='event title',blank=False, null=False)
     image = models.ImageField(upload_to='images', blank=True,null=True)
     thumbnail = ImageSpecField(source='image', processors=[ResizeToFit(325, 186)], format='JPEG', options={'quality': 60})
-    date = models.DateTimeField(blank=True,null=True)
+    date = models.DateTimeField( )
     event_date = models.DateField(blank=True,null=True)
     event_time = models.TimeField(blank=True,null=True)
     description = models.TextField(blank=True, verbose_name="Description")
-    #photo = models.ManyToManyField(to=photo, blank=True)
     QR = models.CharField(max_length=1024, default='', blank=True,null=True)
     venue = models.ForeignKey(Venue)
+
+class PriceType(models.Model):
+    name = models.CharField(max_length=255, blank= False, null= False)
+    def __unicode__(self):
+       return u"%s " % self.name
+
+class EventPrice(models.Model):
+    price_type = models.ForeignKey(PriceType, blank=False, null=False)
+    price = models.CharField(max_length=50, blank=True, null=True, verbose_name="Price")
+    event = models.ForeignKey(Event, blank=False, verbose_name="Event")
 
 class User(AbstractBaseUser):
     name = models.CharField(max_length=255)
@@ -135,12 +143,27 @@ class User(AbstractBaseUser):
     def __unicode__(self):
         return self.email
 
+def computeMD5hash(string):
+    m = hashlib.md5()
+    m.update(string.encode('utf-8'))
+    return m.hexdigest()
+
 class VenueAdministrator(models.Model):
     email =models.EmailField(max_length=254, blank= False, null= False, verbose_name="E-Mail")
-    password = models.CharField(max_length=255, blank= False, null= False, verbose_name="Password")
-    #password = hash(password)
+    password = models.CharField(max_length=1024, blank= False, null= False, verbose_name="Password")
     venue = models.ForeignKey(Venue, null= False, blank= False, verbose_name="Venue")
-    active = models.NullBooleanField(blank=True, null= True)
+    active = models.NullBooleanField(blank=True, null= True, )
+
+    def save(self, force_insert=False, force_update=False, using=None,
+             update_fields=None):
+
+        self.password = computeMD5hash(self.password)
+
+        return super(VenueAdministrator,self).save(force_insert, force_update, using,
+             update_fields)
+
+
+
 
 class Document(models.Model):
     title = models.CharField(max_length=25, blank=True, null=True)

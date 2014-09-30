@@ -6,6 +6,10 @@
     padding: 0;
     margin: 0;
 }
+input,
+textarea {
+    outline:none;
+}
 a:hover {
  cursor:pointer;
 }
@@ -84,7 +88,7 @@ h1{
     border: 1px #f4f4f4 solid;
     box-shadow: none;
 }
-#logIn, #register{
+#logIn, #register, #venueAdminDialog{
     position: relative;
     z-index: 1;
     color: #9a9d9b;
@@ -98,12 +102,29 @@ h1{
     color: #000;
     background: url('../images/empty_bg.png') right no-repeat;
 }
+#venueAdminDialog input[type="text"], input[type="password"]{
+    font-size: 12px;
+    padding-left: 20px;
+    border: 1px solid #c4c3c2;
+    width: 240px;
+    height: 30px;
+    color: #000;
+    background: url('../images/empty_bg.png') right no-repeat;
+}
 #logIn input[type="text"]:focus, input[type="password"]:focus{
     outline: none!important;
     
 }
+#venueAdminDialog input[type="text"]:focus, input[type="password"]:focus{
+    outline: none!important;
+
+}
 
 #logIn input[type="text"]{
+    float: left;
+
+}
+#venueAdminDialog input[type="text"]{
     float: left;
 
 }
@@ -111,7 +132,19 @@ h1{
     float: right;
 
 }
+#venueAdminDialog input[type="password"]{
+    float: right;
+
+}
 #logIn input[type="button"]{
+    color: #f3693b;
+    margin: 30px;
+    width: 250px;
+    height: 38px;
+    border: 1px solid #f3693b;
+    background: none;
+}
+#venueAdminDialog input[type="button"]{
     color: #f3693b;
     margin: 30px;
     width: 250px;

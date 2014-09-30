@@ -5,6 +5,7 @@
 h1{
     font-size: 24px;
     margin-bottom: 20px;
+    font-weight: normal;
 }
 h2{
     font-size: 20px;
@@ -42,10 +43,133 @@ a#link{
     padding-left: 20px;
     background: url("/static/images/icon-address.png")  top left no-repeat;
 }
+.clr {
+    clear:both;
+}
+#src_01 {
+    float: left;
+    border: 0px;
+    width: 600px;
+    padding-left: 33px;
+    padding-right: 33px;
+    height: 41px;
+    background: url('/static/images/src_01.png') left top no-repeat;
+    color: #666666;
+    font-weight: bold;
+    font-size: 16px;
+}
+#src_00 {
+    margin-left: auto;
+    margin-right: auto;
+    width: 789px;
+}
+#src_02,
+#src_03 {
+    width: 40px;
+    float: left;height: 41px;
+
+}
+#src_02 {
+    background: url('/static/images/src_03.png') left top no-repeat;
+}
+#src_03 {
+    background: url('/static/images/src_04.png') left top no-repeat;
+}
+
+
+#src_05 {
+    float: left;
+    border: 0px;
+    width: 43px;
+    height: 41px;
+    background: url('/static/images/src_02.png') left top no-repeat;
+    cursor: pointer;
+}
+#src_10 {
+    width: 789px;
+    height: 8px;
+    margin-left: auto;
+    margin-right: auto;
+    background: url('/static/images/src_05.png') left top no-repeat;
+
+}
+#src_11 {
+    width: 789px;
+    height: 8px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 8px;
+}
+#search_prms {
+
+
+
+
+}
+#search_prms a {
+    margin-right: 20px;
+    text-decoration:none;
+    color: #cccccc;
+    font-size: 18px;
+    border-bottom: 1px dashed #ccc;
+}
+#src_city {
+    float: right;
+    margin-right: 40px;
+    text-align: right;
+
+
+}
+#src_city a {
+    font-size: 14px;
+    color: #ff6633;
+    text-decoration:none;
+    border-bottom: 1px dashed #ff6633;
+}
+
+
+
 </style>
 <div >
 {{ search_q }}
 </div>
+    <div style="height: 30px;"></div>
+    <div style="width: 1026px;">
+        <div id="src_00">
+            <div id="src_02"></div>
+            <form action="/search/" method="post">
+            <input id="src_01" type="text" />
+            <input id="src_05" type="submit" value="" />
+            </form>
+            <div id="src_03"></div>
+            <div class="clr"></div>
+        </div>
+        <div id="src_10">
+
+        </div>
+        <div id="src_11">
+            <div id="src_city"><a href="#">Нижний Новгород</a></div>
+            <div class="clr"></div>
+
+
+        </div>
+    </div>
+
+    <div style="height:20px;"></div>
+    <div id="search_prms">
+        <a href="#">Ресторан</a>
+        <a href="#">Кафе</a>
+        <a href="#">Бар</a>
+        <a href="#">Паб</a>
+        <a href="#">Клуб</a>
+
+
+
+    </div>
+    <div style="height:20px;"></div>
+
+
+
 {% if events and venues %}
    <h4>whats going on on <strong>{{ date|date:'d-m-Y' }}</strong> ?</h4>
     <h1>Афиша</h1>
@@ -74,7 +198,7 @@ a#link{
     {% endfor %}
     <hr>
        <h3>{{ message }}</h3>
-      <h1>Venues</h1>
+      <h1>Заведения</h1>
         {% for venue in venues %}
         <div >
             <div style="float: left; width: 150px;">
