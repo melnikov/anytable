@@ -1,0 +1,80 @@
+#header {
+  background: none !important;
+  height: auto !important; 
+}
+.header_bg {
+  height: auto !important;
+  background: none !important;
+}
+.gal {
+  width: 918px;
+  margin-left: auto;
+  margin-right: auto;
+  
+}
+.gal_l {
+  float: left;
+  
+}
+.gal_r {
+  float: right;
+  line-height: 26px;
+  text-align: right;
+}
+#img_gal {
+  width: 410px;
+  height: 310px;
+  background: #e2e2e2;
+  float: left;  
+}
+#imgs_gal {
+  width: 100px;
+  height: 310px;
+  background: yellow;
+  float: right;
+}
+.zagr {
+  color: #666666;
+  text-align: right;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+#zabron {
+  display: block;
+  width: 287px;
+  height: 46px;
+  float: right;
+  background: url('/images/zabron.png') left top no-repeat;
+  
+}
+.zagr span {
+  padding-left: 10px;
+  padding-right: 10px;
+  background: red;
+  color: white;
+  
+}
+a {
+  color: #ff6633;
+  
+}
+.af_itm {
+  float: left;
+  margin-right: 20px;
+  
+}
+.af_itm_head {
+  color: #ff6633;
+  font-weight: bold;  
+}
+.af_itm_date {
+  color: #ff6633;
+  
+}
+.af_itm_img {
+  width: 204px;
+  height: 278px;
+  background: gray;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}

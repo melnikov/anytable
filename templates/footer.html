@@ -1,0 +1,65 @@
+
+
+<footer >
+<div id="footer">
+    <ul style="padding-left: 20px;">
+        <li><a href="">О сервисе</a></li>
+        <li><a href=""> Информация об оплате</a></li>
+        <li><a href="">Обратная связь</a></li>
+        <li><a href="">Решение проблем</a></li>
+    </ul>
+    <ul style="line-height: 50%;">
+        <li class="enter"> <a  id="targetLink" onclick="openDialog('#logIn');" style="padding-left: 20px; padding-right: 20px;">Вход</a></li>
+        <li><a href="">для пользователей</a></li>
+        <li><div style="height: 15px;"></div></li>
+        <li class="enter"> <a  id="targetLink" onclick="openDialog('#logIn');" style="padding-left: 20px; padding-right: 20px;">Вход</a></li>
+        <li><a href="">для рестораторов</a></li>
+    </ul>
+    <ul style="margin-left: 55px;">
+        <li>Скачать приложение:</li>
+        <li><a href=""><img src="/static/images/AppStore.png" /></a></li>
+        <li><a href=""><img src="/static/images/Google-Play.png" /></a></li>
+    </ul>
+    <ul>
+        <li>В социальных сетях:</li>
+        <li><img  style="padding-left:20px;" height="40px" src="/static/images/fb_top.png" /><img style="padding-left:10px;" height="40px" src="/static/images/inst_top.png" /></li>
+    </ul>
+</div>
+
+<span id="cr">© ООО "ЭниТейбл". Перепечатка возможна только с указанием ссылки на проект.</span>
+
+</footer>
+<div style="height: 100px;"></div>
+<script >
+    function openDialog(targetDiv) {
+        $(targetDiv).dialog({
+		modal: true,
+		autoOpen: false,
+        closeOnEscape: true,
+        dialogClass: "no-close",
+        resizable: false,
+        open: function(){
+
+                jQuery('.ui-widget-overlay').bind('click',function(){
+                jQuery(targetDiv).dialog('close');
+                jQuery(targetDiv).val("");
+
+               })
+              }
+			});
+      };
+            jQuery("#targetLink").on("click", function() {
+			     var targetDiv;
+				 jQuery('#logIn').dialog("open");
+                 openDialog(targetDiv);
+		    });
+
+			jQuery("#targetLink2").on("click", function() {
+			     var targetDiv;
+                 jQuery('#register').dialog("open");
+                 openDialog(targetDiv);
+		    });
+
+
+
+	</script><!-- end login, register forms -->
