@@ -1,0 +1,135 @@
+{% extends "layout_inner.html" %}
+
+{% block content %}
+<style>
+h1{
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+h2{
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+h3{
+    color: #000000;
+    font-size: 16px;
+    font-weight: bold;
+    margin: 20px 0px 20px 0px;
+    text-align: center;
+}
+h4{
+    color:#000;
+    text-align: center;
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+h4 strong{
+    color: #ff6633;
+}
+a#link{
+    padding-top: 100px!important;
+    font-size: 12px;
+    color: #ff6633;
+    text-decoration: underline;
+    font-style: italic;
+}
+.address{
+    text-decoration: underline;
+    font-style: italic;
+    font-size: 12px;
+    height: 20px;
+    margin-left: 20px;
+    padding-left: 20px;
+    background: url("/static/images/icon-address.png")  top left no-repeat;
+}
+</style>
+<div >
+{{ search_q }}
+</div>
+{% if events and venues %}
+   <h4>whats going on on <strong>{{ date|date:'d-m-Y' }}</strong> ?</h4>
+    <h1>Афиша</h1>
+
+    {% for event in events %}
+        <div >
+            <div style="float: left; width: 150px;">
+                <img src="/static/uploads/{{ event.image }}" width="150px" height="200px" style="float: left; margin-right: 20px;">
+            </div>
+            <div style=" position: relative; height: 200px; width: 850px; float: right; padding-left: 20px; text-align: justify;" >
+                <div >
+                    <h2>{{ event.title }}</h2>
+                    <div id="description" style="font-size: 14px;  text-indent: 15px;">
+                        {{ event.description }}
+                        <div style="height: 10px;"></div>
+                        <a id="link">перейти...</a>
+                    </div>
+                    <div class="address" style="position: absolute; left: 0px; bottom: 0px;">
+                        {{ event.venue.name }} | {{ event.event_date|date:'d-m-Y' }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="clear: both; height: 30px;"></div>
+
+    {% endfor %}
+    <hr>
+       <h3>{{ message }}</h3>
+      <h1>Venues</h1>
+        {% for venue in venues %}
+        <div >
+            <div style="float: left; width: 150px;">
+                  <a id="link" href="/venue/{{ venue.pk }}">
+                      <img src="/static/uploads/{{ venue.image }}" width="150px" height="150px" style="float: left; margin-right: 20px;">
+                  </a>
+            </div>
+            <div style=" position: relative; height: 200px; width: 850px; float: right; padding-left: 20px; text-align: justify;" >
+                <div >
+                    <h2>{{ venue.name }}</h2>
+                    <div id="description" style="font-size: 14px;  text-indent: 15px;">
+                        {{ venue.description }}
+                        <div style="height: 10px;"></div>
+                        <a id="link" href="/venue/{{ venue.pk }}">перейти...</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="clear: both; height: 30px;"></div>
+        {% endfor %}
+
+{% elif venues %}
+
+       <h3>{{ message }}</h3>
+
+    <h1>Venues</h1>
+    <div style="text-align: center; margin-top: 50px; margin-bottom: 50px;">
+
+   </div>
+        {% for venue in venues %}
+
+        <div >
+            <div style="float: left; width: 150px;">
+                  <a id="link" href="/venue/{{ venue.pk }}">
+                      <img src="/static/uploads/{{ venue.image }}" width="150px" height="150px" style="float: left; margin-right: 20px;">
+                  </a>
+            </div>
+            <div style=" position: relative; height: 200px; width: 850px; float: right; padding-left: 20px; text-align: justify;" >
+                <div >
+                    <h2>{{ venue.name }}</h2>
+                    <div id="description" style="font-size: 14px;  text-indent: 15px;">
+                        {{ venue.description }}
+                        <div style="height: 10px;"></div>
+                        <a id="link" href="/venue/{{ venue.pk }}">перейти...</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div style="clear: both; height: 30px;"></div>
+
+    {% endfor %}
+{% else %}
+
+       <h3>{{ message }}</h3>
+
+{% endif %}
+{% endblock %}

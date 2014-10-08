@@ -1,0 +1,19 @@
+<script>
+function delete_event_price(price_id){
+    var price_id = price_id
+    $.ajax({
+       type: 'POST',
+       url: '/query/admin/delete_event_price/',
+       data: 'price_id='+price_id,
+       success: function(response){
+           $('#price_i_'+response+'').fadeOut('slow');
+       }
+
+    });
+}
+</script>
+<ul style="list-style: none;">
+    {% for price in prices %}
+        <li id="price_i_{{ price.pk }}">{{ price.price_type }}: {{ price.price }}<img onclick="delete_event_price({{ price.pk }});" src="/static/images/delete-icon.png"></li>
+    {% endfor %}
+</ul>

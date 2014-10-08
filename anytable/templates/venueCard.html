@@ -1,0 +1,380 @@
+{% extends "layout_inner.html" %}
+
+{% block content %}
+
+     <link rel="stylesheet" type="text/css" href="/static/css/jcarousel.connected-carousels.css">
+     <link rel="stylesheet" type="text/css" href="/static/css/venueCard.css">
+
+        <script type="text/javascript" src="/static/js/jquery.jcarousel.js"></script>
+
+        <script type="text/javascript" src="/static/js/jcarousel.connected-carousels.js"></script>
+<div style="">
+    <h1>{{ venue.name }}</h1>
+    <div >
+<div class="wrapper">
+
+            <div class="connected-carousels">
+                <div class="stage">
+                    <div class="carousel carousel-stage">
+                        <ul>
+                            {% for venueimage in venueimages  %}
+                                <li><img src="/static/uploads/{{ venueimage.image }}" width="415" height="310" alt=""></li>
+                            {% empty %}
+                                <li><img src="/static/images/logo_inner.png" width="415" height="310" alt=""></li>
+                            {% endfor %}
+
+                        </ul>
+                    </div>
+                    <div id="qr_link">
+                        <a href="#" id="">QR</a>
+                    </div>
+                </div>
+            {% if venueimages %}
+                <div class="navigation">
+                    <a href="#" class="prev-navigation"></a>
+                    <div class="cl"></div>
+                    <div class="carousel carousel-navigation carousel_list">
+
+                        <ul>
+                            {% for venueimage in venueimages  %}
+                            <li><img src="/static/uploads/{{ venueimage.image }}" width="50" height="50" alt=""></li>
+                            {% empty %}
+                                <li><img src="/static/images/logo_inner.png" width="50" height="50" alt=""></li>
+                            {% endfor %}
+                        </ul>
+
+
+                    </div>
+                    <div class="cl"></div>
+                    <a href="#" class="next-navigation"></a>
+                  </div>
+            {% endif %}
+            </div>
+<div class="cl"></div>
+</div>
+
+<!-- end Jcarousel -->
+    <br />
+
+<div id="venueInfo">
+	{{ venue.city }} ,{{ venue.address }} <a  id="mapLink" onclick="openMap('#map');" style="text-decoration: none">[map]</a>
+    <br>
+
+ <script src="http://api-maps.yandex.ru/2.0/?load=package.full&lang=ru_RU"  type="text/javascript"></script>
+
+    <script type="text/javascript">
+        // Initializes the map as soon as the API is loaded and DOM is ready
+        ymaps.ready(init);
+
+        function init () {
+            var myMap = new ymaps.Map("venueMap", {
+                    center: {{ latitude }},
+                    zoom: 14
+                }),
+                // The first way to set placemarks
+                // Creates a placemark for Salt Lake City.
+                // Specifies the placemark description: the name of the city and its population.
+                myPlacemark = new ymaps.Placemark({{ latitude }}, {
+                    name: '{{ venue.name }}',
+                    tables: '4, tables ',
+                    //rate: 'rate: great',
+                }),
+
+                // Creates a template for displaying the hint content.
+                myHintLayout = ymaps.templateLayoutFactory.createClass(
+                    '<b>$[properties.name]</b> - $[properties.tables]'
+                );
+
+            // Puts the created template in the template storage. Now our template can be accessed using the 'mysuperlayout' key.
+            ymaps.layout.storage.add('my#superlayout', myHintLayout);
+
+            // Defines our template for the placemark hint.
+            myPlacemark.options.set('hintContentLayout', 'my#superlayout');
+                // The second way
+                myGeoObject = new ymaps.GeoObject({
+
+
+                });
+                 myMap.controls
+                // Adds the zoom control button. The position of the control on the map is passed as a parameter.
+                .add('zoomControl', {
+                    left: '35',
+                    top: '50'
+                })
+
+
+                // Adds the list of map types
+                .add('typeSelector')
+                // Adds the scale line
+
+            // Adding placemarks to the map
+            myMap.geoObjects
+                .add(myPlacemark)
+                .add(myGeoObject);
+        }
+    </script>
+    <style>
+        .map_widget{
+            width: 620px!important;
+            height: 320px!important;
+        }
+    </style>
+    <script>
+    function openMap(targetDiv) {
+        $(targetDiv).dialog({
+		modal: true,
+		autoOpen: false,
+        closeOnEscape: true,
+        dialogClass: "no-close",
+        resizable: false,
+        open: function(event, ui){
+                jQuery('.ui-dialog-title').hide();
+                jQuery('.ui-dialog-titlebar').hide();
+                jQuery('.ui-widget-header').hide();
+                jQuery('.ui-widget').addClass('map_widget');
+
+                jQuery('.ui-widget-overlay').bind('click',function(){
+
+                    jQuery(targetDiv).dialog('close');
+                    jQuery(targetDiv).val("");
+
+               })
+              }
+			});
+      };
+			jQuery("#mapLink").on("click", function() {
+			     var targetDiv;
+                 jQuery('#map').dialog("open");
+                 openMap(targetDiv);
+		    });
+
+	</script><!-- end Map,  -->
+
+<div id="map" style="width:600px; height:500px; position: relative; display: none;" title="MAP" >
+    <div id="venueMap" style="width:600px; height:300px;"></div>
+</div>
+
+
+ {{ event.name }}
+Время работы: {{ venue.schedule }}<br>
+тел.: {{ venue.tel }}<br>
+(831) 413-82-32<br>
+e-mail: <a href="mailto:webmaster@example.com">{{ venue.email }}</a><br>
+web: <a href="http://{{ venue.website }}" target="_blank">{{ venue.website }}</a><br>
+{% if venue.vk_url %}
+    <a href="{{ venue.vk_url }}">группа {{ venue.name }} Вконтакте</a> <br>
+{% endif %}
+{% if venue.facebook_url %}
+    <a href="{{ venue.facebook_url }}">группа {{ venue.name }} в Facebook</a> <br>
+{% endif %}
+Загруженность:    <div id="sc_2_percent_red" style="margin-left: 10px; padding: 0px 10px 0px 10px;"> 90%</div>
+<a id="reserveTb" > &nbsp;</a>
+
+
+    <div class="cl"></div>
+</div>
+
+    <div class="cl"></div>
+
+</div>
+<div style="font-size: 12px; ">
+<div >
+    <div>
+        <h2 style="float: left; font-size: 20px; line-height: 10px;">Кухня: </h2>
+    </div>
+    <div>
+       <ul style="list-style: none; font-weight: bold; padding-left: 10px;">
+            {% for kitchen in kitchens %}
+                 <li style=" float: left; margin-left:10px;  padding-left: 20px;  background:url('/static/images/checked_bg_checked.png') left top no-repeat;">{{ kitchen.name }}</li>
+            {% endfor %}
+    </ul>
+    </div>
+</div>
+
+
+</div>
+<div style="height: 20px; clear: both;"></div>
+<div id="description">{{ venue.description }}</div>
+    <div style="height: 30px" class="cl"></div>
+
+    <div style="position: relative;">
+<div id="sc_2_top_shaodw"></div>
+<section id="sc_2">
+
+
+<div class="cl"></div>
+<div style=" width: 100%; margin: 0; padding: 0;">
+
+<div class="afisha" style="">
+<h1>АФИША</h1>
+{% if events %}
+
+    <script type="text/javascript" src="/static/js/jcarousel.responsive.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="/static/css/jcarousel.responsive.css" />
+            <div class="jcarousel-wrapper">
+                <div class="jcarousel"  style="width: 960px!important; margin: 0 auto; " >
+                    <ul>
+
+            {% for event in events %}
+            <li style="width: 230px!important; height: 370px!important;">
+    <div style="float: left; display: inline-block; ">
+        <div class="afishaItem">
+        <h3>{{ event.title }}</h3>
+        <a id="a{{ event.pk }}"  onclick="openEvent('#{{ event.pk }}');"> <img height="270px" src="/static/uploads/{{ event.image }}" /></a>
+        <div style="">{{ event.event_date|date:'d-m-Y'}}</div>
+
+
+    <div  id="{{ event.pk }}"   style="display: none;" class="ui3 ui-widget-eventinfo">
+         <img src="/static/uploads/{{ event.image }}"  />
+         <div class="event_info">
+             <h1>{{ event.title }}</h1>
+             <div class="event_description"> {{ event.description }}</div>
+             <div style="line-height: 30px;">
+                 {% for event_price in event_prices %}
+                     <h2>{{ event_price.price_type }} :&nbsp;</h2>{{ event_price.price }}<br />
+                 {% endfor %}
+            <!--  <h2>Свободные столики:&nbsp;</h2> есть (уточнить) <div style="clear: both;"></div> -->
+             <div class="iwanthere" onclick="order({{ event.pk }});"></div>
+         </div>
+
+<script>
+    function order(eventId){
+        alert('order now '+eventId);
+    }
+</script>
+        </div>
+
+
+    </div>
+
+
+<style>
+.ui-widget{
+
+}
+.ui-widget.event_widget{
+    width: 920px !important;
+    height: 420px !important;
+
+}
+.ui3 h1, h2{
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 30px;
+    text-indent: 0px;
+}
+.ui3 h2{
+    margin: 0px;
+    font-size: 16px;
+    float: left;
+}
+.ui3 img{
+    width: 300px;
+    height: 410px;
+    float: left;
+}
+.event_info{
+    position: relative;
+    width: 550px;
+    height: 410px;
+    float: right;
+    text-align: left;
+    color: #ff6633;
+}
+.event_description{
+    color: #000;
+    font-size: 14px;
+    text-indent: 40px;
+    text-align: justify;
+    margin-bottom: 30px;
+}
+.iwanthere{
+    width: 130px;
+    height: 51px;
+    background: url("/static/images/af_res_but.png") no-repeat;
+    float: right;
+}
+</style>
+    <script>
+
+
+			jQuery("#a{{ event.pk }}").on("click", function() {
+                var targetDiv = '#{{ event.pk }}';
+                jQuery('#{{ event.pk }}').dialog("open");
+                //openEvent(targetDiv);
+		    });
+
+
+	</script><!-- end afisha info, forms -->
+
+    </div>
+
+    </div>
+    </li>
+            {% endfor %}
+
+                    </ul>
+                </div>
+                <a href="#" class="jcarousel-control-prev"></a>
+                <a href="#" class="jcarousel-control-next"></a>
+
+            </div>
+
+    <div class="cl"></div>
+
+{% else %}
+   <h1>No events yet</h1>
+{% endif %}
+</div>
+
+</div>
+
+</section>
+
+<div id="sc_2_bottom_shaodw"></div>
+</div>
+<div >
+
+</div>
+<div style="clear:both;"></div>
+</div>
+    <script>
+
+
+        function openEvent(targetDiv) {
+
+
+        $(targetDiv).dialog({
+		modal: true,
+		autoOpen: false,
+        closeOnEscape: true,
+        dialogClass: "no-close",
+        dialogClass: "event_widget",
+        resizable: false,
+        before: function(event,ui){
+
+        },
+        open: function(event, ui){
+               jQuery('.ui-dialog-title').hide();
+                //jQuery('.ui-widget').addClass('event_widget');
+                jQuery('.ui-dialog').addClass('ui-dialog-eventinfo');
+                //jQuery('.ui-widget')
+
+               jQuery('.ui-widget-overlay').bind('click',function(){
+                jQuery(targetDiv).dialog('close');
+                //jQuery(targetDiv).val("");
+
+               });
+
+              }
+			});
+
+      }
+
+
+
+    </script>
+
+
+{% endblock %}

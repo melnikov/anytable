@@ -1,0 +1,248 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html" />
+    <meta charset="UTF-8" />
+	<meta name="author" content="gencyolcu" />
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+    <script type="text/javascript" src="/static/js/timepicker.js"></script>
+
+<script type="text/javascript" src="/static/js/jquery.jcarousel.js"></script>
+
+<script>
+  $(function() {
+    $( "#datepicker" ).datepicker();
+  });
+   $(function() {
+    $( "#tabs" ).tabs();
+  });
+
+    /*$(document).ready(function(){
+
+        getVenues(1);
+
+
+
+    })
+
+
+        function getVenues(type){
+            $("#venues").empty().append("<div id='preloader'></div>");
+
+            url = "/query/type/" + type;
+             $.ajax({
+                type:'GET',
+                url:url,
+                data:"",
+                dataType:'html'
+            }).done(function(data){
+                   $("#venues").empty().append(data);
+            }).fail(function(data){
+                console.log("AJAX ERROR");
+            });
+
+        }*/
+
+  </script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css" />
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,500,700&subset=latin,cyrillic-ext' rel='stylesheet' type='text/css' />
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css" />
+
+	<title>Any Table</title>
+</head>
+
+<body >
+    <div id="main">
+<div class="header_bg_inner">
+<header id="header_inner" style="position: relative;">
+
+<nav id="nav_inner">
+   <a href="/"> <img style=" padding-left: 120px;" src="/static/images/logo_inner.png" /></a>
+<section id="top_menu">
+<div style="height: 25px; padding-left: 20px;">
+<a  href="" class="city">Нижний Новгород</a>
+    <img style="padding-left:120px;" height="20px" src="/static/images/fb_top.png" />
+    <img height="20px" src="/static/images/twitter_top.png" />
+    <img height="20px" src="/static/images/inst_top.png" />
+ <a  id="targetLink" onclick="openDialog('#logIn');" style="padding-left: 20px; padding-right: 20px;">Войти</a> Забыл пароль?
+ <a  id="targetLink2" onclick="openDialog('#register');"  style="padding-left: 20px;">Регистрация</a>
+</div>
+<style>
+    .ui-widget{
+        height: 380px!important;
+    }
+</style>
+<div id="logIn" title="ВХОД" style="display: none;">
+        <input type="text" placeholder="E-MAIL" />
+        <input type="password" placeholder="ПАРОЛЬ" />
+        <div class="cl" style="height: 30px;"></div>
+        <a href="">ОЙ, Я ЗАБЫЛ ПАРОЛЬ!</a><br />
+        <input type="button"  value="ВОЙТИ"/><br />
+        Войти через социальные сети:<br />
+        <div style=" width: 100%; margin:0 auto; margin-top: 15px ;  ">
+            <img height="60px" src="/static/images/fb_top.png" />
+            <img height="60px" src="/static/images/twitter_top.png" />
+            <img height="60px" src="/static/images/inst_top.png" />
+        </div>
+        <div style="position: absolute; bottom: 100px;  height: 30px; background: #fff;"></div>
+</div>
+
+<div id="register" title="Регистрация" style="display:  none;">
+       <div style="width: 250px; float: left;">
+        <input type="text" placeholder="ФАМИЛИЯ" />
+        <input type="text" placeholder="E-MAIL" />
+        <input type="password" placeholder="ПАРОЛЬ" />
+        <input type="password" placeholder="ПОВТОРИТЕ ПАРОЛЬ" />
+        <input type="text" placeholder="СОТОВЫЙ ТЕЛЕФОН" />
+        <input type="text" placeholder="ВАШ ГОРОД" />
+       </div>
+       <div style="width: 280px; height: 220px; float: right; position: relative; text-align: left;">
+        Войти через социальные сети:<br />
+       <div style="margin-top: 15px ;  ">
+        <img style="padding-left:35px;" height="50px" src="/static/images/fb_top.png" />
+        <img height="50px" src="/static/images/twitter_top.png" />
+        <img height="50px" src="/static/images/inst_top.png" />
+       </div>
+        <input type="text" style="position: absolute; bottom: 0; left: 0; width: 190px; background: none;" placeholder="ПРОВЕРОЧНЫЙ КОД"/>
+       </div>
+        <div class="cl"></div>
+        <input type="button"  value="ЗАРЕГИСТРИРОВАТЬСЯ"/>
+</div>
+<div id="venueAdminDialog" title="ВХОД" style="display: none;">
+        <input type="text" placeholder="E-MAIL" name="email" id="ven_ad_email"/>
+        <input type="password" placeholder="ПАРОЛЬ" name="password" id="ven_ad_password"/>
+        <div class="cl" style="height: 30px;"></div>
+        <!--<a href="">ОЙ, Я ЗАБЫЛ ПАРОЛЬ!</a><br />-->
+        <input type="button"  value="ВОЙТИ" onclick="logInVenAd();"/>
+       <!--
+        Войти через социальные сети:<br />
+        <div style=" width: 100%; margin:0 auto; margin-top: 15px ;  ">
+            <img height="60px" src="/static/images/fb_top.png" />
+            <img height="60px" src="/static/images/twitter_top.png" />
+            <img height="60px" src="/static/images/inst_top.png" />
+        </div>
+        -->
+        <div style="position: absolute; bottom: 100px;  height: 30px; background: #fff;"></div>
+</div>
+
+<hr />
+<div style="position: absolute; bottom: 10px; margin: 0; padding-left: 20px;">
+Скачать приложение:
+<a style="background:  url('/static/images/Apple.png')  left no-repeat; margin-left: 15px; padding-left: 30px ; background-size: 20px 20px;" > AppStore </a>
+<a style="background:  url('/static/images/Android.png') left no-repeat; margin-left: 15px; padding-left: 30px ; background-size: 20px 25px;" >Google Play</a>
+</div>
+<input type="text" size="30px" id="search_form"/>
+</section> <!-- end top menu -->
+</nav> <!-- End navigation -->
+
+
+
+
+</header>
+</div>
+   {% block content %}
+   {% endblock %}
+
+<footer >
+<div id="footer">
+    <ul style="padding-left: 20px;">
+        <li><a href="">О сервисе</a></li>
+        <li><a href=""> Информация об оплате</a></li>
+        <li><a href="">Обратная связь</a></li>
+        <li><a href="">Решение проблем</a></li>
+    </ul>
+    <ul style="line-height: 50%;">
+        <li class="enter"><a href="" >Вход</a></li>
+        <li><a href="">для пользователей</a></li>
+        <li><div style="height: 15px;"></div></li>
+        {% if ven_admin_logged_in  %}
+
+        {% else %}
+        <li class="enter"><a id="venueAdminLink" onclick="openDialog('#venueAdminDialog');" >Вход</a></li>
+        <li><a href="">для рестораторов</a></li>
+        {% endif %}
+    </ul>
+
+
+    <ul style="margin-left: 55px;">
+        <li>Скачать приложение:</li>
+        <li><a href=""><img src="/static/images/AppStore.png" /></a></li>
+        <li><a href=""><img src="/static/images/Google-Play.png" /></a></li>
+    </ul>
+    <ul>
+        <li>В социальных сетях:</li>
+        <li><img  style="padding-left:20px;" height="40px" src="/static/images/fb_top.png" /><img style="padding-left:10px;" height="40px" src="/static/images/inst_top.png" /></li>
+    </ul>
+</div>
+
+<span id="cr">© ООО "ЭниТейбл". Перепечатка возможна только с указанием ссылки на проект.</span>
+
+</footer>
+<div style="height: 100px;"></div>
+</div>
+<script >
+    function openDialog(targetDiv) {
+        $(targetDiv).dialog({
+		modal: true,
+		autoOpen: false,
+        closeOnEscape: true,
+        dialogClass: "no-close",
+        resizable: false,
+        open: function(){
+
+                jQuery('.ui-widget-overlay').bind('click',function(){
+                jQuery(targetDiv).dialog('close');
+                jQuery(targetDiv).val("");
+
+               })
+              }
+			});
+      };
+            jQuery("#targetLink").on("click", function() {
+			     var targetDiv;
+				 jQuery('#logIn').dialog("open");
+                 openDialog(targetDiv);
+		    });
+
+			jQuery("#targetLink2").on("click", function() {
+			     var targetDiv;
+                 jQuery('#register').dialog("open");
+                 openDialog(targetDiv);
+		    });
+			jQuery("#reserveTb").on("click", function() {
+			     var targetDiv;
+                 jQuery('#reserveTable').dialog("open");
+                 openDialog(targetDiv);
+		    });
+            jQuery("#venueAdminLink").on("click", function() {
+			     var targetDiv;
+				 jQuery('#venueAdminDialog').dialog("open");
+                openDialog(targetDiv);
+		    });
+function logInVenAd(){
+    var email = $('#ven_ad_email').val();
+    var password = $('#ven_ad_password').val();
+    url = '/query/admin/venueadministratorauth/';
+
+    $.ajax({
+        type: 'POST',
+                url: url,
+                data: 'email='+email+'&password='+password,
+                dataType: 'html',
+                success: function(response){
+
+                         window.location = '/venueadministrator/';
+
+                },
+                error:  function(){
+                    alert('wrong');
+                }
+
+
+    });
+}
+
+	</script><!-- end login, register forms -->
+</body>
+</html>
