@@ -1,0 +1,5 @@
+<ul style="list-style: none;">
+    {% for price in prices %}
+        <li id="price_i_{{ price.pk }}">{{ price.price_type }}: {{ price.price }}</li>
+    {% endfor %}
+</ul>
