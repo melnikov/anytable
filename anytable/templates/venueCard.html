@@ -9,7 +9,15 @@
 
         <script type="text/javascript" src="/static/js/jcarousel.connected-carousels.js"></script>
 <div style="">
-    <h1>{{ venue.name }}</h1>
+    <h1 style="font-size: 24px;">{{ venue.name }}</h1>
+    <div>
+       <ul style="list-style: none; font-weight: bold; margin-top: 10px;">
+            {% for type in types %}
+                 <li style=" float: left; margin-left:0px;  padding-left: 10px;  ">{{ type.name }} ,</li>
+            {% endfor %}
+    </ul>
+    </div>
+  <div class="cl"></div>
     <div >
 <div class="wrapper">
 
@@ -54,9 +62,37 @@
 </div>
 
 <!-- end Jcarousel -->
-    <br />
+    <div class="cl"></div>
+<br />
+<div style="font-size: 12px; ">
+<div >
 
-<div id="venueInfo">
+    <div>
+       <ul style="list-style: none; font-weight: bold; padding-left: 10px;">
+            {% for option in options %}
+                 <li style=" float: left; margin-left:10px;  padding-left: 20px;  background:url('/static/images/checked_bg_checked.png') left top no-repeat;">{{ option.name }}</li>
+            {% endfor %}
+    </ul>
+    </div>
+    <div style="clear: both; height: 25px;"></div>
+
+
+    <div>
+        <h2 style="float: left; font-size: 20px; line-height: 10px;">Кухня: </h2>
+    </div>
+    <div>
+       <ul style="list-style: none; font-weight: bold; padding-left: 10px;">
+            {% for kitchen in kitchens %}
+                 <li style=" float: left; margin-left:10px;  padding-left: 20px;  background:url('/static/images/checked_bg_checked.png') left top no-repeat;">{{ kitchen.name }}</li>
+            {% endfor %}
+       </ul>
+    </div>
+
+</div>
+
+</div>
+
+<div id="venueInfo" style="position: absolute; top: 200px; right: 200px;">
 	{{ venue.city }} ,{{ venue.address }} <a  id="mapLink" onclick="openMap('#map');" style="text-decoration: none">[map]</a>
     <br>
 
@@ -154,8 +190,6 @@
     <div id="venueMap" style="width:600px; height:300px;"></div>
 </div>
 
-
- {{ event.name }}
 Время работы: {{ venue.schedule }}<br>
 тел.: {{ venue.tel }}<br>
 (831) 413-82-32<br>
@@ -167,6 +201,12 @@ web: <a href="http://{{ venue.website }}" target="_blank">{{ venue.website }}</a
 {% if venue.facebook_url %}
     <a href="{{ venue.facebook_url }}">группа {{ venue.name }} в Facebook</a> <br>
 {% endif %}
+{% if venue.twitter %}
+    <a href="{{ venue.twitter }}">группа {{ venue.name }} в Twitter</a> <br>
+{% endif %}
+{% if venue.instagram %}
+    <a href="{{ venue.instagram }}">группа {{ venue.name }} в Instagram</a> <br>
+{% endif %}
 Загруженность:    <div id="sc_2_percent_red" style="margin-left: 10px; padding: 0px 10px 0px 10px;"> 90%</div>
 <a id="reserveTb" > &nbsp;</a>
 
@@ -177,22 +217,7 @@ web: <a href="http://{{ venue.website }}" target="_blank">{{ venue.website }}</a
     <div class="cl"></div>
 
 </div>
-<div style="font-size: 12px; ">
-<div >
-    <div>
-        <h2 style="float: left; font-size: 20px; line-height: 10px;">Кухня: </h2>
-    </div>
-    <div>
-       <ul style="list-style: none; font-weight: bold; padding-left: 10px;">
-            {% for kitchen in kitchens %}
-                 <li style=" float: left; margin-left:10px;  padding-left: 20px;  background:url('/static/images/checked_bg_checked.png') left top no-repeat;">{{ kitchen.name }}</li>
-            {% endfor %}
-    </ul>
-    </div>
-</div>
 
-
-</div>
 <div style="height: 20px; clear: both;"></div>
 <div id="description">{{ venue.description }}</div>
     <div style="height: 30px" class="cl"></div>
@@ -231,9 +256,22 @@ web: <a href="http://{{ venue.website }}" target="_blank">{{ venue.website }}</a
              <h1>{{ event.title }}</h1>
              <div class="event_description"> {{ event.description }}</div>
              <div style="line-height: 30px;">
-                 {% for event_price in event_prices %}
-                     <h2>{{ event_price.price_type }} :&nbsp;</h2>{{ event_price.price }}<br />
-                 {% endfor %}
+                 <div id="pricesDiv_{{ event.pk }}"></div>
+                  <script>
+             $(document).ready(function(){
+
+                 $.ajax({
+                    type: 'POST',
+                     url: '/event_prices/',
+                     data: 'event_id='+{{ event.pk }},
+                      dataType: 'html',
+                     success: function(response){
+                         $('#pricesDiv_{{ event.pk }}').html(response);
+                     }
+
+                 });
+             });
+         </script>
             <!--  <h2>Свободные столики:&nbsp;</h2> есть (уточнить) <div style="clear: both;"></div> -->
              <div class="iwanthere" onclick="order({{ event.pk }});"></div>
          </div>

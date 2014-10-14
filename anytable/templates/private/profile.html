@@ -270,6 +270,27 @@ label.checkbox :checked + span:before {
         });
 
         /*
+            Update Venue Work Regime
+         */
+        $('#workregime').on('focusout', function(){
+            var workregime = $('#workregime').val();
+            var venue_pk = $('#venue_pk_int').val();
+
+            url = '/query/admin/update_venue_workregime/';
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: "workregime="+workregime+"&venue="+venue_pk,
+            dataType:'html',
+            success: function(response){
+
+              $('<div id="hint"></div>').insertAfter('#workregime').delay(400).fadeOut();
+
+            }
+        });
+        });
+
+        /*
             Update Venue Website
          */
         $('#website').on('focusout', function(){
@@ -545,8 +566,6 @@ function hideShow(div){
     </script>
   <div>
 
-<script src="/static/js/jquery.fileupload.js"></script>
-
 <input type="hidden" id="venue_pk_int" value="{{ user.venue.pk }}">
     <div style="width: 612px;float: left;" >
       <div>
@@ -587,7 +606,7 @@ function hideShow(div){
 </div>
         <div class="cl"></div>
       </div>
-  <div style="float:  left; font-size: 14px; font-weight: bold;">Options:</div><br />
+  <div style="float:  left; font-size: 14px; font-weight: bold;"></div><br />
     <div id="div_venue_types" style="float:  left;margin-left: 20px;">
 
           {% for type in types %}

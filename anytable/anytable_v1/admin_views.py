@@ -188,6 +188,17 @@ def update_venue_email(request):
         return HttpResponse(message, mimetype="text/plain")
 
 @csrf_exempt
+def update_venue_workregime(request):
+    if request.method == 'POST':
+        venueid = request.POST['venue']
+        schedule = request.POST['workregime']
+        v = Venue.objects.get(pk = venueid)
+        v.schedule = schedule
+        v.save()
+        message = 'saved'
+        return HttpResponse(message, mimetype="text/plain")
+
+@csrf_exempt
 def updatevenuesite(request):
     if request.method == 'POST':
         venueid = request.POST['venue']

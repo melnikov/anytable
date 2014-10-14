@@ -11,9 +11,11 @@ import datetime
 
 def index(request):
     events = Event.objects.all()
+
     cities = City.objects.all()
     types = VenueType.objects.all()
     venues = Venue.objects.all()
+
     kitchens = VenueKitchen.objects.all()
     options = VenueOptions.objects.all()
     date_today = datetime.date.today()
@@ -54,11 +56,13 @@ def venueCard(request, id):
         latitude = list(latitude)
         #sevents = event.objects.filter(venue__pk = id).order_by('-date')[:4]
         sevents = Event.objects.filter(venue__pk = id).order_by('-event_date')
-        event_prices = EventPrice.objects.filter(event = sevents)
+
         svenueimages = Venueimage.objects.filter(venue__pk = id)
+        types = VenueType.objects.filter(venue__pk = id)
         kitchens = VenueKitchen.objects.filter(venue__pk = id)
+        options = VenueOptions.objects.filter(venue__pk = id)
         #svenueimage = venueimage.objects.filter(venue__pk = id)
-        context = Context({"venue":svenue, "events":sevents, "event_prices":event_prices, "request":request, "venueimages":svenueimages, "kitchens":kitchens, "latitude":latitude})
+        context = Context({"venue":svenue, "events":sevents, "options":options, "types":types, "request":request, "venueimages":svenueimages, "kitchens":kitchens, "latitude":latitude})
         return render_to_response('venueCard.html', context)
     else:
         return render_to_response('badRequest.html',)
@@ -125,8 +129,6 @@ def searchResult(request):
             message = 'neither venues nor events matched ur search'
             return render_to_response('searchResult.html', context_instance = RequestContext(request, { 'search_q': search_q, 'events':q2, 'city':city, 'message':message}))
 
-
-
     else:
         return render_to_response('badRequest.html',)
 
@@ -135,5 +137,12 @@ def searchResult(request):
         #ana = 'idk'
         #return render_to_response('searchResult.html', context_instance = RequestContext(request, {'a':ana,}))
 
-
+@csrf_exempt
+def event_prices(request):
+    if request.method == 'POST':
+        event_id = request.POST['event_id']
+        event = Event.objects.get(pk = event_id)
+        prices = EventPrice.objects.filter(event = event)
+        context = Context({"prices":prices, })
+        return render_to_response('eventPrices.html',context)
 

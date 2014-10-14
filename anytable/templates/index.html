@@ -181,7 +181,53 @@
 <section id="sc_1">
 <script type="text/javascript" src="/static/js/jquery.jcarousel.js"></script>
 <script type="text/javascript" src="/static/js/jcarousel.responsive.js"></script>
+<style>
+.ui-widget{
 
+}
+.ui-widget.event_widget{
+    width: 920px !important;
+    height: 420px !important;
+
+}
+.ui3 h1, h2{
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 30px;
+    text-indent: 0px;
+}
+.ui3 h2{
+    margin: 0px;
+    font-size: 16px;
+    float: left;
+}
+.ui3 img{
+    width: 300px;
+    height: 410px;
+    float: left;
+}
+.event_info{
+    position: relative;
+    width: 550px;
+    height: 410px;
+    float: right;
+    text-align: left;
+    color: #ff6633;
+}
+.event_description{
+    color: #000;
+    font-size: 14px;
+    text-indent: 40px;
+    text-align: justify;
+    margin-bottom: 30px;
+}
+.iwanthere{
+    width: 130px;
+    height: 51px;
+    background: url("/static/images/af_res_but.png") no-repeat;
+    float: right;
+}
+</style>
 <link rel="stylesheet" type="text/css" href="/static/css/jcarousel.responsive.css" />
             <div class="jcarousel-wrapper">
                 <div class="jcarousel"  style="width: 960px!important; margin: 0 auto;" >
@@ -193,9 +239,89 @@
                     <h1>{{ event.title }}</h1>
                     <div id="sc_1_item_caption">
                         <span id="sc_1_item_date">{{ event.event_date|date:'d-m-Y' }}</span>
-                        <a>QR</a>
+                        <a style="position: absolute; bottom: 5px; right: 10px; border-bottom: 1px dotted;">QR</a>
                     </div>
-                    <img src="/static/uploads/{{ event.image }}" />
+<a id="a{{ event.pk }}" onclick="openEvent('#div_{{ event.pk }}');"> <img  height="290px" src="/static/uploads/{{ event.image }}" /></a>
+         <div id="div_{{ event.pk }}" style="display: none;">
+         <script>
+             $(document).ready(function(){
+
+                 $.ajax({
+                    type: 'POST',
+                     url: '/event_prices/',
+                     data: 'event_id='+{{ event.pk }},
+                      dataType: 'html',
+                     success: function(response){
+                         $('#pricesDiv_{{ event.pk }}').html(response);
+                     }
+
+                 });
+             });
+         </script>
+         <img src="/static/uploads/{{ event.image }}"  width="220px" />
+         <div class="event_info">
+             <h1>{{ event.title }}</h1>
+             <div class="event_description"> {{ event.description }}</div>
+             <div style="line-height: 30px;">
+                <div id="pricesDiv_{{ event.pk }}"></div>
+            <!--  <h2>Свободные столики:&nbsp;</h2> есть (уточнить) <div style="clear: both;"></div> -->
+             <div class="iwanthere" onclick="order({{ event.pk }});"></div>
+         </div>
+<style>
+    .event_info{
+    position: relative;
+    width: 550px;
+    height: 410px;
+    float: right;
+    text-align: left;
+    color: #ff6633;
+}
+</style>
+<script>
+    function order(eventId){
+        alert('order now '+eventId);
+    }
+</script>
+        </div>
+
+
+                    </div>
+
+
+
+
+
+<script>
+    jQuery("#a{{ event.pk }}").on("click", function() {
+                var targetDiv = '#{{ event.pk }}';
+                jQuery('#div_{{ event.pk }}').dialog("open");
+                //openEvent(targetDiv);
+		    });
+function openEvent(targetDiv){
+ $(targetDiv).dialog({
+		modal: true,
+		autoOpen: false,
+        closeOnEscape: true,
+        dialogClass: "no-close",
+        dialogClass: "event_widget",
+        resizable: false,
+        before: function(event,ui){
+
+        },
+        open: function(event, ui){
+               jQuery('.ui-dialog-title').hide();
+                jQuery('.ui-dialog').addClass('ui-dialog-eventinfo');
+               jQuery('.ui-widget-overlay').bind('click',function(){
+                jQuery(targetDiv).dialog('close');
+                //jQuery(targetDiv).val("");
+
+               });
+
+              }
+			});
+                        }
+
+                    </script>
                 </div>
             </li>
             {% endfor %}
