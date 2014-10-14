@@ -5,6 +5,7 @@
 h1{
     font-size: 24px;
     margin-bottom: 20px;
+    font-weight: normal;
 }
 h2{
     font-size: 20px;
@@ -42,39 +43,301 @@ a#link{
     padding-left: 20px;
     background: url("/static/images/icon-address.png")  top left no-repeat;
 }
+.clr {
+    clear:both;
+}
+#src_01 {
+    float: left;
+    border: 0px;
+    width: 600px;
+    padding-left: 33px;
+    padding-right: 33px;
+    height: 41px;
+    background: url('/static/images/src_01.png') left top no-repeat;
+    color: #666666;
+    font-weight: bold;
+    font-size: 16px;
+}
+#src_00 {
+    margin-left: auto;
+    margin-right: auto;
+    width: 789px;
+}
+#src_02,
+#src_03 {
+    width: 40px;
+    float: left;height: 41px;
+
+}
+#src_02 {
+    background: url('/static/images/src_03.png') left top no-repeat;
+}
+#src_03 {
+    background: url('/static/images/src_04.png') left top no-repeat;
+}
+
+
+#src_05 {
+    float: left;
+    border: 0px;
+    width: 43px;
+    height: 41px;
+    background: url('/static/images/src_02.png') left top no-repeat;
+    cursor: pointer;
+}
+#src_10 {
+    width: 789px;
+    height: 8px;
+    margin-left: auto;
+    margin-right: auto;
+    background: url('/static/images/src_05.png') left top no-repeat;
+
+}
+#src_11 {
+    width: 789px;
+    height: 8px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 8px;
+}
+#search_prms {
+
+
+
+
+}
+#search_prms a {
+    margin-right: 20px;
+    text-decoration:none;
+    color: #cccccc;
+    font-size: 18px;
+    border-bottom: 1px dashed #ccc;
+}
+#src_city {
+    float: right;
+    margin-right: 40px;
+    text-align: right;
+
+
+}
+#src_city a {
+    font-size: 14px;
+    color: #ff6633;
+    text-decoration:none;
+    border-bottom: 1px dashed #ff6633;
+}
+
+#af_in {
+    background: url('/static/images/sc_2_bg.jpg') left top repeat;
+
+    padding-right: 25px;
+    width: 1001px;
+}
+.clr {
+    clear: both;
+}
+#af_in_top {
+    width: 1026px;
+    height: 8px;
+    background: url('/static/images/af_1.png') left top no-repeat;
+
+}
+#af_in_bottom {
+    width: 1026px;
+    height: 6px;
+    background: url('/static/images/af_2.png') left top no-repeat;
+
+}
+
+.ev_bl {
+    width: 225px;
+    margin-left: 25px;
+    float: left;
+
+}
+.ev_bl_header {
+    color: #ff6633;
+    font-size: 18px;
+}
+.ev_bl_date {
+    color: #ff6633;
+}
+
+#ven_bl {
+    width: 1090px;
+
+
+
+}
+.ven_i {
+    width: 300px;
+    float: left;
+    margin-right: 63px;
+    margin-bottom: 30px;
+
+}
+.ven_i_header {
+    font-size: 16px;
+    margin-bottom: 10px;
+    color: #333;
+    font-weight: bold;
+}
+.ven_i_img img,
+.ev_bl_cont img {
+    -webkit-box-shadow: -1px 2px 1px 0px rgba(50, 50, 50, 0.75);
+    -moz-box-shadow:    -1px 2px 1px 0px rgba(50, 50, 50, 0.75);
+    box-shadow:         -1px 2px 1px 0px rgba(50, 50, 50, 0.75);
+}
+
+
 </style>
 <div >
 {{ search_q }}
 </div>
-{% if events and venues %}
-   <h4>whats going on on <strong>{{ date|date:'d-m-Y' }}</strong> ?</h4>
-    <h1>Афиша</h1>
+    <div style="height: 30px;"></div>
+    <div style="width: 1026px;">
+        <div id="src_00">
+            <div id="src_02"></div>
+            <form action="/search/" method="post">
+            <input id="src_01" type="text" />
+            <input id="src_05" type="submit" value="" />
+            </form>
+            <div id="src_03"></div>
+            <div class="clr"></div>
+        </div>
+        <div id="src_10">
+        </div>
+        <div id="src_11">
+            <div id="src_city"><a href="#">Нижний Новгород</a></div>
+            <div class="clr"></div>
+        </div>
+    </div>
 
-    {% for event in events %}
-        <div >
-            <div style="float: left; width: 150px;">
-                <img src="/static/uploads/{{ event.image }}" width="150px" height="200px" style="float: left; margin-right: 20px;">
+    <div style="height:20px;"></div>
+    <div id="search_prms">
+        <a href="#">Ресторан</a>
+        <a href="#">Кафе</a>
+        <a href="#">Бар</a>
+        <a href="#">Паб</a>
+        <a href="#">Клуб</a>
+
+
+
+    </div>
+    <div style="height:20px;"></div>
+
+
+
+{% if events and venues %}
+    <!-- <h4>whats going on on <strong>{{ date|date:'d-m-Y' }}</strong> ?</h4> -->
+
+    <div style="height: 30px;"></div>
+    <div id="ven_bl">
+        <h1 style="padding-left: 25px;">Заведения</h1>
+        {% for venue in venues %}
+        <div class="ven_i">
+            <div class="ven_i_header" style="margin-bottom: 5px;">
+                {{ venue.name }}
+
             </div>
-            <div style=" position: relative; height: 200px; width: 850px; float: right; padding-left: 20px; text-align: justify;" >
-                <div >
-                    <h2>{{ event.title }}</h2>
-                    <div id="description" style="font-size: 14px;  text-indent: 15px;">
-                        {{ event.description }}
-                        <div style="height: 10px;"></div>
-                        <a id="link">перейти...</a>
-                    </div>
-                    <div class="address" style="position: absolute; left: 0px; bottom: 0px;">
-                        {{ event.venue.name }} | {{ event.event_date|date:'d-m-Y' }}
+                <div style="color: #666;font-size: 14px;">
+                    {{ venue.address }}
+
+                </div>
+            <div style="height: 10px"></div>
+            <div class="ven_i_img">
+                <a id="link" href="/venue/{{ venue.pk }}">
+                    <img src="/static/uploads/{{ venue.image }}" width="300px" height="200px">
+                </a>
+            </div>
+            <div>
+                <div style="float: right;color: #999;height: 25px;line-height: 25px;font-size: 14px;">
+                    свободных столиков
+                    <div style="height:25px;line-height: 25px;background: red;color: #fff;padding-left: 7px;padding-right: 7px;float: right;font-size: 12px;margin-left: 10px;">10%</div>
+                    <div class="clr"></div>
+                </div>
+
+                <div class="clr"></div>
+            </div>
+        </div>
+        {% endfor %}
+        <div class="clr"></div>
+    </div>
+
+
+
+
+
+
+
+
+
+    <div id="af_in_top"></div>
+    <div id="af_in">
+        <div style="height: 25px;"></div>
+        <h1 style="padding-left: 25px;">Афиша</h1>
+        {% for event in events %}
+            <div class="ev_bl">
+                <div class="ev_bl_header">{{ event.title }}</div>
+                <div style="height: 10px;"></div>
+                <div class="ev_bl_cont"><img src="/static/uploads/{{ event.image }}" width="225px" height="300px"></div>
+                <div class="ev_bl_date">{{ event.event_date|date:'d-m-Y' }}</div>
+                <div class="clr"></div>
+            </div>
+        {% endfor %}
+        <div class="clr"></div>
+        <div style="height: 25px;"></div>
+    </div>
+    <div id="af_in_bottom"></div>
+    <div style="height: 30px"></div>
+
+
+
+
+
+
+<!--
+        {% for event in events %}
+            <div>
+                <div style="float: left; width: 150px;">
+                    <img src="/static/uploads/{{ event.image }}" width="150px" height="200px" style="float: left; margin-right: 20px;">
+                </div>
+                <div style=" position: relative; height: 200px; width: 850px; float: right; padding-left: 20px; text-align: justify;" >
+                    <div >
+                        <h2>{{ event.title }}</h2>
+                        <div id="description" style="font-size: 14px;  text-indent: 15px;">
+                            {{ event.description }}
+                            <div style="height: 10px;"></div>
+                            <a id="link">перейти...</a>
+                        </div>
+                        <div class="address" style="position: absolute; left: 0px; bottom: 0px;">
+                            {{ event.venue.name }} | {{ event.event_date|date:'d-m-Y' }}
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div style="clear: both; height: 30px;"></div>
+            <div style="clear: both; height: 30px;"></div>
+        {% endfor %}
+-->
 
-    {% endfor %}
-    <hr>
-       <h3>{{ message }}</h3>
-      <h1>Venues</h1>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <!-- <h3>{{ message }}</h3> -->
+<!--
         {% for venue in venues %}
         <div >
             <div style="float: left; width: 150px;">
@@ -96,8 +359,11 @@ a#link{
         <div style="clear: both; height: 30px;"></div>
         {% endfor %}
 
-{% elif venues %}
+-->
 
+
+{% elif venues %}
+<!--
        <h3>{{ message }}</h3>
 
     <h1>Venues</h1>
@@ -127,6 +393,40 @@ a#link{
         <div style="clear: both; height: 30px;"></div>
 
     {% endfor %}
+    -->
+    <div style="height: 30px;"></div>
+    <div id="ven_bl">
+        <h1 style="padding-left: 25px;">Заведения</h1>
+        {% for venue in venues %}
+        <div class="ven_i">
+            <div class="ven_i_header" style="margin-bottom: 5px;">
+                {{ venue.name }}
+
+            </div>
+                <div style="color: #666;font-size: 14px;">
+                    {{ venue.address }}
+
+                </div>
+            <div style="height: 10px"></div>
+            <div class="ven_i_img">
+                <a id="link" href="/venue/{{ venue.pk }}">
+                    <img src="/static/uploads/{{ venue.image }}" width="300px" height="200px">
+                </a>
+            </div>
+            <div>
+                <div style="float: right;color: #999;height: 25px;line-height: 25px;font-size: 14px;">
+                    свободных столиков
+                    <div style="height:25px;line-height: 25px;background: red;color: #fff;padding-left: 7px;padding-right: 7px;float: right;font-size: 12px;margin-left: 10px;">10%</div>
+                    <div class="clr"></div>
+                </div>
+
+                <div class="clr"></div>
+            </div>
+        </div>
+        {% endfor %}
+        <div class="clr"></div>
+    </div>
+
 {% else %}
 
        <h3>{{ message }}</h3>
