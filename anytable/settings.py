@@ -97,7 +97,7 @@ TEMPLATE_DIRS = (
 )
 
 MEDIA_ROOT = os.path.join(BASE_DIR,'static/uploads')
-ADMIN_MEDIA_PREFIX = '/static/admin/'
+#ADMIN_MEDIA_PREFIX = '/static/admin/'
 MEDIA_URL = '/static/uploads/'
 from easy_thumbnails.conf import Settings as thumbnail_settings
 THUMBNAIL_PROCESSORS = (
