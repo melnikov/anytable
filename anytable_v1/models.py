@@ -162,8 +162,24 @@ class VenueAdministrator(models.Model):
         return super(VenueAdministrator,self).save(force_insert, force_update, using,
              update_fields)
 
+class Customer(models.Model):
+    name = models.CharField(max_length=1024, blank=False, null=False, verbose_name= 'Name')
+    image = models.ImageField(upload_to='images', blank=True, null=True)
+    email =models.EmailField(max_length=254, blank= False, null= False, verbose_name="E-Mail", unique=True)
+    password = models.CharField(max_length=1024, blank= False, null= False, verbose_name="Password")
+    phone = models.CharField(max_length=254, blank=True, null=True, verbose_name="Phone")
+    facebook = models.CharField(max_length=1024, blank=True, verbose_name="facebook")
+    twitter = models.CharField(max_length=1024, blank=True, verbose_name="twitter")
+    instagram = models.CharField(max_length=1024, blank=True, verbose_name="instagram")
+    vk = models.CharField(max_length=1024, blank=True, verbose_name="vk")
+    active = models.NullBooleanField(blank=True, null= True, )
 
+    def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
 
+        self.password = computeMD5hash(self.password)
+
+        return super(Customer,self).save(force_insert, force_update, using,
+             update_fields)
 
 class Document(models.Model):
     title = models.CharField(max_length=25, blank=True, null=True)

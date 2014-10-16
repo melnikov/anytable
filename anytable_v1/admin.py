@@ -62,6 +62,9 @@ class VenueAdministratorPanel(admin.ModelAdmin):
     #exclude = ["password", ]
     list_display = ("email", "password", )
 
+class CustomerAdmin(admin.ModelAdmin):
+    list_display = ("name", "email", )
+
 class DocumentsAdmin(ImageCroppingMixin, admin.ModelAdmin):
     list_display = (  "thumbnail", "title",)
     admin_thumbnail = AdminThumbnail(image_field='thumbnail')
@@ -84,5 +87,6 @@ admin.site.register(VenueAdministrator, VenueAdministratorPanel)
 admin.site.register(Document, DocumentsAdmin)
 admin.site.register(Folder, FolderAdmin)
 admin.site.register(PriceType, PriceTypeAdmin)
+admin.site.register(Customer, CustomerAdmin)
 
 

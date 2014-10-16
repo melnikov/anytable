@@ -1,0 +1,235 @@
+{% extends "layout_inner.html" %}
+{% block content %}
+<style>
+
+#ml {
+    margin-left: 50px;
+    float: left;
+    width: 175px;
+}
+#mr {
+    float: right;
+}
+#mr_h {
+    color: #ff6633;
+    font-size: 20px;
+}
+.mr_line {
+    margin-bottom: 10px;
+    text-align: right;
+    color: #666666;
+    height: 25px;
+    line-height: 25px;
+}
+.mr_line a {
+    color: #666;
+}
+#pr_ico_1 {
+    display: block;
+    width: 25px;
+    height: 25px;
+    background: url('/static/images/pr_ico_1.png') left top no-repeat;
+    float: right;
+    margin-left: 20px;
+}
+#pr_ico_2 {
+    display: block;
+    width: 25px;
+    height: 25px;
+    background: url('/static/images/pr_ico_2.png') left top no-repeat;
+    float: right;
+    margin-left: 20px;
+}
+#pr_ico_3 {
+    display: block;
+    width: 25px;
+    height: 25px;
+    background: url('/static/images/pr_ico_3.png') left top no-repeat;
+    float: right;
+    margin-left: 20px;
+}
+#or_h {
+    background: #ff6633;
+    color: #fff;
+    height: 44px;
+    line-height: 44px;
+}
+.or_h_i {
+    float: left;
+    text-align: center;
+    min-width: 170px;
+}
+#or_h_links {
+    height: 44px;
+    line-height: 44px;
+    text-align: right;
+}
+#or_h_links a {
+    margin-left: 30px;
+    color: #666;
+    text-decoration: none;
+}
+#or_h_links a.active {
+    font-weight: bold;
+}
+#pr_btn_1 {
+    height: 32px;
+    float: left;
+    margin-right: 27px;
+    width: 239px;
+    background: url('/static/images/pr_btn_1.png') left top no-repeat;
+}
+#pr_btn_2 {
+    height: 32px;
+    float: left;
+    margin-right: 27px;
+    width: 266px;
+    background: url('/static/images/pr_btn_2.png') left top no-repeat;
+}
+#pr_btn_3 {
+    height: 32px;
+    float: left;
+    margin-right: 29px;
+    width: 125px;
+    background: url('/static/images/pr_btn_3.png') left top no-repeat;
+}
+#pr_btn_4 {
+    height: 32px;
+    float: left;
+    width: 311px;
+    background: url('/static/images/pr_btn_4.png') left top no-repeat;
+}
+.or_l {
+    border-bottom: 1px dashed #ccc;
+}
+.or_l_i {
+    float: left;
+    text-align: center;
+    min-width: 170px;
+    min-height: 32px;
+    line-height: 32px;
+    color: #666;
+}
+#ava_img_in {
+    width: 175px;
+    height: 175px;
+    overflow: hidden;
+    position: relative;
+}
+#ava_img_in_on {
+    position: absolute;
+    width: 175px;
+    height: 176px;
+    background: url('/static/images/ava_img_on.png') left top no-repeat;
+    z-index: 10;
+    left: 0px;
+    top: 0px;
+}
+.clr {
+    clear: both;
+}
+
+
+
+
+
+</style>
+
+
+
+
+
+
+
+    <div style="height: 30px;"></div>
+
+    <div>
+        <div id="ml">
+            <div id="ava_img_in">
+                <img src="/static/images/sc_2_img_3.jpg" width="175" height="175" />
+                <div id="ava_img_in_on"></div>
+                <div class="clr"></div>
+            </div>
+            <div style="text-align: center;"><a href="#" style="color: #ccc;text-decoration: none; border-bottom: 1px solid #ccc;">изменить</a></div>
+        </div>
+
+        <div id="mr">
+            <div class="mr_line" id="mr_h">User Name</div>
+            <div class="mr_line"><span style="font-size: 12px;">сот.</span> +7 (920) 000-12-12 <span style="font-size: 12px;">( <a href="#" style="text-decoration: none;border-bottom: 1px solid #666;">изменить</a> )</span></div>
+            <div class="mr_line"><span style="font-size: 12px;">e-mail:</span> dsadsa@gmail.com <span style="font-size: 12px;">( <a href="#" style="text-decoration: none;border-bottom: 1px solid #666;">изменить</a> )</span></div>
+            <div class="mr_line"> <a href="#" style="font-size: 12px;text-decoration: none;border-bottom: 1px solid #666;">связать</a><a href="#" id="pr_ico_1"></a> <div class="clr"></div></div>
+            <div class="mr_line"> <a href="#" style="font-size: 12px;text-decoration: none; border-bottom: 1px solid #666;">связать</a><a href="#" id="pr_ico_2"></a> <div class="clr"></div></div>
+            <div class="mr_line"> <a href="#" style="font-size: 12px;text-decoration: none; border-bottom: 1px solid #666;">связать</a><a href="#" id="pr_ico_3"></a> <div class="clr"></div></div>
+        </div>
+        <div class="clr"></div>
+    </div>
+
+    <div style="height: 30px"></div>
+    <div id="or_h_links">
+        <a href="#" class="active">Все брони</a>
+        <a href="#">Активные брони</a>
+        <a href="#">Закрытые брони</a>
+        <a href="#">Отмененные брони</a>
+    </div>
+    <div>
+        <div id="or_h">
+            <div class="or_h_i">Статус</div>
+            <div class="or_h_i">Номер заказа</div>
+            <div class="or_h_i">Дата / время</div>
+            <div class="or_h_i">Заведение</div>
+            <div class="or_h_i">Кол-во гостей</div>
+            <div class="or_h_i">Сумма</div>
+
+            <div class="clr"></div>
+        </div>
+
+
+
+        <div class="or_l">
+            <div class="or_l_i">1</div>
+            <div class="or_l_i">2</div>
+            <div class="or_l_i">3</div>
+            <div class="or_l_i">4</div>
+            <div class="or_l_i">5</div>
+            <div class="or_l_i">6</div>
+            <div class="clr"></div>
+        </div>
+
+
+        <div class="or_l">
+            <div class="or_l_i">1</div>
+            <div class="or_l_i">2</div>
+            <div class="or_l_i">3</div>
+            <div class="or_l_i">4</div>
+            <div class="or_l_i">5</div>
+            <div class="or_l_i">6</div>
+            <div class="clr"></div>
+        </div>
+
+        <div class="or_l">
+            <div class="or_l_i">1</div>
+            <div class="or_l_i">2</div>
+            <div class="or_l_i">3</div>
+            <div class="or_l_i">4</div>
+            <div class="or_l_i">5</div>
+            <div class="or_l_i">6</div>
+            <div class="clr"></div>
+        </div>
+
+
+
+        <div class="clr"></div>
+    </div>
+    <div style="height: 30px;"></div>
+    <div style="height: 32px;">
+        <a href="#" id="pr_btn_1"></a>
+        <a href="#" id="pr_btn_2"></a>
+        <a href="#" id="pr_btn_3"></a>
+        <a href="#" id="pr_btn_4"></a>
+
+        <div class="clr"></div>
+    </div>
+
+
+    <div style="height: 30px;"></div>
+{% endblock %}

@@ -43,6 +43,9 @@ urlpatterns = patterns('',
      url(r'^query/admin/update_event_price/', 'anytable_v1.admin_views.update_event_price', name= 'Update Event Price'),
      url(r'^query/admin/refresh_event_prices/', 'anytable_v1.admin_views.refresh_event_prices', name= 'Refresh Event Price'),
      url(r'^query/admin/delete_event_price/', 'anytable_v1.admin_views.delete_event_price', name= 'Delete Event Price'),
+## Customers
+     url(r'^customer/profile/', 'anytable_v1.customer_views.profile', name= 'Customer profile'),
+     url(r'^customer/register/', 'anytable_v1.customer_views.register', name= 'Customer register'),
 
 ##Non-Admin
      url(r'^$','anytable_v1.views.index',name='index'),
