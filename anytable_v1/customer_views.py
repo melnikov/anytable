@@ -12,6 +12,7 @@ import _md5
 import hashlib
 from django.contrib.auth import authenticate, login
 
+
 @csrf_exempt
 def register(request):
     name = request.POST['name']
@@ -19,12 +20,34 @@ def register(request):
     pwd = request.POST['pwd']
     new_account = Customer.objects.create(name = name, email = email, password = pwd)
     new_account.save()
-    try:
-        return HttpResponse('success!')
+    request.session['customer_id']= new_account.id
 
-    except KeyError:
-        pass
-    return HttpResponse("something went wrong!")
+    return HttpResponse("done")
 
 def profile(request):
-    return render_to_response('private/customerProfile.html',)
+
+        customer_id = request.session['customer_id']
+        customer = Customer.objects.get(pk = customer_id)
+
+        context = Context({"customer":customer, })
+
+        return render_to_response('private/customerProfile.html', context)
+
+
+
+
+
+@csrf_exempt
+def customer_auth(request):
+    if request.method == 'POST':
+        email = request.POST['email']
+        email = email.lower()
+        password = request.POST['pwd']
+        password = computeMD5hash(password)
+       #try:
+        the_customer = Customer.objects.get(email = email, password = password)
+
+        #if customer is not None:
+        #return HttpResponse('done', mimetype='text/plain')
+        #else:
+        return HttpResponse(email, mimetype='text/plain')

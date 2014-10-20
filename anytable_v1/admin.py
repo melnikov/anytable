@@ -52,9 +52,6 @@ class subscriberAdmin(admin.ModelAdmin):
 class typeAdmin(admin.ModelAdmin):
     list_display = ("name", )
 
-class costumorAdmin(admin.ModelAdmin):
-    list_display = ("name", "email", "telephone", "city", )
-
 class PriceTypeAdmin(admin.ModelAdmin):
     list_display = ('name',)
 
@@ -63,7 +60,7 @@ class VenueAdministratorPanel(admin.ModelAdmin):
     list_display = ("email", "password", )
 
 class CustomerAdmin(admin.ModelAdmin):
-    list_display = ("name", "email", )
+    list_display = ("name", "email", "password")
 
 class DocumentsAdmin(ImageCroppingMixin, admin.ModelAdmin):
     list_display = (  "thumbnail", "title",)
@@ -78,7 +75,7 @@ admin.site.register(VenueKitchen,venueKitchenAdmin)
 admin.site.register(TestUsers,testUsersAdmin)
 admin.site.register(Subscriber, subscriberAdmin)
 admin.site.register(VenueType, typeAdmin)
-admin.site.register(User, costumorAdmin)
+
 admin.site.register(Venue, venueAdmin)
 admin.site.register(Event, eventAdmin)
 admin.site.register(Region, regionAdmin)

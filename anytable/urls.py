@@ -46,6 +46,7 @@ urlpatterns = patterns('',
 ## Customers
      url(r'^customer/profile/', 'anytable_v1.customer_views.profile', name= 'Customer profile'),
      url(r'^customer/register/', 'anytable_v1.customer_views.register', name= 'Customer register'),
+     url(r'^customer/customer_auth/', 'anytable_v1.customer_views.customer_auth', name= 'Customer Authentication'),
 
 ##Non-Admin
      url(r'^$','anytable_v1.views.index',name='index'),

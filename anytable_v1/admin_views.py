@@ -28,6 +28,7 @@ def ven_admin_logout(request):
 def venueadministratorauth(request):
     if request.method == 'POST':
         email = request.POST['email']
+        email = email.lower()
         password = request.POST['password']
         password = computeMD5hash(password)
         try:

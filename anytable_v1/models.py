@@ -178,8 +178,7 @@ class Customer(models.Model):
 
         self.password = computeMD5hash(self.password)
 
-        return super(Customer,self).save(force_insert, force_update, using,
-             update_fields)
+        return super(Customer,self).save(force_insert, force_update, using, update_fields)
 
 class Document(models.Model):
     title = models.CharField(max_length=25, blank=True, null=True)
