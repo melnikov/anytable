@@ -14,6 +14,7 @@
   </li>
 </ul>
 <script src="static/js/carousel.js"></script> <!-- end carousel -->
+<script src="/static/js/register.js"></script>
 
 
 <nav id="nav">
@@ -70,21 +71,7 @@
 
 <section id="top_menu">
     <script>
-        function register(){
-            var name = $('#name').val();
-            var email = $('#email').val();
-            var pwd = $('#pwd').val();
-             $.ajax({
-                     type: 'POST',
-                     url: '/customer/register/',
-                     data: 'name='+name+'&email='+email+'&pwd='+pwd,
-                     dataType: 'html',
-                     success: function(email, pwd){
-                                 window.location = '/customer/profile/';
 
-                     }
-                 });
-        }
     </script>
 <div style="height: 25px; padding-left: 20px;">
 <a  href="" class="city">Нижний Новгород</a>
