@@ -35,8 +35,6 @@ def profile(request):
 
 
 
-
-
 @csrf_exempt
 def customer_auth(request):
     if request.method == 'POST':

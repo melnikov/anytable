@@ -9,7 +9,7 @@
     <script type="text/javascript" src="/static/js/timepicker.js"></script>
 
 <script type="text/javascript" src="/static/js/jquery.jcarousel.js"></script>
-
+<script src="/static/js/register.js"></script>
 <script>
   $(function() {
     $( "#datepicker" ).datepicker();
@@ -90,9 +90,9 @@
 
 <div id="register" title="Регистрация" style="display:  none;">
        <div style="width: 250px; float: left;">
-        <input type="text" placeholder="ФАМИЛИЯ" />
-        <input type="text" placeholder="E-MAIL" />
-        <input type="password" placeholder="ПАРОЛЬ" />
+        <input type="text"  id="name" placeholder="ФАМИЛИЯ" />
+        <input type="text"  id="email" placeholder="E-MAIL" />
+        <input type="password"  id="pwd" placeholder="ПАРОЛЬ" />
         <input type="password" placeholder="ПОВТОРИТЕ ПАРОЛЬ" />
         <input type="text" placeholder="СОТОВЫЙ ТЕЛЕФОН" />
         <input type="text" placeholder="ВАШ ГОРОД" />
@@ -107,7 +107,7 @@
         <input type="text" style="position: absolute; bottom: 0; left: 0; width: 190px; background: none;" placeholder="ПРОВЕРОЧНЫЙ КОД"/>
        </div>
         <div class="cl"></div>
-        <input type="button"  value="ЗАРЕГИСТРИРОВАТЬСЯ"/>
+        <input type="button"  value="ЗАРЕГИСТРИРОВАТЬСЯ"  onclick="register();" />
 </div>
 <div id="venueAdminDialog" title="ВХОД" style="display: none;">
         <input type="text" placeholder="E-MAIL" name="email" id="ven_ad_email"/>
