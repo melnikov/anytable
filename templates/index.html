@@ -15,7 +15,7 @@
 </ul>
 <script src="static/js/carousel.js"></script> <!-- end carousel -->
 <script src="/static/js/register.js"></script>
-
+<script src="/static/js/login.js"></script>
 
 <nav id="nav">
 
@@ -85,11 +85,11 @@
     }
 </style>
 <div id="logIn" title="ВХОД" style="display: none;">
-        <input type="text" placeholder="E-MAIL" />
-        <input type="password" placeholder="ПАРОЛЬ" />
+        <input type="text" id="lGeM" placeholder="E-MAIL" />
+        <input type="password" id="lGpS" placeholder="ПАРОЛЬ" />
         <div class="cl" style="height: 30px;"></div>
         <a href="">ОЙ, Я ЗАБЫЛ ПАРОЛЬ!</a><br />
-        <input type="button"  value="ВОЙТИ"/><br />
+        <input type="button"  value="ВОЙТИ" onclick="login();" /><br />
         Войти через социальные сети:<br />
         <div style=" width: 100%; margin:0 auto; margin-top: 15px ;  ">
             <img height="60px" src="static/images/fb_top.png" />

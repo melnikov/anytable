@@ -18,11 +18,24 @@ def register(request):
     name = request.POST['name']
     email = request.POST['email']
     pwd = request.POST['pwd']
-    new_account = Customer.objects.create(name = name, email = email, password = pwd)
-    new_account.save()
+    #pwd = '123'
+    new_account = Customer.objects.create(name = name, email = email, password= pwd)
+    #new_account.save()
     request.session['customer_id']= new_account.id
 
     return HttpResponse("done")
+
+@csrf_exempt
+def login(request):
+    email = request.POST['email']
+    pwd = request.POST['pwd']
+    pwd = computeMD5hash(pwd)
+    customer = Customer.objects.get(email = email, password = pwd)
+    if customer:
+        request.session['customer_id']= customer.id
+        return HttpResponse("done")
+    else:
+        return HttpResponse('user doesn\'t exist')
 
 def profile(request):
 
