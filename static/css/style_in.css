@@ -6,6 +6,9 @@
   height: auto !important;
   background: none !important;
 }
+.er_missing_input{
+    background: lightyellow !important;
+}
 .gal {
   width: 918px;
   margin-left: auto;

@@ -9,10 +9,7 @@
                      success: function(email, pwd){
                                  window.location = '/customer/profile/';
 
-                     },
-                     error: function(response){
-                        // console.log(response)
-                         alert(response)
                      }
+
                  });
         }

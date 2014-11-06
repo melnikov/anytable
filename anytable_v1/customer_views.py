@@ -15,15 +15,25 @@ from django.contrib.auth import authenticate, login
 
 @csrf_exempt
 def register(request):
-    name = request.POST['name']
-    email = request.POST['email']
-    pwd = request.POST['pwd']
-    #pwd = '123'
-    new_account = Customer.objects.create(name = name, email = email, password= pwd)
-    #new_account.save()
-    request.session['customer_id']= new_account.id
+    if request.method == 'POST':
+        name = request.POST['name']
+        email = request.POST['email']
+        pwd = request.POST['pwd']
+        if len(name) == 0:
+            return HttpResponse('name', mimetype='text/plain')
+        elif len(email) == 0:
+            return HttpResponse('email', mimetype='text/plain')
+        elif len(pwd) == 0:
+            return HttpResponse('pwd', mimetype='text/plain')
+        else:
+            #pwd = '123'
+            new_account = Customer.objects.create(name = name, email = email, password= pwd)
+            #new_account.save()
+            request.session['customer_id']= new_account.id
+            return HttpResponse("done", mimetype='text/plain')
+    else:
+        return render_to_response('badRequest.html', )
 
-    return HttpResponse("done")
 
 @csrf_exempt
 def login(request):
@@ -38,7 +48,6 @@ def login(request):
         return HttpResponse('user doesn\'t exist')
 
 def profile(request):
-
         try:
             customer_id = request.session['customer_id']
             customer = Customer.objects.get(pk = customer_id)
@@ -46,8 +55,6 @@ def profile(request):
             return render_to_response('private/customerProfile.html', context)
         except :
             return render_to_response('badRequest.html', )
-
-
 
 @csrf_exempt
 def customer_auth(request):
