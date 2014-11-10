@@ -8,7 +8,6 @@ function register(){
         $('#pwd_c').after('<span class="">Passwords do not match.</span>')
 
     }
-
              $.ajax({
                      type: 'POST',
                      url: '/customer/register/',
@@ -19,12 +18,11 @@ function register(){
                          //var response = response.val();
 
                          if(response != 'done'){
-                              $('<div style="background:red!important; font-size: 8px; width:262px;" >Please complete the field</div>').insertBefore('#'+response+'').fadeOut().fadeIn().fadeOut();
+                              $('<div style="margin:0px!important; padding:0px!important; background:red!important; font-size: 8px; width:262px;" >Please complete the field</div>').insertBefore('#'+response+'').fadeOut().fadeIn().fadeOut();
                              $('#'+response+'').addClass('er_missing_input').delay('1000').queue(function(){
                                  $(this).removeClass('er_missing_input');
                                  $(this).dequeue();
                              });
-                            // $('<div style="background:red!important; font-size: 8px; " >Please complete the field</div>').insertAfter('#'+response+'').fadeOut().fadeIn().fadeOut();
 
                          }
                      },

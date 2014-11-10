@@ -52,7 +52,7 @@ def profile(request):
             customer_id = request.session['customer_id']
             customer = Customer.objects.get(pk = customer_id)
             context = Context({"customer":customer, })
-            return render_to_response('private/customerProfile.html', context)
+            return render_to_response('private/cusProfile.html', context)
         except :
             return render_to_response('badRequest.html', )
 

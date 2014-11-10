@@ -20,7 +20,7 @@ h1{
     font-size: 17px;
 }
 .er_missing_input{
-    background: lightyellow !important;
+    background: yellow !important;
 }
 #main{
     width: 1024px;
