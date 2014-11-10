@@ -140,14 +140,17 @@
                 <div id="ava_img_in_on"></div>
                 <div class="clr"></div>
             </div>
+
             <div style="text-align: center;"><a href="#" style="color: #ccc;text-decoration: none; border-bottom: 1px solid #ccc;">изменить</a></div>
         </div>
 
         <div id="mr">
+
             <div class="mr_line" id="mr_h">{{ customer.name }}</div>
-            <div class="mr_line"><span style="font-size: 12px;">сот.</span> {{ customer.phone }} <span style="font-size: 12px;">( <a href="#" style="text-decoration: none;border-bottom: 1px solid #666;">изменить</a> )</span></div>
-            <div class="mr_line"><span style="font-size: 12px;">e-mail:</span> {{ customer.email }} <span style="font-size: 12px;">( <a href="#" style="text-decoration: none;border-bottom: 1px solid #666;">изменить</a> )</span></div>
-            <div class="mr_line"> <a href="#" style="font-size: 12px;text-decoration: none;border-bottom: 1px solid #666;">связать</a><a href="{% if customer.facebook %} {{ customer.facebook }} {% endif%} " id="pr_ico_1"></a> <div class="clr"></div></div>
+           <div style="font-size: 12px;">Тел.:<input id= "phone" type="textfield"  value="{{ customer.phone }}" style="padding-left: 5px; border: 0px;border-bottom: 1px solid #000;font-size: 12px;color: #ff6633;" /></div>
+           <div style="font-size: 12px;">e-mail:<input id="email" type="textfield"  value="{{ customer.email }}" style="padding-left: 5px; border: 0px;border-bottom: 1px solid #000;font-size: 12px;color: #ff6633;" /></div>
+
+            <div class="mr_line"><a href="{% if customer.facebook %} {{ customer.facebook }} {% endif%} " id="pr_ico_1"></a> <input type="textfield" id="facebook" value="{{ user.venue.facebook_url }}" style="border: 0px;border-bottom: 1px solid #999999;font-size: 18px;margin-left:10px;color: #999;" /><div class="clr"></div></div>
             <div class="mr_line"> <a href="#" style="font-size: 12px;text-decoration: none; border-bottom: 1px solid #666;">связать</a><a href="{% if customer.twitter %} {{ customer.twitter }} {% endif%}" id="pr_ico_2"></a> <div class="clr"></div></div>
             <div class="mr_line"> <a href="#" style="font-size: 12px;text-decoration: none; border-bottom: 1px solid #666;">связать</a><a href="{% if customer.instagram %} {{ customer.instagram }} {% endif%}" id="pr_ico_3"></a> <div class="clr"></div></div>
         </div>
