@@ -164,6 +164,9 @@
 
                   alert(vk);
                });
+        $('#cusLogout').on('click', function(){
+                alert('b');
+        });
              });
     </script>
     <div style="height: 30px;"></div>
@@ -195,6 +198,7 @@
         <div style="clear: both;"></div>
         {% if customer.vk %}  <div style="font-size: 12px; float: right; margin-bottom: 10px;">ВКонтакте:<input id="vk" type="textfield"  value="{{ customer.vk }}" style="padding-left: 5px; border: 0px;border-bottom: 1px dashed #000;font-size: 12px;color: #666666;" /></div>{% endif%}
         <div style="clear: both;"></div>
+        <div style="margin-top: 25px; float: right;"><a id="cusLogout"><img src="/static/images/logout_180x45.png"></a> </div>
 
         </div>
         <div class="clr"></div>
