@@ -1,5 +1,6 @@
 {% extends "layout_inner.html" %}
 {% block content %}
+
 <style>
 
 #ml {
@@ -130,7 +131,7 @@
 }
 
 </style>
-
+    <script src="cusProfile.js"></script>
     <div style="height: 30px;"></div>
 
     <div>
@@ -147,12 +148,15 @@
         <div id="mr">
 
             <div class="mr_line" id="mr_h">{{ customer.name }}</div>
-           <div style="font-size: 12px;">Тел.:<input id= "phone" type="textfield"  value="{{ customer.phone }}" style="padding-left: 5px; border: 0px;border-bottom: 1px solid #000;font-size: 12px;color: #ff6633;" /></div>
-           <div style="font-size: 12px;">e-mail:<input id="email" type="textfield"  value="{{ customer.email }}" style="padding-left: 5px; border: 0px;border-bottom: 1px solid #000;font-size: 12px;color: #ff6633;" /></div>
+           <div style="font-size: 12px;">Тел.:<input id= "phone" type="textfield"  value="{{ customer.phone }}" style="padding-left: 5px; border: 0px;border-bottom: 1px dashed #000;font-size: 12px;color: #ff6633;" /></div>
+           <div style="font-size: 12px;">e-mail:<input id="email" type="textfield"  value="{{ customer.email }}" style="padding-left: 5px; border: 0px;border-bottom: 1px dashed #000;font-size: 12px;color: #ff6633;" /></div>
+        <div style="height: 10px;"></div>
+        {% if customer.facebook %}  <div style="font-size: 12px;">facebook:<input id="facebook" type="textfield"  value="{{ customer.facebook }}" style="padding-left: 5px; border: 0px;border-bottom: 1px dashed #000;font-size: 12px;color: #666666;" /></div>{% endif%}
+        {% if customer.instagram %}  <div style="font-size: 12px;">Instagram:<input id="instagram" type="textfield"  value="{{ customer.instagram }}" style="padding-left: 5px; border: 0px;border-bottom: 1px dashed #000;font-size: 12px;color: #666666;" /></div>{% endif%}
+        {% if customer.twitter %}  <div style="font-size: 12px;">twitter:<input id="twitter" type="textfield"  value="{{ customer.twitter }}" style="padding-left: 5px; border: 0px;border-bottom: 1px dashed #000;font-size: 12px;color: #666666;" /></div>{% endif%}
+        {% if customer.vk %}  <div style="font-size: 12px;">vk:<input id="vk" type="textfield"  value="{{ customer.vk }}" style="padding-left: 5px; border: 0px;border-bottom: 1px dashed #000;font-size: 12px;color: #666666;" /></div>{% endif%}
 
-            <div class="mr_line"><a href="{% if customer.facebook %} {{ customer.facebook }} {% endif%} " id="pr_ico_1"></a> <input type="textfield" id="facebook" value="{{ user.venue.facebook_url }}" style="border: 0px;border-bottom: 1px solid #999999;font-size: 18px;margin-left:10px;color: #999;" /><div class="clr"></div></div>
-            <div class="mr_line"> <a href="#" style="font-size: 12px;text-decoration: none; border-bottom: 1px solid #666;">связать</a><a href="{% if customer.twitter %} {{ customer.twitter }} {% endif%}" id="pr_ico_2"></a> <div class="clr"></div></div>
-            <div class="mr_line"> <a href="#" style="font-size: 12px;text-decoration: none; border-bottom: 1px solid #666;">связать</a><a href="{% if customer.instagram %} {{ customer.instagram }} {% endif%}" id="pr_ico_3"></a> <div class="clr"></div></div>
+
         </div>
         <div class="clr"></div>
     </div>
