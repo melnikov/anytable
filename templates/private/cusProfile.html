@@ -134,38 +134,98 @@
     <script >
 
     $(document).ready(function(){
-        phone = $('#phone').val();
-        email = $('#e_mail').val();
-        facebook = $('#facebook').val();
-        twitter = $('#twitter').val();
-        instagram = $('#instagram').val();
-        vk = $('#vk').val();
+
+
+
+
+
+
 
         $('#phone').on('focusout', function(){
-            alert(phone);
+            var phone = $('#phone').val();
+            $.ajax({
+                url: '/customer/cusPhone/',
+                type: 'POST',
+                data: 'phone='+phone,
+                dataType: 'HTML',
+                success: function(response){
+                   alert('done');
+                }
+            });
         });
         $('#e_mail').on('focusout', function(){
-           alert(email);
+            var email = $('#e_mail').val();
+            $.ajax({
+                url: '/customer/cusEmail/',
+                type: 'POST',
+                data: 'email='+email,
+                dataType: 'HTML',
+                success: function(response){
+                   alert('done');
+                }
+            });
         });
 
         $('#facebook').on('focusout', function(){
-
-                  alert(facebook);
-               });
+             var facebook = $('#facebook').val();
+            $.ajax({
+                url: '/customer/cusFacebook/',
+                type: 'POST',
+                data: 'facebook='+facebook,
+                dataType: 'HTML',
+                success: function(response){
+                   alert('done');
+                }
+            });
+        });
         $('#instagram').on('focusout', function(){
+            var instagram = $('#instagram').val();
+            $.ajax({
+                url: '/customer/cusInstagram/',
+                type: 'POST',
+                data: 'instagram='+instagram,
+                dataType: 'HTML',
+                success: function(response){
+                   alert('done');
+                }
+            });
+        });
 
-                  alert(instagram);
-               });
         $('#twitter').on('focusout', function(){
+            var twitter = $('#twitter').val();
+            $.ajax({
+                url: '/customer/cusTwitter/',
+                type: 'POST',
+                data: 'twitter='+twitter,
+                dataType: 'HTML',
+                success: function(response){
+                   alert('done');
+                }
+            });
+        });
 
-                  alert(twitter);
-               });
         $('#vk').on('focusout', function(){
+             var vk = $('#vk').val();
+            $.ajax({
+                url: '/customer/cusVk/',
+                type: 'POST',
+                data: 'vk='+vk,
+                dataType: 'HTML',
+                success: function(response){
+                   alert('done');
+                }
+            });
 
-                  alert(vk);
-               });
+        });
+
         $('#cusLogout').on('click', function(){
-                alert('b');
+                $.ajax({
+                type: 'POST',
+                url: '/customer/cuslogOut/',
+                success: function(){
+                    window.location = '/';
+                }
+            });
         });
              });
     </script>
@@ -174,18 +234,38 @@
     <div>
         <div id="ml">
             <div id="ava_img_in">
-                <img src="/static/uploads/{{ customer.image }}" width="175" height="175" />
+                <img src="/static/uploads/{{ customer.image }}" id="customerImage" width="175" height="175" />
                 <div id="ava_img_in_on"></div>
                 <div class="clr"></div>
             </div>
 
-            <div style="text-align: center;"><a href="#" style="color: #ccc;text-decoration: none; border-bottom: 1px solid #ccc;">изменить</a></div>
+            <div style="text-align: center;">
+                <script>
+                    function openM(){
+                        $('#cusImg').click();
+                        $('#cusImg').on('change', function(){
+                            var form = document.getElementById('cusImgForm');
+                            var formData = new FormData(form);
+                            var xhr = new XMLHttpRequest();
+                            xhr.open('post', '/customer/cusImg/', true);
+                            xhr.send(formData);
+                            xhr.onreadystatechange = function(data){
+                                var img = this.response;
+                                $('#customerImage').fadeOut('fast', function(){
+
+                                $('#customerImage').attr('src', '/static/uploads/'+img).fadeIn('fast');
+                            });
+                        }
+                    })}
+                </script>
+               <form id="cusImgForm" enctype="multipart/form-data"><input type="file" id="cusImg" name="cusImg" style="display: none;"></form>
+            <a href="#" id="openMlink" onclick="openM();" style="color: #ccc;text-decoration: none; border-bottom: 1px solid #ccc;">изменить</a></div>
         </div>
 
         <div id="mr">
 
             <div class="mr_line" id="mr_h">{{ customer.name }}</div>
-         <div style="font-size: 12px; float: right; margin-bottom: 10px;">Тел.:<input id= "phone" type="textfield"  value="{{ customer.phone }}" style="padding-left: 5px; border: 0px;border-bottom: 1px dashed #000;font-size: 12px;color: #ff6633;" /></div>
+         <div id="phoneDiv" style="font-size: 12px; float: right; margin-bottom: 10px;">Тел.:<input id="phone" name="phone" type="textfield"  value="{{ customer.phone }}" style="padding-left: 5px; border: 0px;border-bottom: 1px dashed #000;font-size: 12px;color: #ff6633;" /></div>
            <div style="clear: both;"></div>
         <div style="font-size: 12px; float: right; margin-bottom: 10px;">e-mail:<input id="e_mail" type="textfield"  value="{{ customer.email }}" style="padding-left: 5px; border: 0px;border-bottom: 1px dashed #000;font-size: 12px;color: #ff6633;" /></div>
         <div style="clear: both;"></div>

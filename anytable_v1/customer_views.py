@@ -12,7 +12,13 @@ import _md5
 import hashlib
 from django.contrib.auth import authenticate, login
 
+def save_file(file, path='images/'):
 
+    filename = file.name
+    fd = open('%s/%s' % (MEDIA_ROOT, str(path) + str(filename)), 'wb')
+    for chunk in file.chunks():
+        fd.write(chunk)
+    fd.close()
 @csrf_exempt
 def register(request):
     if request.method == 'POST':
@@ -70,3 +76,83 @@ def customer_auth(request):
         #return HttpResponse('done', mimetype='text/plain')
         #else:
         return HttpResponse(email, mimetype='text/plain')
+
+@csrf_exempt
+def cusImg(request):
+    if request.method == 'POST':
+        file = request.FILES
+        if file:
+            save_file(request.FILES['cusImg'])
+            the_file = ('images/%s' % request.FILES['cusImg'])
+            customer = Customer.objects.get(pk = request.session['customer_id'])
+            customer.image = the_file
+            message = customer.image.name
+            customer.save()
+
+            return HttpResponse(message, mimetype='text/plain')
+
+@csrf_exempt
+def cusPhone(request):
+    if request.method == 'POST':
+        phone = request.POST['phone']
+        customer = Customer.objects.get(pk = request.session['customer_id'])
+        customer.phone = phone
+        customer.save()
+
+        return HttpResponse(phone, mimetype='text/plain')
+
+@csrf_exempt
+def cusEmail(request):
+    if request.method == 'POST':
+        email = request.POST['email']
+        email = email.lower()
+        customer = Customer.objects.get(pk = request.session['customer_id'])
+        customer.email = email
+        customer.save()
+        return HttpResponse(email, mimetype='text/plain')
+
+@csrf_exempt
+def cusFacebook(request):
+    if request.method == 'POST':
+        fb = request.POST['facebook']
+        customer = Customer.objects.get(pk = request.session['customer_id'])
+        customer.facebook = fb
+        customer.save()
+        return HttpResponse(fb, mimetype='text/plain')
+
+@csrf_exempt
+def cusInstagram(request):
+    if request.method == 'POST':
+        instagram = request.POST['instagram']
+        customer = Customer.objects.get(pk = request.session['customer_id'])
+        customer.instagram = instagram
+        customer.save()
+        return HttpResponse(instagram, mimetype='text/plain')
+
+@csrf_exempt
+def cusTwitter(request):
+    if request.method == 'POST':
+        twitter = request.POST['twitter']
+        customer = Customer.objects.get(pk = request.session['customer_id'])
+        customer.twitter = twitter
+        customer.save()
+        return HttpResponse(twitter, mimetype='text/plain')
+
+@csrf_exempt
+def cusVk(request):
+    if request.method == 'POST':
+        vk = request.POST['vk']
+        customer = Customer.objects.get(pk = request.session['customer_id'])
+        customer.vk = vk
+        customer.save()
+        return HttpResponse(vk, mimetype='text/plain')
+
+@csrf_exempt
+def cuslogOut(request):
+    try:
+        del request.session['customer_id']
+        #del request.session['logged_in']
+        #del request.session['user_is']
+    except KeyError:
+        pass
+    return HttpResponse("You're logged out.")
