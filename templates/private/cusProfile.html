@@ -1,6 +1,10 @@
 {% extends "layout_inner.html" %}
 {% block content %}
-<div id="saved" style="display: none; height: 20px; background: #cc0000; text-align: center; color: #fff; font-size: 13px;" >changes saved...</div>
+
+    <div style="position: absolute; left: 50%; width: 60%;">
+         <div id="saved" style="position: relative; left: -50%;display: none; height: 20px; border:1px dashed #FF6633; text-align: center; color:#FF6633; font-size: 13px;" >changes saved...</div>
+    </div>
+
 <style>
 .saved{
     display: block!important;
@@ -233,6 +237,8 @@ function changesSaved(){
     <div style="height: 30px;"></div>
 
     <div>
+
+
         <div id="ml">
             <div id="ava_img_in">
                 <img src="/static/uploads/{{ customer.image }}" id="customerImage" width="175" height="175" />
