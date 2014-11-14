@@ -1,8 +1,10 @@
 {% extends "layout_inner.html" %}
 {% block content %}
-
+<div id="saved" style="display: none; height: 20px; background: #cc0000; text-align: center; color: #fff; font-size: 13px;" >changes saved...</div>
 <style>
-
+.saved{
+    display: block!important;
+}
 #ml {
     margin-left: 50px;
     float: left;
@@ -132,14 +134,13 @@
 
 </style>
     <script >
-
+function changesSaved(){
+     $('#saved').fadeIn('slow').delay('1000').queue(function(){
+                    $(this).fadeOut('slow');
+                    $(this).dequeue();
+                  });
+}
     $(document).ready(function(){
-
-
-
-
-
-
 
         $('#phone').on('focusout', function(){
             var phone = $('#phone').val();
@@ -149,10 +150,11 @@
                 data: 'phone='+phone,
                 dataType: 'HTML',
                 success: function(response){
-                   alert('done');
+                 changesSaved();
                 }
             });
         });
+        // Email,
         $('#e_mail').on('focusout', function(){
             var email = $('#e_mail').val();
             $.ajax({
@@ -161,7 +163,7 @@
                 data: 'email='+email,
                 dataType: 'HTML',
                 success: function(response){
-                   alert('done');
+                    changesSaved();
                 }
             });
         });
@@ -174,7 +176,7 @@
                 data: 'facebook='+facebook,
                 dataType: 'HTML',
                 success: function(response){
-                   alert('done');
+                    changesSaved();
                 }
             });
         });
@@ -186,7 +188,7 @@
                 data: 'instagram='+instagram,
                 dataType: 'HTML',
                 success: function(response){
-                   alert('done');
+                    changesSaved();
                 }
             });
         });
@@ -199,7 +201,7 @@
                 data: 'twitter='+twitter,
                 dataType: 'HTML',
                 success: function(response){
-                   alert('done');
+                    changesSaved();
                 }
             });
         });
@@ -212,10 +214,9 @@
                 data: 'vk='+vk,
                 dataType: 'HTML',
                 success: function(response){
-                   alert('done');
+                    changesSaved();
                 }
             });
-
         });
 
         $('#cusLogout').on('click', function(){
