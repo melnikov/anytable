@@ -256,7 +256,10 @@ web: <a href="http://{{ venue.website }}" target="_blank">{{ venue.website }}</a
              <h1>{{ event.title }}</h1>
              <div class="event_description"> {{ event.description }}</div>
              <div style="line-height: 30px;">
+                {% if event.t_reservation %} <div>Table Reservation: {{ event.t_reservation }}</div>{% endif %}
+
                  <div id="pricesDiv_{{ event.pk }}"></div>
+
                   <script>
              $(document).ready(function(){
 

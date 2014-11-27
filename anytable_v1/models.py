@@ -118,9 +118,10 @@ class Event(models.Model):
     description = models.TextField(blank=True, verbose_name="Description")
     QR = models.CharField(max_length=1024, default='', blank=True,null=True)
     venue = models.ForeignKey(Venue)
+    t_reservation = models.FloatField(blank=True, null=True, verbose_name='table reservation')
 
 class PriceType(models.Model):
-    name = models.CharField(max_length=255, blank= False, null= False)
+    name = models.CharField(max_length=255, blank= False, null= False, default='')
     def __unicode__(self):
        return u"%s " % self.name
 

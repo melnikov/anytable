@@ -254,6 +254,7 @@
          <script>
 
              $(document).ready(function(){
+
                  $.ajax({
                     type: 'POST',
                      url: '/event_prices/',
@@ -270,6 +271,7 @@
          <div class="event_info">
              <h1>{{ event.title }}</h1>
              <div class="event_description"> {{ event.description }}</div>
+              {% if event.t_reservation %} <div>Table Reservation: {{ event.t_reservation }}</div>{% endif %}
              <div style="line-height: 30px;">
                 <div id="pricesDiv_{{ event.pk }}"></div>
             <!--  <h2>Свободные столики:&nbsp;</h2> есть (уточнить) <div style="clear: both;"></div> -->
